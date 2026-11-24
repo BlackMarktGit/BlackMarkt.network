@@ -35,7 +35,7 @@ export default function PrivacyPolicyPage() {
               <span className="text-white/20">&bull;</span>
               <span>DATA PROTECTION</span>
               <span className="text-white/20">&bull;</span>
-              <span className="text-emerald-400 font-mono">ISO 27001 &amp; SWISS FADP ALIGNED</span>
+              <span className="text-emerald-400 font-mono">UK GDPR &amp; DATA PRIVACY COMPLIANT</span>
             </div>
 
             <h1 className="text-[38px] sm:text-[54px] lg:text-[62px] font-headings font-medium tracking-tight text-white leading-[1.05]">
@@ -49,7 +49,7 @@ export default function PrivacyPolicyPage() {
             <div className="flex flex-wrap items-center gap-6 pt-3 text-[13px] text-[#94A3B8] border-t border-white/10 mt-2">
               <div>
                 <span className="text-white/40 block text-[11px] uppercase tracking-wider">Jurisdiction</span>
-                <span className="text-white font-medium">UK GDPR &bull; Swiss FADP &bull; US Privacy</span>
+                <span className="text-white font-medium">UK GDPR &bull; Data Protection Act 2018</span>
               </div>
               <div>
                 <span className="text-white/40 block text-[11px] uppercase tracking-wider">Review Schedule</span>
@@ -423,7 +423,7 @@ export default function PrivacyPolicyPage() {
                 </h2>
               </div>
               <p className="text-[15px] sm:text-[16px] text-[#CBD5E1] leading-relaxed">
-                Black Markt operates across primary financial hubs in <strong>London (Global HQ)</strong>, <strong>New York</strong>, <strong>Zurich</strong>, <strong>Singapore</strong>, and <strong>Dubai</strong>, alongside strategic corridors across Africa (Lagos, Nairobi, Johannesburg, Cairo, Accra, Kigali).
+                Black Markt operates from our headquarters in <strong>London (124 City Road)</strong>, collaborating with institutional counterparties across Europe, North America, the Middle East, and key growth markets in Africa.
               </p>
               <p className="text-[14.5px] text-[#94A3B8] leading-relaxed">
                 On occasion, fulfilling complex cross-border client mandates requires sharing relevant data between these regional offices. In all such events, Black Markt takes appropriate legal and technical steps to guarantee that your personal data receives full and equivalent protection.
@@ -437,9 +437,9 @@ export default function PrivacyPolicyPage() {
               </p>
               <ul className="space-y-2.5 text-[14px] text-[#CBD5E1] pl-4 list-disc list-outside marker:text-[#C9A227]">
                 <li>UK International Data Transfer Agreements (IDTA) / Addendum;</li>
-                <li>European Commission Standard Contractual Clauses (SCCs);</li>
-                <li>Swiss Federal Data Protection Act (FADP) statutory adequacy frameworks;</li>
-                <li>Bilateral multi-jurisdictional intra-group data transfer agreements.</li>
+                <li>Approved Standard Contractual Clauses (SCCs);</li>
+                <li>Statutory adequacy regulations recognized under UK data protection law;</li>
+                <li>Bilateral intra-group and client data transfer agreements.</li>
               </ul>
             </div>
           </div>
@@ -458,7 +458,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <p className="text-[15px] sm:text-[16px] text-[#CBD5E1] leading-relaxed">
-              Under international data protection laws (including the UK Data Protection Act 2018, EU GDPR, and Swiss FADP), our legal basis for collecting and processing personal information encompasses:
+              Under applicable data protection laws (including the UK Data Protection Act 2018 and UK GDPR), our legal basis for collecting and processing personal information encompasses:
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">

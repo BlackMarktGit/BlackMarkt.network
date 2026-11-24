@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
 import ActionButton from '../components/common/ActionButton';
-import { GLOBAL_HUBS } from '../data/platformData';
+import { COMPANY_INFO } from '../data/platformData';
 
 export default function TermsPage() {
   const [copiedEmail, setCopiedEmail] = useState(false);
@@ -38,7 +38,7 @@ export default function TermsPage() {
               <span className="text-white/20">&bull;</span>
               <span>TERMS OF ENGAGEMENT</span>
               <span className="text-white/20">&bull;</span>
-              <span className="text-emerald-400 font-mono">SWISS &amp; UK JURISDICTION</span>
+              <span className="text-emerald-400 font-mono">ENGLAND &amp; WALES JURISDICTION</span>
             </div>
 
             <h1 className="text-[38px] sm:text-[54px] lg:text-[62px] font-headings font-medium tracking-tight text-white leading-[1.05]">
@@ -56,7 +56,7 @@ export default function TermsPage() {
               </div>
               <div>
                 <span className="text-white/40 block text-[11px] uppercase tracking-wider">Governing Framework</span>
-                <span className="text-white font-medium">Senior Courts of England &amp; Swiss Commercial Law</span>
+                <span className="text-white font-medium">Laws &amp; Senior Courts of England and Wales</span>
               </div>
             </div>
           </div>
@@ -148,7 +148,7 @@ export default function TermsPage() {
                 Corporate Structure &amp; Governance
               </h3>
               <p className="text-[14px] text-[#94A3B8] leading-relaxed">
-                Black Markt operates under strict British corporate governance and Swiss fiduciary oversight. A formal register of advisory partners, practice directors, and authorized mandate signatories is maintained and available for inspection by accredited institutional clients at our London and Zurich registered offices.
+                Black Markt operates under British corporate governance standards. A formal register of advisory partners, practice directors, and authorized mandate signatories is maintained at our London registered office.
               </p>
               <div className="pt-4 border-t border-white/5 grid grid-cols-2 gap-4 text-[13px]">
                 <div>
@@ -290,9 +290,9 @@ export default function TermsPage() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="p-6 sm:p-8 rounded-[18px] bg-[#070D18] border border-white/5 space-y-2.5">
-                <h3 className="text-[18px] font-headings font-medium text-white">Cryptographic Air-Gaps</h3>
+                <h3 className="text-[18px] font-headings font-medium text-white">Information Security</h3>
                 <p className="text-[14px] text-[#94A3B8] leading-relaxed">
-                  Sensitive client balance sheets, transaction pricing, syndicate participation books, and technical designs are segregated behind Swiss air-gapped sovereign compute enclaves in Zurich.
+                  Sensitive client financial models, valuation benchmarks, syndicate participation books, and corporate disclosures are strictly protected under rigorous confidentiality controls.
                 </p>
               </div>
 
@@ -383,12 +383,12 @@ export default function TermsPage() {
                 </h2>
               </div>
               <p className="text-[14.5px] text-[#CBD5E1] leading-relaxed">
-                These Terms of Engagement and any digital disputes arising out of the use of this platform shall be governed by, and interpreted in accordance with, the substantive laws of England and Wales and Swiss Commercial Law.
+                These Terms of Engagement and any disputes arising out of the use of this website shall be governed by, and interpreted in accordance with, the substantive laws of England and Wales.
               </p>
               <div className="p-5 rounded-[16px] bg-[#070D18] border border-white/5 space-y-1.5">
                 <h4 className="text-[15px] font-headings font-medium text-white">Exclusive Forum</h4>
                 <p className="text-[13px] text-[#94A3B8]">
-                  Exclusive jurisdiction lies with the <strong className="text-white">Commercial Court of the High Court of Justice in London, UK</strong>, or, where an engagement explicitly specifies Swiss seat, the <strong className="text-white">Commercial Court of Zurich, Switzerland</strong>.
+                  Exclusive jurisdiction lies with the <strong className="text-white">Senior Courts of England and Wales</strong> sitting in London, UK.
                 </p>
               </div>
             </div>
@@ -411,31 +411,54 @@ export default function TermsPage() {
               Official legal notices, corporate communications, or subpoena service requests should be addressed in writing to our Office of General Counsel or your regional hub:
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-2">
-              {GLOBAL_HUBS.map((hub) => (
-                <div key={hub.city} className="p-6 rounded-[18px] bg-[#070D18] border border-white/5 space-y-2.5 flex flex-col justify-between hover:border-[#C9A227]/30 transition-all">
-                  <div>
-                    <div className="flex items-center justify-between mb-2">
-                      <span className="text-[12px] font-mono text-[#C9A227] uppercase tracking-wider font-semibold">
-                        {hub.district}
-                      </span>
-                      <span className="text-[12px] text-white/50">{hub.city}</span>
-                    </div>
-                    <h3 className="text-[17px] font-headings font-medium text-white mb-1">
-                      {hub.city} Legal Office
-                    </h3>
-                    <p className="text-[13.5px] text-[#94A3B8]">
-                      {hub.address}
-                    </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+              <div className="p-6 rounded-[18px] bg-[#070D18] border border-white/5 space-y-2.5 flex flex-col justify-between hover:border-[#C9A227]/30 transition-all">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[12px] font-mono text-[#C9A227] uppercase tracking-wider font-semibold">
+                      Registered Office
+                    </span>
+                    <span className="text-[12px] text-white/50">London, UK</span>
                   </div>
-                  <div className="pt-2 border-t border-white/5 flex flex-col gap-1 text-[13px]">
-                    <span className="text-[#CBD5E1] font-mono">{hub.phone}</span>
-                    <a href={`mailto:${hub.email}`} className="text-[#C9A227] hover:underline font-mono">
-                      {hub.email}
-                    </a>
-                  </div>
+                  <h3 className="text-[17px] font-headings font-medium text-white mb-1">
+                    {COMPANY_INFO.name}
+                  </h3>
+                  <p className="text-[13.5px] text-[#94A3B8]">
+                    {COMPANY_INFO.registeredAddress}
+                  </p>
                 </div>
-              ))}
+                <div className="pt-2 border-t border-white/5 flex flex-col gap-1 text-[13px]">
+                  <span className="text-[#94A3B8]">Company No: {COMPANY_INFO.registrationNumber} &bull; VAT: {COMPANY_INFO.vatNumber}</span>
+                  <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="text-[#C9A227] hover:underline font-mono">
+                    {COMPANY_INFO.emails.clientService}
+                  </a>
+                </div>
+              </div>
+
+              <div className="p-6 rounded-[18px] bg-[#070D18] border border-white/5 space-y-2.5 flex flex-col justify-between hover:border-[#C9A227]/30 transition-all">
+                <div>
+                  <div className="flex items-center justify-between mb-2">
+                    <span className="text-[12px] font-mono text-[#C9A227] uppercase tracking-wider font-semibold">
+                      Advisory &amp; Mandates Desk
+                    </span>
+                    <span className="text-[12px] text-white/50">Executive Communications</span>
+                  </div>
+                  <h3 className="text-[17px] font-headings font-medium text-white mb-1">
+                    Mandate Engagement Inquiries
+                  </h3>
+                  <p className="text-[13.5px] text-[#94A3B8]">
+                    Confidential communications regarding advisory mandates, strategic partnerships, and capital transactions.
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-white/5 flex flex-col gap-1 text-[13px]">
+                  <a href={`mailto:${COMPANY_INFO.emails.advisory}`} className="text-[#C9A227] hover:underline font-mono">
+                    {COMPANY_INFO.emails.advisory}
+                  </a>
+                  <a href={`mailto:${COMPANY_INFO.emails.executive}`} className="text-[#C9A227] hover:underline font-mono">
+                    {COMPANY_INFO.emails.executive}
+                  </a>
+                </div>
+              </div>
             </div>
 
             {/* Cross Links to Privacy Policy and Compliance */}

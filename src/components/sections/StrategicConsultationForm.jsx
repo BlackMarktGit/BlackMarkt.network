@@ -1,61 +1,38 @@
 import React, { useState } from 'react';
 import api from '../../services/api';
-import { 
-  ShieldCheck, 
-  Lock, 
-  Send, 
-  CheckCircle2, 
-  Building2, 
-  Globe, 
-  Briefcase, 
-  PhoneCall, 
-  Mail, 
-  MapPin,
-  Clock,
-  ArrowRight
-} from 'lucide-react';
+import { CheckCircle2, ArrowRight, ShieldCheck, Mail, MapPin } from 'lucide-react';
+import { INDUSTRIES_DATA, COMPANY_INFO } from '../../data/platformData';
 
-const INDUSTRIES = [
-  'Energy & Infrastructure',
-  'Mining & Natural Resources',
-  'Agriculture & Agribusiness',
-  'Telecommunications & Digital Infrastructure',
-  'Financial Services & FinTech',
-  'Real Estate & Hospitality',
-  'Healthcare & Pharmaceuticals',
-  'Manufacturing & Industrial',
-  'Logistics & Supply Chain'
+const INVESTMENT_REQUIREMENTS = [
+  'Growth Capital & Private Equity',
+  'Project Finance & Infrastructure Debt',
+  'Commercial Debt & Structured Lending',
+  'Strategic Equity & Joint Venture Capital',
+  'Venture & Early Stage Growth Capital',
+  'Sovereign / Public-Private Partnership Financing',
+  'General Strategic Capital Advisory',
 ];
 
-const MANDATE_SIZES = [
-  '$10M – $50M (Middle Market)',
-  '$50M – $100M (Growth Expansion)',
-  '$100M – $500M (Large Institutional)',
-  '$500M+ (Mega Infrastructure & Sovereign)',
-  'Undisclosed / Structured Debt Facility'
-];
-
-const ENGAGEMENT_TYPES = [
-  'Institutional Capital Raising',
-  'Cross-Border Mergers & Acquisitions',
-  'Sovereign Advisory & Policy Alignment',
-  'Public-Private Partnerships (PPP)',
-  'Strategic Market Entry & Joint Ventures',
-  'Syndicated Debt & Infrastructure Finance'
+const PARTNERSHIP_OBJECTIVES = [
+  'Access International Institutional Investors',
+  'Cross-Border Market Entry & Expansion',
+  'Strategic Joint Venture Alignment',
+  'Investment Readiness & Due Diligence Preparation',
+  'Mergers, Acquisitions or Divestitures',
+  'Government & Concession Structuring',
+  'General Strategic Partnership Discussion',
 ];
 
 export default function StrategicConsultationForm() {
   const [formData, setFormData] = useState({
-    fullName: '',
-    email: '',
-    phone: '',
+    name: '',
     organisation: '',
     country: '',
     industry: '',
-    mandateSize: '',
-    engagementType: '',
+    investmentRequirement: '',
+    partnershipObjective: '',
     message: '',
-    ndaRequired: true
+    confidentialityAgreed: true,
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -64,9 +41,9 @@ export default function StrategicConsultationForm() {
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: type === 'checkbox' ? checked : value
+      [name]: type === 'checkbox' ? checked : value,
     }));
   };
 
@@ -76,25 +53,25 @@ export default function StrategicConsultationForm() {
 
     try {
       const payload = {
-        name: formData.fullName,
-        email: formData.email,
-        phone: formData.phone || null,
-        organization: formData.organisation || null,
-        mandate_type: formData.engagementType || null,
-        capital_range: formData.mandateSize || null,
-        message: `Country: ${formData.country || 'N/A'}\nIndustry: ${formData.industry || 'N/A'}\nNDA Required: ${formData.ndaRequired ? 'Yes' : 'No'}\n\n${formData.message}`
+        name: formData.name,
+        organization: formData.organisation,
+        country: formData.country,
+        industry: formData.industry,
+        investment_requirement: formData.investmentRequirement,
+        partnership_objective: formData.partnershipObjective,
+        message: formData.message,
       };
 
       const res = await api.submitInquiry(payload);
-      const generatedRef = res?.inquiry_id 
-        ? `BM-LON-${String(res.inquiry_id).padStart(6, '0')}`
-        : `BM-LON-${Math.floor(100000 + Math.random() * 900000)}`;
+      const generatedRef = res?.inquiry_id
+        ? `BMN-${String(res.inquiry_id).padStart(5, '0')}`
+        : `BMN-${Math.floor(10000 + Math.random() * 90000)}`;
 
       setRefId(generatedRef);
       setSubmitted(true);
     } catch (err) {
       console.error('Inquiry submission error:', err);
-      setRefId(`BM-LON-${Math.floor(100000 + Math.random() * 900000)}`);
+      setRefId(`BMN-${Math.floor(10000 + Math.random() * 90000)}`);
       setSubmitted(true);
     } finally {
       setLoading(false);
@@ -102,204 +79,132 @@ export default function StrategicConsultationForm() {
   };
 
   const handleReset = () => {
+    setSubmitted(false);
     setFormData({
-      fullName: '',
-      email: '',
-      phone: '',
+      name: '',
       organisation: '',
       country: '',
       industry: '',
-      mandateSize: '',
-      engagementType: '',
+      investmentRequirement: '',
+      partnershipObjective: '',
       message: '',
-      ndaRequired: true
+      confidentialityAgreed: true,
     });
-    setSubmitted(false);
-    setRefId('');
   };
 
   return (
-    <section id="consultation" className="relative py-28 bg-[#050505] text-white border-t border-[#C9A227]/20 overflow-hidden">
-      {/* Background ambient lighting */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-[#0B1320] rounded-full blur-[140px] opacity-40 pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#C9A227]/10 rounded-full blur-[100px] pointer-events-none" />
+    <section
+      id="consultation"
+      className="relative w-full bg-[#050505] text-[#F8F9FA] py-20 sm:py-28 px-6 sm:px-12 lg:px-16 rounded-[24px] border border-white/10 shadow-[0_25px_60px_rgba(0,0,0,0.9)] overflow-hidden my-4"
+      aria-labelledby="consultation-heading"
+    >
+      <div className="max-w-[1408px] mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+          {/* Left Column: Context & Discretion Guarantee */}
+          <div className="lg:col-span-5 flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 mb-3">
+                <span className="w-2 h-2 rounded-full bg-[#C9A227]" />
+                <span className="text-[#C9A227] text-[11px] sm:text-[12px] font-sans font-semibold tracking-[0.18em] uppercase">
+                  Confidential Engagement
+                </span>
+              </div>
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#C9A227]/30 bg-[#C9A227]/10 text-[#C9A227] text-xs font-mono tracking-widest uppercase mb-5">
-            <Lock className="w-3.5 h-3.5" />
-            Confidential Mandate Intake
-          </div>
-          <h2 className="font-headings text-3xl md:text-5xl font-light text-white tracking-tight mb-5">
-            Request a <span className="italic font-serif text-[#C9A227]">Strategic Consultation</span>
-          </h2>
-          <p className="text-gray-400 text-base md:text-lg font-light leading-relaxed">
-            Connect with our London Senior Partners to discuss sovereign advisory, strategic equity, 
-            or structured debt deployment across high-growth African corridors.
-          </p>
-        </div>
+              <h2
+                id="consultation-heading"
+                className="font-headings text-[clamp(28px,3.8vw,52px)] font-medium leading-[1.12] text-white tracking-[-0.02em] mb-6"
+              >
+                Begin a Strategic Conversation
+              </h2>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-          {/* Left Column: Institutional Credentials & Direct Office Contact */}
-          <div className="lg:col-span-4 space-y-6">
-            <div className="p-8 rounded-2xl bg-gradient-to-b from-[#0B1320] to-[#070D17] border border-[#C9A227]/25 shadow-2xl space-y-6">
-              <h3 className="font-headings text-xl text-white font-medium flex items-center gap-2.5">
-                <ShieldCheck className="w-5 h-5 text-[#C9A227]" />
-                Institutional Discretion
-              </h3>
-              
-              <p className="text-gray-300 text-sm leading-relaxed font-light">
-                Black Markt Network operates under bilateral non-disclosure protocols. 
-                All transaction briefs and proprietary financial models are handled under strict fiduciary custody.
+              <p className="text-[#CBD5E1] text-[15.5px] leading-[1.65] mb-5">
+                Whether you are an African business seeking capital, an investor seeking opportunities, a government institution or a strategic partner, Black Markt Network Consultancy welcomes confidential discussions.
               </p>
 
-              <div className="space-y-4 pt-4 border-t border-white/10 text-xs">
-                <div className="flex items-start gap-3">
-                  <MapPin className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-white font-medium">London Headquarters</div>
-                    <div className="text-gray-400 font-light">Bank Financial District, City of London, EC2N UK</div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Globe className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-white font-medium">Regional Coverage Corridors</div>
-                    <div className="text-gray-400 font-light">Lagos • Nairobi • Johannesburg • Cairo • Accra • Kigali</div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Clock className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-white font-medium">Mandate Response SLA</div>
-                    <div className="text-gray-400 font-light">Senior Partner initial response within 24 business hours</div>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <Mail className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-white font-medium">Direct Mandate Desk</div>
-                    <div className="text-gray-400 font-light font-mono">advisory@blackmarkt.network</div>
-                  </div>
-                </div>
-              </div>
+              <p className="text-[#94A3B8] text-[14px] leading-relaxed mb-8">
+                Our partners will review your brief with the utmost discretion and reach out directly to schedule a private introductory discussion.
+              </p>
             </div>
 
-            {/* Quick Mandate Stats */}
-            <div className="p-6 rounded-2xl bg-[#080808] border border-white/10 space-y-4">
-              <div className="text-xs uppercase tracking-widest text-[#C9A227] font-mono">Engagement Parameters</div>
-              <ul className="text-xs text-gray-400 space-y-2.5">
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227]"></span>
-                  Target Ticket Range: <strong className="text-white font-normal ml-1">$10M to $500M+</strong>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227]"></span>
-                  Structuring: <strong className="text-white font-normal ml-1">Equity, Senior Debt, Mezzanine, PPP</strong>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227]"></span>
-                  Jurisdictions: <strong className="text-white font-normal ml-1">United Kingdom, Sub-Saharan & North Africa</strong>
-                </li>
-              </ul>
+            {/* Direct Contact Card */}
+            <div className="p-7 rounded-[18px] bg-[#0B1320] border border-[#C9A227]/25 space-y-4">
+              <span className="text-[#C9A227] text-[11px] font-sans font-semibold tracking-wider uppercase block">
+                London Advisory Desk
+              </span>
+              <div className="flex items-start gap-3 text-[13.5px] text-[#CBD5E1]">
+                <MapPin className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
+                <span>124 City Road, London, EC1V 2NX, United Kingdom</span>
+              </div>
+              <div className="flex items-center gap-3 text-[13.5px] text-[#CBD5E1]">
+                <Mail className="w-4 h-4 text-[#C9A227] shrink-0" />
+                <a href="mailto:advisory@blackmarkt.network" className="hover:text-[#C9A227] transition-colors">
+                  advisory@blackmarkt.network
+                </a>
+              </div>
+              <div className="pt-2 border-t border-white/10 text-[12px] text-[#94A3B8] flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-[#C9A227] shrink-0" />
+                <span>All enquiries are treated with the highest level of confidentiality.</span>
+              </div>
             </div>
           </div>
 
-          {/* Right Column: Confidential Mandate Intake Form */}
-          <div className="lg:col-span-8">
-            <div className="p-8 md:p-10 rounded-2xl bg-[#090C11]/90 backdrop-blur-md border border-[#C9A227]/20 shadow-2xl relative">
+          {/* Right Column: Lightweight, Modern Form */}
+          <div className="lg:col-span-7">
+            <div className="p-8 sm:p-10 rounded-[22px] bg-[#0B1320] border border-white/10 shadow-2xl relative">
               {submitted ? (
-                <div className="py-12 px-4 text-center space-y-6 animate-fadeIn">
-                  <div className="w-16 h-16 mx-auto rounded-full bg-[#C9A227]/15 border border-[#C9A227] flex items-center justify-center text-[#C9A227]">
+                <div className="py-12 px-4 text-center space-y-6">
+                  <div className="w-16 h-16 mx-auto rounded-full bg-[#C9A227]/10 border border-[#C9A227] flex items-center justify-center text-[#C9A227]">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
                   <div className="space-y-2">
-                    <span className="text-xs uppercase tracking-widest font-mono text-[#C9A227]">Confidential Submission Received</span>
-                    <h3 className="text-2xl md:text-3xl font-headings text-white">
-                      Mandate Inquiry Logged
+                    <span className="text-xs uppercase tracking-widest font-mono text-[#C9A227]">
+                      Inquiry Received
+                    </span>
+                    <h3 className="text-2xl sm:text-3xl font-headings text-white font-medium">
+                      Thank You, {formData.name}
                     </h3>
-                    <p className="text-gray-300 text-sm max-w-lg mx-auto font-light leading-relaxed">
-                      Thank you, <span className="text-white font-medium">{formData.fullName}</span>. 
-                      Your inquiry regarding <span className="text-white font-medium">{formData.organisation || 'your institution'}</span> has been routed directly to our London Executive Partnership Desk under reference code:
+                    <p className="text-[#CBD5E1] text-sm max-w-md mx-auto leading-relaxed">
+                      Your inquiry has been received. Our advisory team will review your requirements and respond promptly with strict confidentiality.
                     </p>
                   </div>
 
-                  <div className="inline-block py-3 px-6 rounded-lg bg-[#050505] border border-[#C9A227]/40 text-[#C9A227] font-mono text-base tracking-widest">
-                    {refId}
+                  <div className="inline-block py-2.5 px-6 rounded-lg bg-[#050505] border border-[#C9A227]/40 text-[#C9A227] font-mono text-sm tracking-wider">
+                    Reference: {refId}
                   </div>
-
-                  <p className="text-xs text-gray-400 max-w-md mx-auto">
-                    A Partner in charge of the <strong className="text-gray-200">{formData.industry || 'specified'}</strong> practice will review the brief and contact you within 24 business hours under mutual NDA.
-                  </p>
 
                   <div className="pt-4">
                     <button
+                      type="button"
                       onClick={handleReset}
-                      className="px-6 py-2.5 rounded-full border border-white/20 text-xs font-mono uppercase tracking-wider text-gray-300 hover:text-white hover:border-[#C9A227] transition-all"
+                      className="px-6 py-2.5 rounded-lg border border-white/20 text-xs font-mono uppercase tracking-wider text-gray-300 hover:text-white hover:border-[#C9A227] transition-all"
                     >
-                      Submit Another Mandate
+                      Submit Another Inquiry
                     </button>
                   </div>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {/* Full Name */}
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    {/* Name */}
                     <div>
-                      <label className="block text-xs uppercase tracking-wider text-gray-300 font-mono mb-2">
+                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
                         Full Name <span className="text-[#C9A227]">*</span>
                       </label>
                       <input
                         type="text"
-                        name="fullName"
+                        name="name"
                         required
-                        value={formData.fullName}
+                        value={formData.name}
                         onChange={handleChange}
-                        placeholder="e.g. Alistair Sterling / Dr. Amina Bello"
-                        className="w-full px-4 py-3 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-gray-600 focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
-                      />
-                    </div>
-
-                    {/* Work Email */}
-                    <div>
-                      <label className="block text-xs uppercase tracking-wider text-gray-300 font-mono mb-2">
-                        Institutional Email <span className="text-[#C9A227]">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        name="email"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="executive@institution.com"
-                        className="w-full px-4 py-3 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-gray-600 focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
-                      />
-                    </div>
-
-                    {/* Phone / WhatsApp */}
-                    <div>
-                      <label className="block text-xs uppercase tracking-wider text-gray-300 font-mono mb-2">
-                        Direct Phone / WhatsApp <span className="text-[#C9A227]">*</span>
-                      </label>
-                      <input
-                        type="tel"
-                        name="phone"
-                        required
-                        value={formData.phone}
-                        onChange={handleChange}
-                        placeholder="+44 20 7946 0912 / +234 803..."
-                        className="w-full px-4 py-3 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-gray-600 focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
+                        placeholder="Your full name"
+                        className="w-full px-4 py-3 rounded-xl bg-[#050505] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
                       />
                     </div>
 
                     {/* Organisation */}
                     <div>
-                      <label className="block text-xs uppercase tracking-wider text-gray-300 font-mono mb-2">
-                        Organisation / Entity <span className="text-[#C9A227]">*</span>
+                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
+                        Organisation <span className="text-[#C9A227]">*</span>
                       </label>
                       <input
                         type="text"
@@ -307,15 +212,15 @@ export default function StrategicConsultationForm() {
                         required
                         value={formData.organisation}
                         onChange={handleChange}
-                        placeholder="e.g. Atlas Capital / Federal Ministry"
-                        className="w-full px-4 py-3 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-gray-600 focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
+                        placeholder="Company or institution name"
+                        className="w-full px-4 py-3 rounded-xl bg-[#050505] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
                       />
                     </div>
 
-                    {/* Operating Country / Jurisdiction */}
+                    {/* Country */}
                     <div>
-                      <label className="block text-xs uppercase tracking-wider text-gray-300 font-mono mb-2">
-                        Primary Jurisdiction / Country <span className="text-[#C9A227]">*</span>
+                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
+                        Country <span className="text-[#C9A227]">*</span>
                       </label>
                       <input
                         type="text"
@@ -323,79 +228,85 @@ export default function StrategicConsultationForm() {
                         required
                         value={formData.country}
                         onChange={handleChange}
-                        placeholder="United Kingdom / Nigeria / Kenya / South Africa..."
-                        className="w-full px-4 py-3 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-gray-600 focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
+                        placeholder="e.g. United Kingdom, Nigeria, Kenya"
+                        className="w-full px-4 py-3 rounded-xl bg-[#050505] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
                       />
                     </div>
 
-                    {/* Industry Sector */}
+                    {/* Industry */}
                     <div>
-                      <label className="block text-xs uppercase tracking-wider text-gray-300 font-mono mb-2">
-                        Target Industry Sector <span className="text-[#C9A227]">*</span>
+                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
+                        Industry <span className="text-[#C9A227]">*</span>
                       </label>
                       <select
                         name="industry"
                         required
                         value={formData.industry}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-[#050505] border border-white/15 text-white focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
+                        className="w-full px-4 py-3 rounded-xl bg-[#050505] border border-white/15 text-white focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
                       >
-                        <option value="" disabled>Select Primary Sector</option>
-                        {INDUSTRIES.map((ind, i) => (
-                          <option key={i} value={ind} className="bg-[#0B1320] text-white">
-                            {ind}
+                        <option value="" disabled className="bg-[#0B1320] text-gray-400">
+                          Select Industry
+                        </option>
+                        {INDUSTRIES_DATA.map((ind) => (
+                          <option key={ind.slug} value={ind.name} className="bg-[#0B1320] text-white">
+                            {ind.name}
                           </option>
                         ))}
                       </select>
                     </div>
 
-                    {/* Mandate Size */}
+                    {/* Investment Requirement */}
                     <div>
-                      <label className="block text-xs uppercase tracking-wider text-gray-300 font-mono mb-2">
-                        Estimated Mandate / Capital Size <span className="text-[#C9A227]">*</span>
+                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
+                        Investment Requirement <span className="text-[#C9A227]">*</span>
                       </label>
                       <select
-                        name="mandateSize"
+                        name="investmentRequirement"
                         required
-                        value={formData.mandateSize}
+                        value={formData.investmentRequirement}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-[#050505] border border-white/15 text-white focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
+                        className="w-full px-4 py-3 rounded-xl bg-[#050505] border border-white/15 text-white focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
                       >
-                        <option value="" disabled>Select Capital Range</option>
-                        {MANDATE_SIZES.map((size, i) => (
-                          <option key={i} value={size} className="bg-[#0B1320] text-white">
-                            {size}
+                        <option value="" disabled className="bg-[#0B1320] text-gray-400">
+                          Select Capital Requirement
+                        </option>
+                        {INVESTMENT_REQUIREMENTS.map((req, i) => (
+                          <option key={i} value={req} className="bg-[#0B1320] text-white">
+                            {req}
                           </option>
                         ))}
                       </select>
                     </div>
 
-                    {/* Nature of Engagement */}
+                    {/* Partnership Objective */}
                     <div>
-                      <label className="block text-xs uppercase tracking-wider text-gray-300 font-mono mb-2">
-                        Engagement Nature <span className="text-[#C9A227]">*</span>
+                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
+                        Partnership Objective <span className="text-[#C9A227]">*</span>
                       </label>
                       <select
-                        name="engagementType"
+                        name="partnershipObjective"
                         required
-                        value={formData.engagementType}
+                        value={formData.partnershipObjective}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 rounded-lg bg-[#050505] border border-white/15 text-white focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
+                        className="w-full px-4 py-3 rounded-xl bg-[#050505] border border-white/15 text-white focus:outline-none focus:border-[#C9A227] transition-colors text-sm"
                       >
-                        <option value="" disabled>Select Advisory Scope</option>
-                        {ENGAGEMENT_TYPES.map((type, i) => (
-                          <option key={i} value={type} className="bg-[#0B1320] text-white">
-                            {type}
+                        <option value="" disabled className="bg-[#0B1320] text-gray-400">
+                          Select Strategic Objective
+                        </option>
+                        {PARTNERSHIP_OBJECTIVES.map((obj, i) => (
+                          <option key={i} value={obj} className="bg-[#0B1320] text-white">
+                            {obj}
                           </option>
                         ))}
                       </select>
                     </div>
                   </div>
 
-                  {/* Mandate Summary / Message */}
+                  {/* Message */}
                   <div>
-                    <label className="block text-xs uppercase tracking-wider text-gray-300 font-mono mb-2">
-                      Confidential Mandate Summary / Project Scope <span className="text-[#C9A227]">*</span>
+                    <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
+                      Message / Project Summary <span className="text-[#C9A227]">*</span>
                     </label>
                     <textarea
                       name="message"
@@ -403,46 +314,59 @@ export default function StrategicConsultationForm() {
                       rows={4}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Outline transaction objectives, timeline, asset details, or co-investment appetite. Fiduciary confidentiality is preserved..."
-                      className="w-full px-4 py-3 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-gray-600 focus:outline-none focus:border-[#C9A227] transition-colors text-sm resize-none"
+                      placeholder="Please share an overview of your capital requirement, project timeline, or strategic partnership objectives..."
+                      className="w-full px-4 py-3 rounded-xl bg-[#050505] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] transition-colors text-sm resize-none"
                     />
                   </div>
 
-                  {/* NDA Checkbox */}
-                  <div className="flex items-center gap-3">
-                    <input
-                      type="checkbox"
-                      id="ndaRequired"
-                      name="ndaRequired"
-                      checked={formData.ndaRequired}
-                      onChange={handleChange}
-                      className="w-4 h-4 rounded bg-[#050505] border-white/20 text-[#C9A227] focus:ring-[#C9A227] focus:ring-offset-0"
-                    />
-                    <label htmlFor="ndaRequired" className="text-xs text-gray-400 cursor-pointer">
-                      Please furnish our legal counsel with a standard bilateral Mutual NDA prior to detailed documentation exchange.
+                  {/* Custom Styled Checkbox */}
+                  <div className="flex items-start gap-3 pt-1">
+                    <div className="relative flex items-center justify-center mt-0.5">
+                      <input
+                        type="checkbox"
+                        id="confidentialityAgreed"
+                        name="confidentialityAgreed"
+                        checked={formData.confidentialityAgreed}
+                        onChange={handleChange}
+                        className="appearance-none w-5 h-5 rounded-md bg-[#050505] border border-white/25 checked:bg-[#C9A227] checked:border-[#C9A227] focus:outline-none transition-all cursor-pointer"
+                      />
+                      {formData.confidentialityAgreed && (
+                        <svg
+                          className="w-3.5 h-3.5 text-black absolute pointer-events-none"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          strokeWidth="3.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        >
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      )}
+                    </div>
+                    <label
+                      htmlFor="confidentialityAgreed"
+                      className="text-[12.5px] text-[#94A3B8] leading-snug cursor-pointer select-none"
+                    >
+                      I confirm that this enquiry is submitted for confidential advisory review. All enquiries are treated with the highest level of confidentiality.
                     </label>
                   </div>
 
                   {/* Submit CTA */}
-                  <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-                    <div className="flex items-center gap-2 text-xs text-gray-400">
-                      <Lock className="w-3.5 h-3.5 text-[#C9A227]" />
-                      <span>256-bit encrypted transmission • Direct London Partner inbox</span>
-                    </div>
-
+                  <div className="pt-3">
                     <button
                       type="submit"
                       disabled={loading}
-                      className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#C9A227] text-black font-semibold tracking-wide text-xs uppercase font-mono hover:bg-[#d4b035] transition-all transform hover:-translate-y-0.5 shadow-lg shadow-[#C9A227]/20 flex items-center justify-center gap-2 disabled:opacity-50"
+                      className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-[#C9A227] hover:bg-[#DFBA42] text-[#050505] font-semibold text-[13.5px] transition-all shadow-[0_4px_16px_rgba(201,162,39,0.25)] flex items-center justify-center gap-2 disabled:opacity-50"
                     >
                       {loading ? (
                         <>
-                          <div className="w-4 h-4 border-2 border-black border-t-transparent rounded-full animate-spin"></div>
-                          Transmitting Mandate...
+                          <div className="w-4 h-4 border-2 border-[#050505] border-t-transparent rounded-full animate-spin" />
+                          <span>Submitting...</span>
                         </>
                       ) : (
                         <>
-                          <span>Submit Confidential Mandate Inquiry</span>
+                          <span>Submit Inquiry</span>
                           <ArrowRight className="w-4 h-4" />
                         </>
                       )}

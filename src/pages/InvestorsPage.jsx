@@ -1,88 +1,94 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
-import ActionButton from '../components/common/ActionButton';
+import Icon from '../components/common/Icon';
 import InvestorsSection from '../components/sections/InvestorsSection';
 import StrategicConsultationForm from '../components/sections/StrategicConsultationForm';
-import { Shield, Globe, Award, TrendingUp, Lock } from 'lucide-react';
+import { INDUSTRIES_DATA } from '../data/platformData';
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 
 export default function InvestorsPage() {
   return (
     <Layout>
-      <div className="bg-[#050505] text-white min-h-screen">
-        {/* Hero Section */}
-        <section className="relative py-24 sm:py-32 px-6 lg:px-8 border-b border-white/10 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0B1320]/60 via-[#050505] to-[#050505] pointer-events-none" />
-          <div className="absolute top-0 right-1/4 w-96 h-96 bg-[#C9A227]/10 rounded-full blur-[120px] pointer-events-none" />
+      {/* Header Banner */}
+      <section className="relative w-full rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 p-8 sm:p-14 lg:p-20 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] my-2">
+        <div className="max-w-[960px] flex flex-col gap-5">
+          <div className="flex items-center gap-2 text-[#C9A227]">
+            <span className="w-2 h-2 rounded-full bg-[#C9A227]" />
+            <span className="text-[11px] sm:text-[12px] font-sans font-semibold tracking-[0.18em] uppercase">
+              INVESTOR NETWORK
+            </span>
+          </div>
 
-          <div className="relative max-w-5xl mx-auto text-center space-y-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border border-[#C9A227]/30 bg-[#C9A227]/10 text-[#C9A227] text-xs font-mono tracking-widest uppercase">
-              <Globe className="w-3.5 h-3.5" />
-              Global Investor Relations &amp; Syndication
-            </div>
+          <h1 className="text-[38px] sm:text-[56px] lg:text-[68px] font-headings font-medium tracking-tight text-white leading-[1.04]">
+            Access African Growth Opportunities
+          </h1>
 
-            <h1 className="font-headings text-4xl sm:text-6xl lg:text-7xl font-light text-white tracking-tight leading-[1.08]">
-              Connecting Global Capital With <br />
-              <span className="italic font-serif text-[#C9A227]">High-Yield African Corridors</span>
-            </h1>
+          <p className="text-[18px] sm:text-[22px] text-[#CBD5E1] leading-relaxed max-w-[800px] font-body">
+            Black Markt Network Consultancy connects institutional investors, family offices, sovereign funds, and DFIs with verified, high-potential African businesses and projects.
+          </p>
 
-            <p className="text-gray-300 text-lg sm:text-xl font-light leading-relaxed max-w-3xl mx-auto">
-              We structure bankable, de-risked investment vehicles for sovereign wealth funds, development finance institutions, private equity sponsors, and global family offices seeking alpha across Africa’s most transformative sectors.
+          <div className="flex flex-wrap gap-4 pt-3">
+            <a
+              href="#consultation"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#C9A227] hover:bg-[#DFBA42] text-[#050505] font-semibold text-[13.5px] transition-all shadow-[0_4px_16px_rgba(201,162,39,0.25)]"
+            >
+              <span>Request Investor Briefing</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <Link
+              to="/transactions"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/15 text-[13.5px] font-medium transition-all"
+            >
+              <span>Advisory Capabilities</span>
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Investor Network Component */}
+      <InvestorsSection />
+
+      {/* Supported Sectors for Investors */}
+      <section className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-4">
+        <div className="max-w-[1408px] mx-auto">
+          <div className="max-w-[700px] mb-10">
+            <span className="text-[#C9A227] text-[11px] font-sans font-semibold uppercase tracking-wider block mb-2">
+              Sectors of Exposure
+            </span>
+            <h2 className="text-[28px] sm:text-[38px] font-headings font-medium text-white leading-tight">
+              Opportunities Across Foundational Growth Sectors
+            </h2>
+            <p className="text-[#94A3B8] text-[15px] leading-relaxed mt-2">
+              We connect international capital with opportunities across the core sectors driving African economic development.
             </p>
-
-            <div className="subpage-cta-wrap pt-4 flex flex-wrap justify-center gap-4">
-              <ActionButton href="#consultation" variant="primary" className="w-[230px]">
-                Request Investor Briefing
-              </ActionButton>
-              <ActionButton href="/transactions" variant="on-dark" className="w-[230px]">
-                Track Record &amp; Pipeline
-              </ActionButton>
-            </div>
           </div>
-        </section>
 
-        {/* Global Investor Criteria & Allocation Pillars */}
-        <section className="py-20 px-6 lg:px-8 border-b border-white/10 bg-[#070A0F]">
-          <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="p-8 rounded-2xl bg-[#0B1320]/60 border border-white/10 space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-[#C9A227]/10 border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227]">
-                  <Shield className="w-6 h-6" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {INDUSTRIES_DATA.map((ind) => (
+              <div
+                key={ind.slug}
+                className="p-5 rounded-[16px] bg-[#050505]/60 border border-white/5 flex items-start gap-3.5"
+              >
+                <div className="w-9 h-9 rounded-lg bg-[#0B1320] border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227] shrink-0 mt-0.5">
+                  <Icon name={ind.iconName} className="w-4 h-4 text-[#C9A227]" />
                 </div>
-                <h3 className="font-headings text-xl text-white">De-Risked Deal Structures</h3>
-                <p className="text-gray-400 text-sm font-light leading-relaxed">
-                  Bespoke political risk mitigation, FX currency hedging, sovereign guarantees, and multilateral credit enhancement facilities.
-                </p>
-              </div>
-
-              <div className="p-8 rounded-2xl bg-[#0B1320]/60 border border-white/10 space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-[#C9A227]/10 border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227]">
-                  <TrendingUp className="w-6 h-6" />
+                <div>
+                  <h3 className="text-white font-headings text-[17px] font-medium leading-snug">
+                    {ind.name}
+                  </h3>
+                  <p className="text-[#94A3B8] text-[12.5px] leading-relaxed mt-1">
+                    {ind.desc}
+                  </p>
                 </div>
-                <h3 className="font-headings text-xl text-white">Institutional Diligence</h3>
-                <p className="text-gray-400 text-sm font-light leading-relaxed">
-                  Forensic audit standards, ESG compliance frameworks, and on-the-ground intelligence across key African metropolitan hubs.
-                </p>
               </div>
-
-              <div className="p-8 rounded-2xl bg-[#0B1320]/60 border border-white/10 space-y-4">
-                <div className="w-12 h-12 rounded-xl bg-[#C9A227]/10 border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227]">
-                  <Award className="w-6 h-6" />
-                </div>
-                <h3 className="font-headings text-xl text-white">Proprietary Pipeline</h3>
-                <p className="text-gray-400 text-sm font-light leading-relaxed">
-                  Exclusive access to pre-cleared, non-auction mandates in infrastructure, renewable energy, and digital transformation.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* The 7 Investor Types & Network Section */}
-        <InvestorsSection />
-
-        {/* Consultation Form Anchor */}
-        <StrategicConsultationForm />
-      </div>
+      {/* Confidential Consultation Anchor */}
+      <StrategicConsultationForm />
     </Layout>
   );
 }

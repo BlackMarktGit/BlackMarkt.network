@@ -1,222 +1,130 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
-import ActionButton from '../components/common/ActionButton';
-import { INDUSTRIES_DATA, TRANSACTIONS_DATA } from '../data/platformData';
+import Icon from '../components/common/Icon';
+import { INDUSTRIES_DATA } from '../data/platformData';
+import { ArrowRight, CheckCircle2, ChevronRight } from 'lucide-react';
 
 export default function IndustryDetailPage() {
   const { slug } = useParams();
-  const industry = INDUSTRIES_DATA.find((ind) => ind.slug === slug) || INDUSTRIES_DATA[0];
-  const relatedTransactions = TRANSACTIONS_DATA.slice(0, 2);
+  const industry = INDUSTRIES_DATA.find((i) => i.slug === slug) || INDUSTRIES_DATA[0];
 
   return (
     <Layout>
       {/* Breadcrumb Header Card */}
-      <section className="relative w-full rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 p-8 sm:p-14 lg:p-16 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-        <div className="flex items-center gap-2 text-caption text-[#94A3B8] mb-4 overflow-hidden">
+      <section className="relative w-full rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 p-8 sm:p-14 lg:p-16 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] my-2">
+        <div className="flex items-center gap-2 text-[12px] text-[#94A3B8] mb-5 overflow-hidden">
           <Link to="/" className="hover:text-white transition-colors shrink-0">Home</Link>
-          <span className="shrink-0 text-white/30">/</span>
+          <ChevronRight className="w-3.5 h-3.5 text-white/30 shrink-0" />
           <Link to="/industries" className="hover:text-white transition-colors shrink-0">Industries</Link>
-          <span className="shrink-0 text-white/30">/</span>
-          <span className="text-[#C9A227] font-semibold truncate max-w-[180px] sm:max-w-none">{industry.name}</span>
+          <ChevronRight className="w-3.5 h-3.5 text-white/30 shrink-0" />
+          <span className="text-[#C9A227] font-semibold truncate">{industry.name}</span>
         </div>
 
-        <div className="max-w-[960px] flex flex-col gap-6">
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-caption text-[#C9A227]">
-            <span className="font-semibold uppercase tracking-wider">{industry.eyebrow}</span>
-            <span className="hidden sm:inline text-white/30">&bull;</span>
-            <span className="text-white/80">SECTOR SPECIALIZATION</span>
+        <div className="max-w-[960px] flex flex-col gap-5">
+          <div className="w-12 h-12 rounded-xl bg-[#050505] border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227]">
+            <Icon name={industry.iconName} className="w-6 h-6 text-[#C9A227]" />
           </div>
 
-          <h1 className="text-[40px] sm:text-[60px] lg:text-[68px] font-headings font-medium tracking-tight text-white leading-[1.02]">
+          <h1 className="text-[36px] sm:text-[52px] lg:text-[62px] font-headings font-medium tracking-tight text-white leading-[1.04]">
             {industry.name}
           </h1>
 
-          <p className="text-[20px] sm:text-[23px] text-[#CBD5E1] leading-relaxed max-w-[820px]">
+          <p className="text-[18px] sm:text-[21px] text-[#CBD5E1] leading-relaxed max-w-[820px]">
             {industry.desc}
           </p>
 
-          <div className="subpage-cta-wrap flex flex-wrap gap-4 pt-2">
-            <ActionButton href="/book-consultation" className="w-[220px]">
-              Sector Consultation
-            </ActionButton>
-            <ActionButton href="/request-proposal" variant="on-dark" className="w-[190px]">
-              Submit Sector RFP
-            </ActionButton>
+          <div className="flex flex-wrap gap-4 pt-3">
+            <Link
+              to="/book-consultation"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-[#C9A227] hover:bg-[#DFBA42] text-[#050505] font-semibold text-[13.5px] transition-all shadow-[0_4px_16px_rgba(201,162,39,0.25)]"
+            >
+              <span>Book a Consultation</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              to="/industries"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/15 text-[13.5px] font-medium transition-all"
+            >
+              <span>All Growth Sectors</span>
+            </Link>
           </div>
         </div>
       </section>
 
-      {/* Sector Performance Metrics */}
-      <section className="grid grid-cols-1 sm:grid-cols-3 gap-4 my-2">
-        <div className="p-6 sm:p-8 rounded-[20px] bg-[#0B1320] border border-white/10 hover:border-[#C9A227]/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)] text-center transition-all duration-300">
-          <p className="text-caption text-[#94A3B8] mb-2 font-semibold uppercase tracking-wider">PRIMARY BENCHMARK</p>
-          <div className="text-[40px] sm:text-[50px] font-headings font-bold text-white">
-            {industry.statMetric}
-          </div>
-          <span className="text-[12px] font-caption text-[#CBD5E1]">{industry.statLabel}</span>
-        </div>
-
-        <div className="p-6 sm:p-8 rounded-[20px] bg-[#0B1320] border border-white/10 hover:border-[#C9A227]/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)] text-center transition-all duration-300">
-          <p className="text-caption text-[#94A3B8] mb-2 font-semibold uppercase tracking-wider">EXECUTION STANDARD</p>
-          <div className="text-[40px] sm:text-[50px] font-headings font-bold text-[#C9A227]">
-            {industry.secondaryStat}
-          </div>
-          <span className="text-[12px] font-caption text-[#CBD5E1]">{industry.secondaryStatLabel}</span>
-        </div>
-
-        <div className="p-6 sm:p-8 rounded-[20px] bg-[#0B1320] border border-white/10 hover:border-[#C9A227]/40 shadow-[0_10px_30px_rgba(0,0,0,0.5)] text-center flex flex-col justify-center transition-all duration-300">
-          <p className="text-caption text-[#94A3B8] mb-2 font-semibold uppercase tracking-wider">SECURITY RATING</p>
-          <div className="text-[24px] sm:text-[28px] font-headings font-bold text-white">
-            Tier-IV Sovereign
-          </div>
-          <span className="text-[12px] font-caption text-[#C9A227] font-semibold mt-1">Swiss FADP &amp; ISO 27001</span>
-        </div>
-      </section>
-
-      {/* Structural Challenges & Engineering Solutions */}
-      <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 my-2">
-        {/* Left: Sector Headwinds & Vulnerabilities */}
-        <div className="lg:col-span-6 p-8 sm:p-12 rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] flex flex-col justify-between">
-          <div>
-            <span className="text-[11px] font-caption text-[#C9A227] uppercase tracking-wider block mb-3 font-semibold">
-              STRUCTURAL HEADWINDS
-            </span>
-            <h2 className="text-[28px] sm:text-[34px] font-headings font-medium text-white mb-6 leading-tight">
-              Critical vulnerabilities demanding partner intervention
-            </h2>
-            <div className="space-y-6">
-              {(industry.challenges || []).map((ch, i) => (
-                <div key={i} className="p-5 rounded-[16px] bg-[#050505] border border-white/10">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="w-6 h-6 rounded-full bg-white/10 text-[#C9A227] text-[11px] font-mono flex items-center justify-center font-bold">
-                      0{i + 1}
-                    </span>
-                    <span className="text-[14px] font-semibold text-white">Systemic Challenge</span>
-                  </div>
-                  <p className="text-[14.5px] text-[#94A3B8] leading-relaxed pl-9">
-                    {ch}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Right: Black Markt Proprietary Interventions */}
-        <div className="lg:col-span-6 p-8 sm:p-12 rounded-[24px] bg-[#050505] border border-white/10 text-white shadow-[0_16px_40px_rgba(0,0,0,0.7)] flex flex-col justify-between">
-          <div>
-            <span className="text-[11px] font-caption text-[#C9A227] uppercase tracking-wider block mb-3 font-semibold">
-              PROPRIETARY INTERVENTIONS
-            </span>
-            <h2 className="text-[28px] sm:text-[34px] font-headings font-medium text-white mb-6 leading-tight">
-              High-integrity architectures engineered for fault tolerance
-            </h2>
-            <div className="space-y-6">
-              {(industry.solutions || []).map((sol, i) => (
-                <div key={i} className="p-5 rounded-[16px] bg-[#0B1320] border border-white/10">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="w-6 h-6 rounded-full bg-[#C9A227] text-[#050505] text-[11px] font-mono flex items-center justify-center font-bold">
-                      {i + 1}
-                    </span>
-                    <span className="text-[14px] font-semibold text-white">Advisory Architecture</span>
-                  </div>
-                  <p className="text-[14.5px] text-[#CBD5E1] leading-relaxed pl-9">
-                    {sol}
-                  </p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Regulatory Framework Compliance Standards */}
-      <section className="p-8 sm:p-12 rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-2">
-        <span className="text-[11px] font-caption text-[#C9A227] uppercase tracking-wider block mb-2 font-semibold">
-          GOVERNANCE &amp; DISCLOSURE
-        </span>
-        <h2 className="text-[26px] sm:text-[32px] font-headings font-medium text-white mb-6">
-          Regulatory compliance regimes supported in this sector
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {(industry.regulations || [
-            'Basel IV Capital Buffers',
-            'EU Digital Operational Resilience Act (DORA)',
-            'Swiss Federal Act on Data Protection (FADP)',
-            'ISO 27001 Tier-IV Security'
-          ]).map((reg, idx) => (
-            <div key={idx} className="p-5 rounded-[16px] bg-[#050505] border border-white/10 shadow-xs flex flex-col justify-between">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="w-2 h-2 rounded-full bg-[#C9A227]" />
-                <span className="text-[11px] font-caption text-[#94A3B8] uppercase tracking-wider font-semibold">Accreditation</span>
-              </div>
-              <p className="text-[15px] font-headings font-semibold text-white">{reg}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Related Landmark Mandates */}
-      <section className="p-8 sm:p-12 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_20px_50px_rgba(0,0,0,0.8)] my-2">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div>
-            <span className="text-[11px] font-caption text-[#C9A227] uppercase tracking-wider block mb-1 font-semibold">
-              VERIFIED TRACK RECORD
-            </span>
-            <h2 className="text-[28px] sm:text-[34px] font-headings font-medium text-white">
-              Landmark transactions in this domain
-            </h2>
-          </div>
-          <ActionButton href="/transactions" variant="on-dark" className="w-[180px]">
-            All Case Studies
-          </ActionButton>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {relatedTransactions.map((tx) => (
-            <div key={tx.slug} className="p-8 rounded-[20px] bg-[#0B1320] border border-white/10 hover:border-[#C9A227]/40 shadow-sm flex flex-col justify-between transition-all duration-300">
-              <div>
-                <span className="text-[11px] font-caption text-[#C9A227] font-semibold tracking-wider uppercase block mb-2">
-                  {tx.location} &bull; {tx.sector}
-                </span>
-                <h3 className="text-[20px] font-headings font-medium text-white mb-3">
-                  <Link to={`/transactions/${tx.slug}`} className="hover:text-[#C9A227] transition-colors">
-                    {tx.title}
-                  </Link>
-                </h3>
-                <p className="text-[14px] text-[#94A3B8] leading-relaxed mb-6">
-                  {tx.scope}
-                </p>
-              </div>
-              <div className="pt-4 border-t border-white/10 flex items-center justify-between text-[13px]">
-                <span className="font-caption text-white font-semibold">{tx.impact}</span>
-                <Link to={`/transactions/${tx.slug}`} className="text-[#C9A227] font-semibold hover:underline">
-                  Dossier &rarr;
-                </Link>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Bottom CTA Card */}
-      <section className="rounded-[24px] bg-[#050505] border border-[#C9A227]/30 text-white p-8 sm:p-14 lg:p-16 my-2 shadow-[0_25px_60px_rgba(0,0,0,0.9)] flex flex-col md:flex-row items-center justify-between gap-8">
-        <div className="max-w-[680px]">
-          <span className="text-[12px] font-caption text-[#C9A227] tracking-wider uppercase block mb-2 font-semibold">
-            CONFIDENTIAL ENGAGEMENT
+      {/* Main Content Grid */}
+      <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 my-4">
+        {/* Left Column: Sector Overview */}
+        <div className="lg:col-span-8 p-8 sm:p-12 rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] space-y-6">
+          <span className="text-[#C9A227] text-[11px] font-sans font-semibold uppercase tracking-wider block">
+            Sector Involvement &amp; Advisory Scope
           </span>
-          <h2 className="text-[32px] sm:text-[42px] font-headings font-medium text-white mb-4 leading-tight">
-            Retain our specialized industry counsel
+
+          <h2 className="text-[26px] sm:text-[32px] font-headings font-medium text-white leading-snug">
+            Supporting capital allocation and sustainable project delivery in {industry.name}
           </h2>
-          <p className="text-[16px] sm:text-[18px] text-[#94A3B8] leading-relaxed">
-            Our Sector Managing Directors are available under reciprocal Non-Disclosure Agreements for institutional sponsors, boards, and sovereign treasuries.
-          </p>
+
+          <div className="text-[16px] text-[#CBD5E1] leading-[1.7] space-y-4">
+            <p>{industry.overview}</p>
+            <p>
+              We work closely with project developers, corporate operators, and international investors to ensure projects in this sector meet bankability criteria, commercial viability hurdles, and environmental and governance standards.
+            </p>
+          </div>
+
+          <div className="pt-6 border-t border-white/10">
+            <h3 className="text-white font-headings text-[20px] font-medium mb-4">
+              Key Transaction &amp; Advisory Focus Areas
+            </h3>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {industry.focusAreas.map((area, i) => (
+                <div key={i} className="flex items-start gap-2.5 p-3.5 rounded-xl bg-[#050505]/60 border border-white/5">
+                  <CheckCircle2 className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
+                  <span className="text-[13.5px] text-[#CBD5E1]">{area}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="flex flex-col sm:flex-row gap-4 shrink-0">
-          <ActionButton href="/book-consultation" className="w-[210px]">
-            Initiate Mandate
-          </ActionButton>
+
+        {/* Right Column: Next Steps & Navigation */}
+        <div className="lg:col-span-4 flex flex-col gap-6">
+          <div className="p-8 rounded-[24px] bg-[#050505] border border-[#C9A227]/30 shadow-xl space-y-5">
+            <span className="text-[#C9A227] text-[11px] font-sans font-semibold uppercase tracking-wider block">
+              Consultation
+            </span>
+            <h3 className="text-white font-headings text-[22px] font-medium leading-snug">
+              Discuss a project in {industry.name}
+            </h3>
+            <p className="text-[#94A3B8] text-[13.5px] leading-relaxed">
+              We welcome confidential inquiries from project sponsors, businesses, and institutional capital providers.
+            </p>
+            <Link
+              to="/book-consultation"
+              className="w-full inline-flex items-center justify-center gap-2 py-3.5 px-4 rounded-xl bg-[#C9A227] hover:bg-[#DFBA42] text-[#050505] font-semibold text-[13.5px] transition-all"
+            >
+              <span>Schedule a Discussion</span>
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+
+          {/* Other Industries Navigation */}
+          <div className="p-8 rounded-[24px] bg-[#0B1320] border border-white/10 space-y-4">
+            <h4 className="text-white font-headings text-[18px] font-medium border-b border-white/10 pb-3">
+              Other Growth Sectors
+            </h4>
+            <div className="flex flex-col gap-2">
+              {INDUSTRIES_DATA.filter((i) => i.slug !== industry.slug).map((other) => (
+                <Link
+                  key={other.slug}
+                  to={`/industries/${other.slug}`}
+                  className="text-[13.5px] text-[#CBD5E1] hover:text-[#C9A227] transition-colors py-1.5 flex items-center justify-between group"
+                >
+                  <span className="truncate">{other.name}</span>
+                  <span className="text-white/20 group-hover:text-[#C9A227] text-sm">&rarr;</span>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </section>
     </Layout>

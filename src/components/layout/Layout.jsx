@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Lenis from 'lenis';
 import NavBar from './NavBar';
 import Footer from './Footer';
+import CookieConsent from '../common/CookieConsent';
 
 export default function Layout({ children, fullBleed = false, className = '' }) {
   useEffect(() => {
@@ -30,9 +31,12 @@ export default function Layout({ children, fullBleed = false, className = '' }) 
       <NavBar />
 
       {/* Main Page Content */}
-      <main className={`w-full max-w-full overflow-x-hidden flex-1 ${fullBleed ? 'flex flex-col' : 'max-w-[1408px] mx-auto px-3 sm:px-6 md:px-8 pb-12 flex flex-col gap-4 w-full'} ${className}`}>
+      <main className={`w-full max-w-full overflow-x-hidden flex-1 ${fullBleed ? 'flex flex-col' : 'max-w-[1408px] mx-auto px-4 sm:px-6 md:px-8 pb-12 flex flex-col gap-6 w-full'} ${className}`}>
         {children}
       </main>
+
+      {/* Cookie Consent Manager */}
+      <CookieConsent />
 
       {/* Footer */}
       <Footer />
