@@ -4,43 +4,43 @@ export const CITIES = [
   {
     id: 'london',
     name: 'London',
-    hub: 'Bank & City Financial District',
+    hub: 'Bank and city financial district',
     image: '/images/cities/london.jpg',
   },
   {
     id: 'newyork',
     name: 'New York',
-    hub: 'Wall Street & Lower Manhattan',
+    hub: 'Wall Street and lower Manhattan',
     image: '/images/cities/newyork.jpg',
   },
   {
     id: 'lagos',
     name: 'Lagos',
-    hub: 'Lekki & Victoria Island Corridor',
+    hub: 'Lekki and Victoria Island corridor',
     image: '/images/cities/lagos.jpg',
   },
   {
     id: 'nairobi',
     name: 'Nairobi',
-    hub: 'Upper Hill & Silicon Savannah',
+    hub: 'Upper Hill and Silicon Savannah',
     image: '/images/cities/nairobi.jpg',
   },
   {
     id: 'johannesburg',
     name: 'Johannesburg',
-    hub: 'Sandton Financial District',
+    hub: 'Sandton financial district',
     image: '/images/cities/johannesburg.jpg',
   },
   {
     id: 'cairo',
     name: 'Cairo',
-    hub: 'Nile Corniche & Financial District',
+    hub: 'Nile Corniche and financial district',
     image: '/images/cities/cairo.jpg',
   },
   {
     id: 'accra',
     name: 'Accra',
-    hub: 'Airport City & Ridge Financial District',
+    hub: 'Airport City and Ridge financial district',
     image: '/images/cities/accra.jpg',
   },
   {
@@ -203,13 +203,13 @@ export default function AnimatedCityBackground() {
       {/* Bottom Ground Vignette */}
       <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-[3]" />
 
-      {/* 5. Clean, Refined City & District Label (Minimalist, No Clutter) */}
+      {/* 5. Clean, Refined City & District Label (Only City Name in ALL CAPS, District in Sentence Case) */}
       <div className="absolute bottom-4 left-6 sm:left-10 md:left-16 z-30 pointer-events-none flex items-center gap-2">
-        <span className="w-2 h-2 rounded-full bg-[#C9A227] animate-pulse" />
-        <span className="text-[11px] sm:text-[12px] font-sans font-medium tracking-[0.14em] uppercase text-white/90">
-          <strong className="text-[#C9A227] font-semibold">{activeCity.name}</strong>
+        <span className="w-2 h-2 rounded-full bg-[#C9A227] animate-pulse shrink-0" />
+        <span className="text-[12px] sm:text-[13px] font-sans font-medium text-white/90">
+          <strong className="uppercase text-[#C9A227] font-semibold tracking-wider">{activeCity.name}</strong>
           <span className="mx-2 text-white/40">&bull;</span>
-          <span className="text-white/70">{activeCity.hub}</span>
+          <span className="text-white/80 font-normal tracking-normal capitalize-first">{activeCity.hub}</span>
         </span>
       </div>
     </div>
