@@ -1,0 +1,670 @@
+
+@import './original.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Brand Dark Luxury Color Palette */
+  --bg-page: #050505;
+  --bg-canvas: #0B1320;
+  --bg-card: rgba(11, 19, 32, 0.85);
+  --bg-inverse: #050505;
+  
+  --text-primary: #F8F9FA;
+  --text-secondary: #94A3B8;
+  --text-accent: #C9A227;
+  
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(201, 162, 39, 0.25);
+
+  --cta-bg: #C9A227;
+  --cta-fg: #050505;
+  --action-primary-bg: #C9A227;
+  --action-primary-bg-hover: #DFBA42;
+  --action-primary-fg: #050505;
+
+  --font-headings: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-display: 'Cormorant Garamond', 'Playfair Display', Georgia, serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-caption: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+html,
+body {
+  background-color: #050505 !important;
+  color: #F8F9FA !important;
+  font-family: var(--font-body);
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  position: relative !important;
+}
+
+#root,
+main {
+  overflow-x: hidden !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Luxury Card Shell Styling */
+.page-shell__card {
+  background-color: #0B1320 !important;
+  border: 1px solid rgba(201, 162, 39, 0.15) !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6) !important;
+  max-width: 100% !important;
+}
+
+/* Additional custom overrides if needed */
+.hero__chip-bar {
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0,
+    transparent 5px,
+    rgba(255, 255, 255, 0.08) 5px,
+    rgba(255, 255, 255, 0.08) 6.5px
+  ) !important;
+}
+
+/* Ensure smooth transitions on navbar elements */
+.sensiq-nav__card {
+  transition: width 0.5s cubic-bezier(0.16, 1, 0.3, 1), padding 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Ken Burns Aerial Drone Pan & Zoom Animation */
+@keyframes kenBurnsDrift {
+  0% {
+    transform: scale(1.01) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.05) translate(-0.8%, -0.5%);
+  }
+  100% {
+    transform: scale(1.08) translate(0.5%, -1%);
+  }
+}
+
+.animate-kenBurnsDrift {
+  animation: kenBurnsDrift 8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  will-change: transform;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.sensiq-nav__links, .sensiq-nav__right-cluster {
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.sensiq-nav__hamburger--desktop {
+  transition: opacity 0.3s ease;
+}
+
+/* Desktop Navigation Header: Fluid Spacing & Clearance Protection (>=1024px) */
+@media (min-width: 1024px) {
+  .sensiq-nav__panel {
+    gap: 0 !important;
+  }
+  .sensiq-nav__links {
+    gap: clamp(8px, 1.1vw, 20px) !important;
+    max-width: 100% !important;
+  }
+  .sensiq-nav__divider {
+    margin: 0 !important;
+  }
+}
+
+/* Tablet & Mobile Navigation Header: Dark luxury glassmorphism (<1024px) */
+@media (max-width: 1023px) {
+  .sensiq-nav {
+    height: 64px !important;
+    padding: 10px 16px 0 !important;
+    gap: 0 !important;
+    background-color: rgba(5, 5, 5, 0.94) !important;
+    backdrop-filter: blur(18px) saturate(140%) !important;
+    -webkit-backdrop-filter: blur(18px) saturate(140%) !important;
+    border-bottom: 1px solid rgba(201, 162, 39, 0.22) !important;
+  }
+  .sensiq-nav::before {
+    display: none !important;
+    background-color: transparent !important;
+  }
+  .sensiq-nav__panel {
+    display: none !important;
+  }
+  .sensiq-nav__mobile-right {
+    display: flex !important;
+  }
+}
+
+/* Option A: Unified 100svh Luxury Dashboard for Hero Section */
+#hero {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+@media (max-width: 1023px) {
+  #hero,
+  .hero {
+    position: relative !important;
+    top: auto !important;
+    height: calc(100svh - 76px) !important;
+    min-height: 520px !important;
+    max-height: calc(100svh - 76px) !important;
+    margin-bottom: 20px !important;
+    overflow: hidden !important;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+  .hero__content {
+    height: 100% !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Vertically centered in the mobile canvas */
+    align-items: flex-start !important;
+    padding-top: 10px !important;
+    padding-bottom: 84px !important; /* Safe clearance for the bottom City HUD */
+    overflow: hidden !important;
+  }
+  .hero__chips,
+  #hero .hero__chips {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  #hero {
+    position: sticky !important;
+    top: var(--section-gap, 16px) !important;
+    /* Full viewport coverage above the fold on both laptop and external monitors */
+    height: calc(100svh - 96px) !important;
+    min-height: calc(100svh - 96px) !important;
+    max-height: calc(100svh - 96px) !important;
+  }
+  .hero__content {
+    height: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    padding-top: clamp(16px, 2.5vh, 48px) !important;
+    padding-bottom: clamp(84px, 10vh, 120px) !important; /* Safe clearance for City Telemetry HUD */
+    gap: clamp(10px, 1.4vh, 22px) !important;
+  }
+  #hero .hero__chips,
+  .hero__chips {
+    display: flex !important;
+    flex-direction: column !important;
+    width: clamp(316px, 21vw, 380px) !important;
+    height: auto !important;
+    bottom: auto !important;
+    right: clamp(24px, 3.5vw, 64px) !important;
+    /* Centered in the usable canvas above the bottom City HUD */
+    top: calc(50% - 24px) !important;
+    transform: translateY(-50%) !important;
+    gap: clamp(8px, 1.1vh, 14px) !important;
+    padding: clamp(6px, 0.8vh, 10px) !important;
+    z-index: 20 !important;
+  }
+  .hero__chip {
+    padding: clamp(10px, 1.3vh, 16px) clamp(13px, 1.1vw, 18px) !important;
+    gap: clamp(6px, 0.8vh, 10px) !important;
+  }
+}
+
+@media (min-width: 640px) {
+  .hero__media {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-vault-portal {
+    position: absolute;
+    right: clamp(24px, 3.5vw, 64px);
+    top: 50%;
+    transform: translateY(-50%);
+    left: auto;
+    width: clamp(340px, 28vw, 420px);
+    height: clamp(340px, 28vw, 420px);
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-vault-portal {
+    right: clamp(32px, 4vw, 80px);
+    width: clamp(400px, 32vw, 480px);
+    height: clamp(400px, 32vw, 480px);
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-vault-portal {
+    right: clamp(40px, 5vw, 100px);
+    width: clamp(460px, 32vw, 560px);
+    height: clamp(460px, 32vw, 560px);
+  }
+}
+
+@media (min-width: 1600px) {
+  .hero-vault-portal {
+    right: clamp(60px, 6vw, 140px);
+    width: clamp(540px, 30vw, 680px);
+    height: clamp(540px, 30vw, 680px);
+  }
+}
+
+/* ==========================================================================
+   HERO VAULT: AUTOMATIC CLOCKWORK TUMBLER CASCADE (Option 2)
+   12-Position Clockwork Sweep with 24K Gold Specular Glints & Hydraulic Deadbolts
+   ========================================================================== */
+
+/* 1. Standard Hinge Bracket Body (Hydraulic pin pulse + gold specular flare) */
+.vault-hinge-node {
+  animation-name: vaultHingeClick;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity, filter;
+}
+
+@keyframes vaultHingeClick {
+  0% {
+    opacity: 0;
+    transform: translateY(0) scale(0.95);
+    filter: drop-shadow(0 0 0px transparent);
+  }
+  1.5% {
+    opacity: 1;
+    transform: translateY(3px) scale(1.08); /* Radial mechanical deadbolt impulse */
+    filter: drop-shadow(0 0 16px rgba(255, 220, 110, 0.95)) drop-shadow(0 0 28px rgba(212, 175, 55, 0.6));
+  }
+  4% {
+    opacity: 0.95;
+    transform: translateY(0px) scale(1.0);
+    filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.75));
+  }
+  8% {
+    opacity: 0.4;
+    transform: translateY(0px) scale(0.98);
+    filter: drop-shadow(0 0 4px rgba(212, 175, 55, 0.3));
+  }
+  11%, 100% {
+    opacity: 0;
+    transform: translateY(0) scale(0.95);
+    filter: drop-shadow(0 0 0px transparent);
+  }
+}
+
+/* 2. Outer Pivot Pin 4-Point Star Sparkle */
+.vault-sparkle-star {
+  animation-name: vaultStarGlint;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  animation-iteration-count: infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes vaultStarGlint {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  1.8% {
+    opacity: 1;
+    transform: scale(1.4) rotate(45deg);
+    filter: drop-shadow(0 0 8px #FFF9D2) drop-shadow(0 0 16px #FFD700);
+  }
+  4.5% {
+    opacity: 0.75;
+    transform: scale(0.95) rotate(90deg);
+  }
+  7.5% {
+    opacity: 0;
+    transform: scale(0.2) rotate(135deg);
+  }
+  10.5%, 100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+}
+
+/* 3. Orbiting Gold Laser Tracer Arc */
+.vault-tracer-orbit {
+  animation: vaultTracerSweep 5.6s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  transform-origin: 50px 50px;
+}
+
+@keyframes vaultTracerSweep {
+  0% {
+    stroke-dashoffset: 0;
+    opacity: 0.9;
+  }
+  68% {
+    stroke-dashoffset: -240;
+    opacity: 0.9;
+  }
+  74% {
+    stroke-dashoffset: -240;
+    opacity: 0;
+  }
+  100% {
+    stroke-dashoffset: -240;
+    opacity: 0;
+  }
+}
+
+/* 4. Perimeter Confirmation Shockwave Ring */
+.vault-shockwave-ring {
+  animation: vaultShockwaveRing 5.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes vaultShockwaveRing {
+  0%, 68% {
+    transform: scale(0.90);
+    opacity: 0;
+    border-color: rgba(212, 175, 55, 0);
+  }
+  71% {
+    transform: scale(0.93);
+    opacity: 0.95;
+    border-color: rgba(255, 235, 140, 0.95);
+    box-shadow: 0 0 24px rgba(255, 215, 0, 0.7), inset 0 0 16px rgba(212, 175, 55, 0.5);
+  }
+  84% {
+    transform: scale(1.05);
+    opacity: 0;
+    border-color: rgba(212, 175, 55, 0.15);
+    box-shadow: 0 0 35px rgba(255, 215, 0, 0), inset 0 0 25px rgba(212, 175, 55, 0);
+  }
+  100% {
+    transform: scale(1.05);
+    opacity: 0;
+  }
+}
+
+/* 5. Center Biometric Scanner Cycle Integration */
+.vault-biometric-dial {
+  animation: vaultBiometricCycle 5.6s cubic-bezier(0.16, 1, 0.3, 1) infinite;
+}
+
+@keyframes vaultBiometricCycle {
+  0%, 68% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 12px rgba(0, 240, 255, 0.2);
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+  72% {
+    box-shadow: 0 0 36px rgba(0, 240, 255, 0.95), inset 0 0 22px rgba(212, 175, 55, 0.75);
+    border-color: #00F0FF;
+  }
+  78% {
+    box-shadow: 0 0 45px rgba(255, 220, 100, 0.95), inset 0 0 28px rgba(0, 240, 255, 0.6);
+    border-color: #FFD700;
+  }
+  86%, 100% {
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.3), inset 0 0 12px rgba(0, 240, 255, 0.2);
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+}
+
+/* ==========================================================================
+   DESKTOP SCROLLED FROSTED CAPSULE ISLAND (Option A)
+   Wraps [ blackmarkt   ⌂   ≡ ] in an elegant frosted glass capsule
+   ========================================================================== */
+
+.sensiq-nav__panel {
+  transition: flex 0.5s cubic-bezier(0.16, 1, 0.3, 1), width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.sensiq-nav__pill-wrap {
+  transition: flex 0.5s cubic-bezier(0.16, 1, 0.3, 1), width 0.5s cubic-bezier(0.16, 1, 0.3, 1), max-width 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Mobile & Tablet: Island wrapper disappears from layout tree */
+@media (max-width: 1023px) {
+  .sensiq-nav__desktop-island {
+    display: contents !important;
+  }
+}
+
+/* Desktop: Wide state (expanded) (>=1024px) */
+@media (min-width: 1024px) {
+  .sensiq-nav__desktop-island {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    flex: 1;
+    width: 100%;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 20px;
+    padding: 0;
+    transition: 
+      background 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      backdrop-filter 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      -webkit-backdrop-filter 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      border-color 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      box-shadow 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      padding 400ms cubic-bezier(0.16, 1, 0.3, 1),
+      gap 400ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .sensiq-nav__panel {
+    margin-left: auto !important;
+    flex: 0 0 auto !important;
+    width: auto !important;
+  }
+
+  .sensiq-nav__pill-wrap {
+    flex: 0 0 auto !important;
+    width: auto !important;
+  }
+
+  .sensiq-nav__card {
+    width: auto !important;
+  }
+
+  /* Desktop: Collapsed Scrolled Island */
+  .sensiq-nav__desktop-island--scrolled {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    gap: 20px;
+    padding: 4px 6px 4px 18px;
+    background: rgba(11, 19, 32, 0.92);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border: 1px solid rgba(201, 162, 39, 0.25);
+    border-radius: 20px;
+    box-shadow: 
+      0 10px 30px -4px rgba(0, 0, 0, 0.8),
+      0 2px 6px -1px rgba(0, 0, 0, 0.5);
+  }
+
+  .sensiq-nav__desktop-island--scrolled .sensiq-nav__panel {
+    flex: 0 0 auto !important;
+    width: auto !important;
+  }
+
+  .sensiq-nav__desktop-island--scrolled .sensiq-nav__pill-wrap {
+    flex: 0 0 4rem !important;
+    width: 4rem !important;
+    max-width: 4rem !important;
+  }
+
+  /* Frosted backdrop when user reopens the full navbar while scrolled down */
+  .sensiq-nav[data-reopened=true]:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-color: rgba(11, 19, 32, 0.95);
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border-bottom: 1px solid rgba(201, 162, 39, 0.2);
+    opacity: 1;
+    pointer-events: none;
+    transition: opacity var(--nav-duration-base) var(--nav-ease-fluid);
+  }
+}
+
+/* ==========================================================================
+   GLOBAL NAVIGATION & MOBILE HEADER POLISH (Phase 1)
+   ========================================================================== */
+
+/* RFP Cart Micro-Pill Badge */
+.sensiq-nav__cart-badge {
+  position: absolute !important;
+  top: -4px !important;
+  right: -8px !important;
+  width: auto !important;
+  min-width: 26px !important;
+  height: 16px !important;
+  padding: 0 4px !important;
+  border-radius: 9999px !important;
+  background: #C9A227 !important;
+  color: #050505 !important;
+  border: 1.5px solid #050505 !important;
+  font-family: var(--font-body) !important;
+  font-size: 8.5px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.04em !important;
+  line-height: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* Mobile Menu Drawer Ergonomics & Hide Raw Scrollbar */
+.sensiq-nav__mobile-panel {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+.sensiq-nav__mobile-panel::-webkit-scrollbar {
+  display: none !important;
+}
+
+@media (max-width: 1023px) {
+  .sensiq-nav__mobile-panel {
+    top: 68px !important;
+    left: 12px !important;
+    right: 12px !important;
+    max-height: calc(100svh - 80px) !important;
+    padding: 18px 22px 22px !important;
+    border-radius: 20px !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+  .sensiq-nav__mobile-links {
+    margin-top: 14px !important;
+    gap: 0 !important;
+  }
+  .sensiq-nav__mobile-link {
+    font-size: 20px !important;
+    line-height: 1.25 !important;
+    padding: 8px 0 !important;
+  }
+  .sensiq-nav__mobile-cta {
+    margin-top: 16px !important;
+    width: 100% !important;
+    height: 48px !important;
+    flex-shrink: 0 !important;
+  }
+}
+
+/* Tablet Slide-Over Drawer constraint (640px to 1023px) */
+@media (min-width: 640px) and (max-width: 1023px) {
+  .sensiq-nav__mobile-panel {
+    left: auto !important;
+    right: 20px !important;
+    width: 380px !important;
+    max-width: 400px !important;
+  }
+}
+
+/* ==========================================================================
+   SUBPAGE HERO CTA BUTTONS FLUID RESPONSIVE SYSTEM
+   ========================================================================== */
+
+/* Very narrow mobile screens (<420px): Full-width stacked buttons with full text */
+@media (max-width: 419px) {
+  .subpage-cta-wrap {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .subpage-cta-wrap > * {
+    width: 100% !important;
+    min-width: 0 !important;
+    height: 48px !important;
+    font-size: 13.5px !important;
+  }
+  .subpage-cta-wrap > * .action-button__label,
+  .subpage-cta-wrap > * span {
+    font-size: 13.5px !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Standard mobile screens (420px to 639px): Fluid row wrapping without truncation */
+@media (min-width: 420px) and (max-width: 639px) {
+  .subpage-cta-wrap {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 10px !important;
+    width: 100% !important;
+  }
+  .subpage-cta-wrap > * {
+    flex: 1 1 180px !important;
+    min-width: 0 !important;
+    height: 48px !important;
+    padding-left: 12px !important;
+    padding-right: 12px !important;
+    font-size: 13px !important;
+  }
+  .subpage-cta-wrap > * .action-button__label,
+  .subpage-cta-wrap > * span {
+    font-size: 13px !important;
+    white-space: nowrap !important;
+  }
+}
+
+/* Single CTA button never constrained to 50% */
+.subpage-cta-wrap > *:only-child {
+  width: auto !important;
+  max-width: 100% !important;
+  flex: initial !important;
+}
+
+
+
+/* Offscreen Mobile Drawer Guard: Completely remove from layout flow when closed */
+.sensiq-nav__mobile-panel {
+  max-width: calc(100vw - 32px) !important;
+}
+
+.sensiq-nav__mobile-panel:not([data-open="true"]) {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.sensiq-nav__mobile-panel[data-open="true"] {
+  display: flex !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+
+
+
