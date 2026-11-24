@@ -131,7 +131,7 @@ export default function AboutPage() {
                 className="p-7 rounded-[18px] bg-[#050505]/70 border border-white/5 hover:border-[#C9A227]/30 transition-all flex flex-col justify-between group"
               >
                 <div>
-                  <div className="w-11 h-11 rounded-xl bg-[#0B1320] border border-[#C9A227]/25 flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] transition-colors">
+                  <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_2px_12px_rgba(201,162,39,0.15)] flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] transition-all">
                     <Icon name={val.iconName} className="w-5 h-5 text-[#C9A227]" />
                   </div>
                   <h3 className="font-headings text-[20px] text-white font-medium mb-2 group-hover:text-[#C9A227] transition-colors">

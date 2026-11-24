@@ -342,18 +342,30 @@
   border-radius:4px
 }
 
-.sensiq-nav {
-  height:56px;
-  padding:12px 12px 0;
-  gap:0
+@media (max-width: 1023px) {
+  .sensiq-nav {
+    height: 64px;
+    padding: 10px 16px 0;
+    gap: 0;
+  }
+
+  .sensiq-nav__panel {
+    display: none !important;
+  }
+
+  .sensiq-nav__mobile-right {
+    display: flex !important;
+  }
 }
 
-.sensiq-nav__panel {
-  display:none
-}
+@media (min-width: 1024px) {
+  .sensiq-nav__panel {
+    display: flex !important;
+  }
 
-.sensiq-nav__mobile-right {
-  display:flex
+  .sensiq-nav__mobile-right {
+    display: none !important;
+  }
 }
 
 .sensiq-nav__mobile-panel {

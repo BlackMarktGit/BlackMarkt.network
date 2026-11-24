@@ -70,7 +70,7 @@ export default function InvestorsPage() {
                 key={ind.slug}
                 className="p-5 rounded-[16px] bg-[#050505]/60 border border-white/5 flex items-start gap-3.5"
               >
-                <div className="w-9 h-9 rounded-lg bg-[#0B1320] border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227] shrink-0 mt-0.5">
+                <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_2px_10px_rgba(201,162,39,0.12)] flex items-center justify-center text-[#C9A227] shrink-0 mt-0.5">
                   <Icon name={ind.iconName} className="w-4 h-4 text-[#C9A227]" />
                 </div>
                 <div>

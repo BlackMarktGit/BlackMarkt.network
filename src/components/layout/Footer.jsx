@@ -1,11 +1,24 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, ArrowRight } from 'lucide-react';
+import Icon from '../common/Icon';
 import { COMPANY_INFO } from '../../data/platformData';
 
 export default function Footer() {
+  const footerRef = useRef(null);
+  const [mousePos, setMousePos] = useState({ x: 50, y: 50 });
+
+  const handleMouseMove = (e) => {
+    if (!footerRef.current) return;
+    const rect = footerRef.current.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+    setMousePos({ x, y });
+  };
+
   return (
     <footer
+      ref={footerRef}
+      onMouseMove={handleMouseMove}
       className="relative w-full bg-[#050505] text-[#F8F9FA] pt-20 pb-12 px-6 sm:px-12 overflow-hidden rounded-[24px] mt-16 border-t border-[#C9A227]/20 shadow-[0_-20px_50px_rgba(0,0,0,0.8)]"
       aria-labelledby="footer-brand"
     >
@@ -20,17 +33,13 @@ export default function Footer() {
       <div className="relative max-w-[1408px] mx-auto">
         {/* Top 4-Column Navigation Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-16 border-b border-white/10 text-[14px]">
-          {/* Col 1: Brand & Identity (5 cols on lg) */}
+          {/* Col 1: Brand & Identity (Prominent, High-Visibility Logo) */}
           <div className="lg:col-span-4 flex flex-col gap-4">
-            <Link to="/" className="group select-none inline-block" aria-label="Black Markt Network Consultancy">
+            <Link to="/" className="group select-none inline-block py-1" aria-label="Black Markt Network Consultancy">
               <img
                 src="/images/logos/bmn-logo.png"
-                alt="Black Markt Network Consultancy Logo"
-                className="h-12 sm:h-14 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = '/public/images/logos/BMN Black Markt Network Logo.png';
-                }}
+                alt="Black Markt Network Consultancy"
+                className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(201,162,39,0.35)] transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
@@ -44,7 +53,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2: Services (3 cols on lg) */}
+          {/* Col 2: Services Suite */}
           <div className="lg:col-span-3 flex flex-col gap-3">
             <h4 className="font-headings text-[17px] text-white font-medium tracking-wide mb-1">
               Advisory Services
@@ -83,7 +92,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 3: Focus Sectors & Navigation (2 cols on lg) */}
+          {/* Col 3: Focus Sectors & Navigation */}
           <div className="lg:col-span-2 flex flex-col gap-3">
             <h4 className="font-headings text-[17px] text-white font-medium tracking-wide mb-1">
               Company
@@ -122,29 +131,29 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Col 4: Desks & Confidential Inquiries (3 cols on lg) */}
+          {/* Col 4: Desks & Confidential Inquiries */}
           <div className="lg:col-span-3 flex flex-col gap-4">
             <h4 className="font-headings text-[17px] text-white font-medium tracking-wide mb-1">
               Confidential Communications
             </h4>
 
-            <div className="flex flex-col gap-2 text-[13px] text-[#94A3B8]">
+            <div className="flex flex-col gap-2.5 text-[13px] text-[#94A3B8]">
               <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
+                <Icon name="MapPin" className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
                 <span>
-                  124 City Road, London, EC1V 2NX, England
+                  {COMPANY_INFO.registeredAddress}
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#C9A227] shrink-0" />
-                <a href="mailto:advisory@blackmarkt.network" className="hover:text-[#C9A227] transition-colors">
-                  advisory@blackmarkt.network
+                <Icon name="Mail" className="w-4 h-4 text-[#C9A227] shrink-0" />
+                <a href={`mailto:${COMPANY_INFO.emails.advisory}`} className="hover:text-[#C9A227] transition-colors">
+                  {COMPANY_INFO.emails.advisory}
                 </a>
               </div>
               <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#C9A227] shrink-0" />
-                <a href="mailto:Clientservice@blackmarkt.network" className="hover:text-[#C9A227] transition-colors">
-                  Clientservice@blackmarkt.network
+                <Icon name="Mail" className="w-4 h-4 text-[#C9A227] shrink-0" />
+                <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="hover:text-[#C9A227] transition-colors">
+                  {COMPANY_INFO.emails.clientService}
                 </a>
               </div>
             </div>
@@ -155,17 +164,34 @@ export default function Footer() {
                 className="inline-flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#C9A227] hover:bg-[#DFBA42] text-[#050505] font-semibold text-[13px] transition-all shadow-[0_4px_16px_rgba(201,162,39,0.2)]"
               >
                 <span>Request Consultation</span>
-                <ArrowRight className="w-3.5 h-3.5" />
+                <Icon name="ArrowRight" className="w-3.5 h-3.5" />
               </Link>
             </div>
           </div>
         </div>
 
+        {/* Grand Mouse-Following Brand Logo Watermark Display (Displayed Beneath the Footer) */}
+        <div className="relative max-w-[1408px] mx-auto py-12 flex justify-center items-center overflow-hidden border-b border-white/10">
+          <div
+            className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+            style={{
+              background: `radial-gradient(circle 380px at ${mousePos.x}% ${mousePos.y}%, rgba(201, 162, 39, 0.22), transparent 70%)`,
+            }}
+          />
+          <div className="relative z-10 flex flex-col items-center gap-3 py-2">
+            <img
+              src="/images/logos/bmn-logo.png"
+              alt="Black Markt Network Consultancy Official Logo"
+              className="h-20 sm:h-28 md:h-36 w-auto object-contain filter drop-shadow-[0_0_35px_rgba(201,162,39,0.28)] transition-transform duration-300 hover:scale-105 select-none"
+            />
+          </div>
+        </div>
+
         {/* Corporate Entity & Registration Notice */}
-        <div className="pt-8 pb-6 border-b border-white/5 text-[12px] text-[#94A3B8] leading-relaxed">
+        <div className="pt-6 pb-6 border-b border-white/5 text-[12px] text-[#94A3B8] leading-relaxed">
           <p>
             <strong className="text-white font-medium">Corporate Registration &amp; Legal Notice:</strong>{' '}
-            Black Markt Network Consultancy is a subsidiary of LSTC, registered in England and Wales under company registration number 11124243. Registered office address: 124 City Road, London, EC1V 2NX, England. Registered VAT Number: 477993219. All confidential engagements are governed under the laws of England and Wales.
+            Black Markt Network Consultancy is a subsidiary of {COMPANY_INFO.parentCompany}, registered in England and Wales under company registration number {COMPANY_INFO.registrationNumber}. Registered office address: {COMPANY_INFO.registeredAddress}. Registered VAT Number: {COMPANY_INFO.vatNumber}. All confidential engagements are governed under the laws of England and Wales.
           </p>
         </div>
 

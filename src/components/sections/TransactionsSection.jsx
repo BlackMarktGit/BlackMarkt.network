@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2 } from 'lucide-react';
+import Icon from '../common/Icon';
 import { TRANSACTION_SCOPES, LIFECYCLE_STEPS } from '../../data/platformData';
 
 export default function TransactionsSection() {
@@ -85,7 +85,7 @@ export default function TransactionsSection() {
             className="inline-flex items-center gap-2 text-[13.5px] font-medium text-[#C9A227] hover:text-[#DFBA42] transition-colors"
           >
             <span>View transaction case studies &amp; advisory credentials</span>
-            <ArrowRight className="w-4 h-4" />
+            <Icon name="ArrowRight" className="w-4 h-4" />
           </Link>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Layout from '../components/layout/Layout';
 import Icon from '../components/common/Icon';
+import LuxurySelect from '../components/common/LuxurySelect';
 import { PRACTICES_DATA, INDUSTRIES_DATA, INVESTOR_NETWORK, COMPANY_INFO } from '../data/platformData';
 import api from '../services/api';
 
@@ -9,6 +10,7 @@ export default function BookConsultationPage() {
     name: '',
     organization: '',
     email: '',
+    phone: '',
     country: '',
     serviceArea: PRACTICES_DATA[0].title,
     industry: INDUSTRIES_DATA[0].name,
@@ -38,10 +40,11 @@ export default function BookConsultationPage() {
       await api.submitInquiry({
         name: formData.name,
         email: formData.email,
+        phone: formData.phone,
         organization: formData.organization,
         mandate_type: `Consultation: ${formData.serviceArea} | ${formData.industry}`,
         capital_range: `${formData.investorType} (${formData.country})`,
-        message: `Format: ${formData.consultationFormat}\nTimeframe: ${formData.timeframe}\nObjective:\n${formData.objective}`,
+        message: `Phone: ${formData.phone}\nCountry: ${formData.country}\nFormat: ${formData.consultationFormat}\nTimeframe: ${formData.timeframe}\nObjective:\n${formData.objective}`,
       });
       setIsBooked(true);
     } catch (err) {
@@ -52,11 +55,29 @@ export default function BookConsultationPage() {
     }
   };
 
+  const serviceOptions = PRACTICES_DATA.map((p) => ({ value: p.title, label: p.title }));
+  const industryOptions = INDUSTRIES_DATA.map((ind) => ({ value: ind.name, label: ind.name }));
+  const investorOptions = [
+    ...INVESTOR_NETWORK.map((inv) => ({ value: inv.type, label: inv.type })),
+    { value: 'Project Developer / Sponsor', label: 'Project Developer / Sponsor' },
+    { value: 'Government Entity / State Agency', label: 'Government Entity / State Agency' },
+  ];
+  const formatOptions = [
+    { value: 'Virtual Briefing (Video Conference)', label: 'Virtual Briefing (Video Conference)' },
+    { value: 'London Headquarters (124 City Road)', label: 'London Headquarters (124 City Road)' },
+    { value: 'Regional Delegation Meeting', label: 'Regional Delegation Meeting' },
+  ];
+  const timeframeOptions = [
+    { value: 'Immediate (Within 1-2 weeks)', label: 'Immediate (Within 1-2 weeks)' },
+    { value: 'Medium Term (Within 1-2 months)', label: 'Medium Term (Within 1-2 months)' },
+    { value: 'Strategic Planning (Next Quarter)', label: 'Strategic Planning (Next Quarter)' },
+  ];
+
   return (
     <Layout>
       {/* Hero Header */}
-      <section className="relative w-full rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 p-8 sm:p-14 lg:p-20 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-        <div className="max-w-[960px] flex flex-col gap-6">
+      <section className="relative w-full rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 p-6 sm:p-12 lg:p-16 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+        <div className="max-w-[960px] flex flex-col gap-4 sm:gap-6">
           <div className="flex items-center gap-3 text-caption text-[#C9A227]">
             <span className="w-2 h-2 rounded-full bg-[#C9A227]" />
             <span className="text-[11px] sm:text-[12px] font-sans font-semibold tracking-[0.18em] uppercase">
@@ -64,24 +85,24 @@ export default function BookConsultationPage() {
             </span>
           </div>
 
-          <h1 className="text-[40px] sm:text-[60px] lg:text-[70px] font-headings font-medium tracking-tight text-white leading-[1.02]">
+          <h1 className="text-[32px] sm:text-[52px] lg:text-[64px] font-headings font-medium tracking-tight text-white leading-[1.05]">
             Book an Advisory Consultation
           </h1>
 
-          <p className="text-[18px] sm:text-[22px] text-[#CBD5E1] leading-relaxed max-w-[800px] font-body">
+          <p className="text-[16px] sm:text-[20px] text-[#CBD5E1] leading-relaxed max-w-[800px] font-body">
             Schedule an introductory consultation with our senior advisory team to discuss your project requirements, capital strategy, or expansion plans across African growth markets.
           </p>
         </div>
       </section>
 
       {/* Booking Form Section */}
-      <section className="max-w-[880px] mx-auto p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-8">
+      <section className="max-w-[880px] mx-auto p-6 sm:p-10 lg:p-14 rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-8">
         {isBooked ? (
           <div className="text-center py-12 space-y-4">
             <div className="w-16 h-16 rounded-full bg-[#050505] border border-[#C9A227] text-[#C9A227] mx-auto flex items-center justify-center">
               <Icon name="Check" className="w-8 h-8 text-[#C9A227]" />
             </div>
-            <h2 className="text-[28px] font-headings font-medium text-white">
+            <h2 className="text-[26px] sm:text-[28px] font-headings font-medium text-white">
               Consultation Request Submitted
             </h2>
             <p className="text-[15px] text-[#CBD5E1] max-w-[500px] mx-auto leading-relaxed">
@@ -98,9 +119,9 @@ export default function BookConsultationPage() {
             </div>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-5 sm:space-y-6">
             <div>
-              <h2 className="text-[24px] font-headings font-medium text-white mb-1">
+              <h2 className="text-[22px] sm:text-[24px] font-headings font-medium text-white mb-1">
                 Consultation Details
               </h2>
               <p className="text-[14px] text-[#94A3B8]">
@@ -121,7 +142,7 @@ export default function BookConsultationPage() {
                   value={formData.name}
                   onChange={handleChange}
                   placeholder="e.g. David Mensah"
-                  className="w-full h-11 px-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                  className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
                 />
               </div>
 
@@ -136,11 +157,12 @@ export default function BookConsultationPage() {
                   value={formData.organization}
                   onChange={handleChange}
                   placeholder="e.g. Zenith Infrastructure Ltd"
-                  className="w-full h-11 px-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                  className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
                 />
               </div>
             </div>
 
+            {/* Email & Phone Number (Added per User Request) */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
@@ -153,121 +175,85 @@ export default function BookConsultationPage() {
                   value={formData.email}
                   onChange={handleChange}
                   placeholder="e.g. d.mensah@zenith.com"
-                  className="w-full h-11 px-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                  className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
                 />
               </div>
 
               <div>
                 <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                  Country / Operating Market *
+                  Phone Number *
                 </label>
                 <input
                   required
-                  type="text"
-                  name="country"
-                  value={formData.country}
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
                   onChange={handleChange}
-                  placeholder="e.g. Ghana, South Africa, United Kingdom"
-                  className="w-full h-11 px-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                  placeholder="e.g. +44 20 7000 0000"
+                  className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
                 />
               </div>
             </div>
 
-            {/* Consultation Parameters */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div>
-                <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                  Advisory Focus Area
-                </label>
-                <select
-                  name="serviceArea"
-                  value={formData.serviceArea}
-                  onChange={handleChange}
-                  className="w-full h-11 px-3 rounded-lg bg-[#050505] border border-white/15 text-white text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
-                >
-                  {PRACTICES_DATA.map((p) => (
-                    <option key={p.slug} value={p.title} className="bg-[#0B1320] text-white">
-                      {p.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            {/* Country */}
+            <div>
+              <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
+                Country / Operating Market *
+              </label>
+              <input
+                required
+                type="text"
+                name="country"
+                value={formData.country}
+                onChange={handleChange}
+                placeholder="e.g. Ghana, South Africa, United Kingdom"
+                className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+              />
+            </div>
 
-              <div>
-                <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                  Industry Sector
-                </label>
-                <select
-                  name="industry"
-                  value={formData.industry}
-                  onChange={handleChange}
-                  className="w-full h-11 px-3 rounded-lg bg-[#050505] border border-white/15 text-white text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
-                >
-                  {INDUSTRIES_DATA.map((ind) => (
-                    <option key={ind.slug} value={ind.name} className="bg-[#0B1320] text-white">
-                      {ind.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
+            {/* Consultation Parameters (Custom Elite Dropdowns) */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <LuxurySelect
+                label="Advisory Focus Area"
+                value={formData.serviceArea}
+                onChange={(val) => setFormData((p) => ({ ...p, serviceArea: val }))}
+                options={serviceOptions}
+                placeholder="Select Service"
+              />
+
+              <LuxurySelect
+                label="Industry Sector"
+                value={formData.industry}
+                onChange={(val) => setFormData((p) => ({ ...p, industry: val }))}
+                options={industryOptions}
+                placeholder="Select Industry"
+              />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-              <div>
-                <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                  Client / Investor Type
-                </label>
-                <select
-                  name="investorType"
-                  value={formData.investorType}
-                  onChange={handleChange}
-                  className="w-full h-11 px-3 rounded-lg bg-[#050505] border border-white/15 text-white text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
-                >
-                  {INVESTOR_NETWORK.map((inv) => (
-                    <option key={inv.type} value={inv.type} className="bg-[#0B1320] text-white">
-                      {inv.type}
-                    </option>
-                  ))}
-                  <option value="Project Developer / Sponsor" className="bg-[#0B1320] text-white">
-                    Project Developer / Sponsor
-                  </option>
-                  <option value="Government Entity / State Agency" className="bg-[#0B1320] text-white">
-                    Government Entity / State Agency
-                  </option>
-                </select>
-              </div>
+              <LuxurySelect
+                label="Client / Investor Type"
+                value={formData.investorType}
+                onChange={(val) => setFormData((p) => ({ ...p, investorType: val }))}
+                options={investorOptions}
+                placeholder="Select Client Type"
+              />
 
-              <div>
-                <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                  Format Preference
-                </label>
-                <select
-                  name="consultationFormat"
-                  value={formData.consultationFormat}
-                  onChange={handleChange}
-                  className="w-full h-11 px-3 rounded-lg bg-[#050505] border border-white/15 text-white text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
-                >
-                  <option className="bg-[#0B1320] text-white">Virtual Briefing (Video Conference)</option>
-                  <option className="bg-[#0B1320] text-white">London Headquarters (124 City Road)</option>
-                  <option className="bg-[#0B1320] text-white">Regional Delegation Meeting</option>
-                </select>
-              </div>
+              <LuxurySelect
+                label="Format Preference"
+                value={formData.consultationFormat}
+                onChange={(val) => setFormData((p) => ({ ...p, consultationFormat: val }))}
+                options={formatOptions}
+                placeholder="Select Format"
+              />
 
-              <div>
-                <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                  Target Timeframe
-                </label>
-                <select
-                  name="timeframe"
-                  value={formData.timeframe}
-                  onChange={handleChange}
-                  className="w-full h-11 px-3 rounded-lg bg-[#050505] border border-white/15 text-white text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
-                >
-                  <option className="bg-[#0B1320] text-white">Immediate (Within 1-2 weeks)</option>
-                  <option className="bg-[#0B1320] text-white">Medium Term (Within 1-2 months)</option>
-                  <option className="bg-[#0B1320] text-white">Strategic Planning (Next Quarter)</option>
-                </select>
-              </div>
+              <LuxurySelect
+                label="Target Timeframe"
+                value={formData.timeframe}
+                onChange={(val) => setFormData((p) => ({ ...p, timeframe: val }))}
+                options={timeframeOptions}
+                placeholder="Select Timeframe"
+              />
             </div>
 
             {/* Objective */}
@@ -282,7 +268,7 @@ export default function BookConsultationPage() {
                 value={formData.objective}
                 onChange={handleChange}
                 placeholder="Briefly outline your transaction objectives, capital requirements, or strategic considerations..."
-                className="w-full p-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all resize-none"
+                className="w-full p-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all resize-none"
               />
             </div>
 

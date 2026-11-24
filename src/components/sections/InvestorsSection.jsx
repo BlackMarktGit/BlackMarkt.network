@@ -66,7 +66,7 @@ export default function InvestorsSection() {
                 key={index}
                 className="p-5 rounded-[14px] bg-[#0B1320] border border-white/5 hover:border-[#C9A227]/40 flex items-start sm:items-center gap-4 transition-all group"
               >
-                <div className="w-10 h-10 rounded-xl bg-[#050505] border border-[#C9A227]/25 flex items-center justify-center text-[#C9A227] shrink-0 group-hover:border-[#C9A227] transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_2px_12px_rgba(201,162,39,0.12)] flex items-center justify-center text-[#C9A227] shrink-0 group-hover:border-[#C9A227] transition-all">
                   <Icon name={cat.iconName} className="w-5 h-5 text-[#C9A227]" />
                 </div>
                 <div className="flex-1">

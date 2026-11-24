@@ -4,41 +4,49 @@ export const CITIES = [
   {
     id: 'london',
     name: 'London',
+    hub: 'Bank & City Financial District',
     image: '/images/cities/london.jpg',
   },
   {
     id: 'newyork',
     name: 'New York',
+    hub: 'Wall Street & Lower Manhattan',
     image: '/images/cities/newyork.jpg',
   },
   {
     id: 'lagos',
     name: 'Lagos',
+    hub: 'Lekki & Victoria Island Corridor',
     image: '/images/cities/lagos.jpg',
   },
   {
     id: 'nairobi',
     name: 'Nairobi',
+    hub: 'Upper Hill & Silicon Savannah',
     image: '/images/cities/nairobi.jpg',
   },
   {
     id: 'johannesburg',
     name: 'Johannesburg',
+    hub: 'Sandton Financial District',
     image: '/images/cities/johannesburg.jpg',
   },
   {
     id: 'cairo',
     name: 'Cairo',
+    hub: 'Nile Corniche & Financial District',
     image: '/images/cities/cairo.jpg',
   },
   {
     id: 'accra',
     name: 'Accra',
+    hub: 'Airport City & Ridge Financial District',
     image: '/images/cities/accra.jpg',
   },
   {
     id: 'kigali',
     name: 'Kigali',
+    hub: 'Kigali International Financial Centre',
     image: '/images/cities/kigali.jpg',
   },
 ];
@@ -83,7 +91,7 @@ export default function AnimatedCityBackground() {
     window.addEventListener('resize', resize);
 
     // Light trail particles moving along arterial vectors
-    const numParticles = 26;
+    const numParticles = 24;
     const particles = Array.from({ length: numParticles }, () => ({
       x: Math.random() * (canvas.width || 1200),
       y: 0.45 * (canvas.height || 800) + Math.random() * 0.45 * (canvas.height || 800),
@@ -172,7 +180,6 @@ export default function AnimatedCityBackground() {
       />
 
       {/* 4. Luxury Vignette Gradients: Obsidian Black & Deep Midnight Navy */}
-      {/* Left heavy gradient protecting text readability */}
       <div
         className="absolute inset-0 z-[3]"
         style={{
@@ -190,11 +197,21 @@ export default function AnimatedCityBackground() {
         }}
       />
 
-      {/* Top Navbar Ground Scrim */}
+      {/* Top Navbar Scrim */}
       <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#050505]/90 to-transparent z-[3]" />
 
       {/* Bottom Ground Vignette */}
-      <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-[3]" />
+      <div className="absolute inset-x-0 bottom-0 h-36 bg-gradient-to-t from-[#050505] via-[#050505]/80 to-transparent z-[3]" />
+
+      {/* 5. Clean, Refined City & District Label (Minimalist, No Clutter) */}
+      <div className="absolute bottom-4 left-6 sm:left-10 md:left-16 z-30 pointer-events-none flex items-center gap-2">
+        <span className="w-2 h-2 rounded-full bg-[#C9A227] animate-pulse" />
+        <span className="text-[11px] sm:text-[12px] font-sans font-medium tracking-[0.14em] uppercase text-white/90">
+          <strong className="text-[#C9A227] font-semibold">{activeCity.name}</strong>
+          <span className="mx-2 text-white/40">&bull;</span>
+          <span className="text-white/70">{activeCity.hub}</span>
+        </span>
+      </div>
     </div>
   );
 }

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Layout from '../components/layout/Layout';
 import ActionButton from '../components/common/ActionButton';
 import Icon from '../components/common/Icon';
+import LuxurySelect from '../components/common/LuxurySelect';
 import { PRACTICES_DATA, INDUSTRIES_DATA, COMPANY_INFO } from '../data/platformData';
 import api from '../services/api';
 
@@ -12,6 +13,7 @@ export default function ContactPage() {
     name: '',
     organization: '',
     email: '',
+    phone: '',
     country: '',
     serviceArea: PRACTICES_DATA[0].title,
     industry: INDUSTRIES_DATA[0].name,
@@ -35,16 +37,18 @@ export default function ContactPage() {
       await api.submitInquiry({
         name: formData.name,
         email: formData.email,
+        phone: formData.phone,
         organization: formData.organization,
         mandate_type: `${formData.serviceArea} (${formData.industry})`,
         capital_range: formData.country,
-        message: formData.message,
+        message: `Phone: ${formData.phone || 'N/A'}\nCountry: ${formData.country}\n\n${formData.message}`,
       });
       setFormSent(true);
       setFormData({
         name: '',
         organization: '',
         email: '',
+        phone: '',
         country: '',
         serviceArea: PRACTICES_DATA[0].title,
         industry: INDUSTRIES_DATA[0].name,
@@ -59,11 +63,14 @@ export default function ContactPage() {
     }
   };
 
+  const serviceOptions = PRACTICES_DATA.map((p) => ({ value: p.title, label: p.title }));
+  const industryOptions = INDUSTRIES_DATA.map((ind) => ({ value: ind.name, label: ind.name }));
+
   return (
     <Layout>
       {/* Hero Header */}
-      <section className="relative w-full rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 p-8 sm:p-14 lg:p-20 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
-        <div className="max-w-[960px] flex flex-col gap-6">
+      <section className="relative w-full rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 p-6 sm:p-12 lg:p-16 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+        <div className="max-w-[960px] flex flex-col gap-4 sm:gap-6">
           <div className="flex items-center gap-3 text-caption text-[#C9A227]">
             <span className="w-2 h-2 rounded-full bg-[#C9A227]" />
             <span className="text-[11px] sm:text-[12px] font-sans font-semibold tracking-[0.18em] uppercase">
@@ -71,11 +78,11 @@ export default function ContactPage() {
             </span>
           </div>
 
-          <h1 className="text-[40px] sm:text-[60px] lg:text-[70px] font-headings font-medium tracking-tight text-white leading-[1.02]">
+          <h1 className="text-[32px] sm:text-[52px] lg:text-[64px] font-headings font-medium tracking-tight text-white leading-[1.05]">
             Contact Our Advisory Team
           </h1>
 
-          <p className="text-[18px] sm:text-[22px] text-[#CBD5E1] leading-relaxed max-w-[800px] font-body">
+          <p className="text-[16px] sm:text-[20px] text-[#CBD5E1] leading-relaxed max-w-[800px] font-body">
             Connect directly with Black Markt Network Consultancy regarding transaction mandates, strategic capital advisory, or institutional partnership opportunities.
           </p>
         </div>
@@ -85,12 +92,12 @@ export default function ContactPage() {
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 my-8">
         {/* Left Column: Corporate & Contact Details */}
         <div className="lg:col-span-5 space-y-6">
-          <div className="p-8 rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.4)] space-y-6">
+          <div className="p-6 sm:p-8 rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.4)] space-y-6">
             <div>
               <span className="text-[11px] font-caption text-[#C9A227] uppercase tracking-wider block mb-2 font-semibold">
                 London Headquarters
               </span>
-              <h2 className="text-[22px] font-headings font-medium text-white">
+              <h2 className="text-[20px] sm:text-[22px] font-headings font-medium text-white">
                 {COMPANY_INFO.name}
               </h2>
               <p className="text-[13px] text-[#94A3B8] mt-0.5">
@@ -111,7 +118,7 @@ export default function ContactPage() {
                 <Icon name="Mail" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-white block font-medium">Advisory Inquiries</span>
-                  <a href={`mailto:${COMPANY_INFO.emails.advisory}`} className="text-[#C9A227] hover:underline">
+                  <a href={`mailto:${COMPANY_INFO.emails.advisory}`} className="text-[#C9A227] hover:underline break-all">
                     {COMPANY_INFO.emails.advisory}
                   </a>
                 </div>
@@ -121,7 +128,7 @@ export default function ContactPage() {
                 <Icon name="Mail" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-white block font-medium">Client Services</span>
-                  <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="text-[#C9A227] hover:underline">
+                  <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="text-[#C9A227] hover:underline break-all">
                     {COMPANY_INFO.emails.clientService}
                   </a>
                 </div>
@@ -131,7 +138,7 @@ export default function ContactPage() {
                 <Icon name="User" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-white block font-medium">Managing Director Desk</span>
-                  <a href={`mailto:${COMPANY_INFO.emails.executive}`} className="text-[#C9A227] hover:underline">
+                  <a href={`mailto:${COMPANY_INFO.emails.executive}`} className="text-[#C9A227] hover:underline break-all">
                     {COMPANY_INFO.emails.executive}
                   </a>
                 </div>
@@ -146,11 +153,11 @@ export default function ContactPage() {
           </div>
 
           {/* Quick Schedule Prompt */}
-          <div className="p-8 rounded-[24px] bg-[#050505] border border-[#C9A227]/30 text-white shadow-[0_16px_40px_rgba(0,0,0,0.6)]">
+          <div className="p-6 sm:p-8 rounded-[20px] sm:rounded-[24px] bg-[#050505] border border-[#C9A227]/30 text-white shadow-[0_16px_40px_rgba(0,0,0,0.6)]">
             <span className="text-[11px] font-caption text-[#C9A227] uppercase tracking-wider block mb-2 font-semibold">
               Formal Consultation
             </span>
-            <h3 className="text-[19px] font-headings font-medium text-white mb-2">
+            <h3 className="text-[18px] sm:text-[19px] font-headings font-medium text-white mb-2">
               Prefer a structured briefing?
             </h3>
             <p className="text-[14px] text-[#94A3B8] leading-relaxed mb-4">
@@ -162,14 +169,14 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* Right Column: Modern Lightweight Contact Form */}
-        <div className="lg:col-span-7 p-8 sm:p-12 rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)]">
+        {/* Right Column: Custom Modern Form with Zero Grey Dropdowns */}
+        <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)]">
           {formSent ? (
             <div className="text-center py-12 space-y-4">
               <div className="w-16 h-16 rounded-full bg-[#050505] border border-[#C9A227] text-[#C9A227] mx-auto flex items-center justify-center">
                 <Icon name="Check" className="w-8 h-8 text-[#C9A227]" />
               </div>
-              <h2 className="text-[28px] font-headings font-medium text-white">
+              <h2 className="text-[26px] sm:text-[28px] font-headings font-medium text-white">
                 Inquiry Received
               </h2>
               <p className="text-[15px] text-[#CBD5E1] max-w-[480px] mx-auto leading-relaxed">
@@ -178,15 +185,15 @@ export default function ContactPage() {
               <button
                 type="button"
                 onClick={() => setFormSent(false)}
-                className="mt-4 px-6 py-2.5 rounded-lg bg-[#C9A227] text-black font-semibold text-[13px] hover:bg-[#DFBA42] transition-colors"
+                className="mt-4 px-6 py-2.5 rounded-lg bg-[#C9A227] text-black font-semibold text-[13px] hover:bg-[#DFBA42] transition-colors cursor-pointer"
               >
                 Submit Another Inquiry
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <h2 className="text-[24px] font-headings font-medium text-white mb-1">
+                <h2 className="text-[22px] sm:text-[24px] font-headings font-medium text-white mb-1">
                   Send an Inquiry
                 </h2>
                 <p className="text-[14px] text-[#94A3B8]">
@@ -206,7 +213,7 @@ export default function ContactPage() {
                     value={formData.name}
                     onChange={handleChange}
                     placeholder="e.g. John Doe"
-                    className="w-full h-11 px-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                    className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
                   />
                 </div>
 
@@ -221,11 +228,12 @@ export default function ContactPage() {
                     value={formData.organization}
                     onChange={handleChange}
                     placeholder="e.g. Acme Capital Partners"
-                    className="w-full h-11 px-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                    className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
                   />
                 </div>
               </div>
 
+              {/* Email & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
@@ -238,10 +246,27 @@ export default function ContactPage() {
                     value={formData.email}
                     onChange={handleChange}
                     placeholder="e.g. j.doe@company.com"
-                    className="w-full h-11 px-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                    className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
                   />
                 </div>
 
+                <div>
+                  <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
+                    Phone Number *
+                  </label>
+                  <input
+                    required
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="e.g. +44 20 7946 0000"
+                    className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
                     Country / Location *
@@ -253,47 +278,29 @@ export default function ContactPage() {
                     value={formData.country}
                     onChange={handleChange}
                     placeholder="e.g. United Kingdom, Kenya, Nigeria"
-                    className="w-full h-11 px-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                    className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                  />
+                </div>
+
+                <div>
+                  <LuxurySelect
+                    label="Advisory Service Area"
+                    value={formData.serviceArea}
+                    onChange={(val) => setFormData((p) => ({ ...p, serviceArea: val }))}
+                    options={serviceOptions}
+                    placeholder="Select Service"
                   />
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                    Advisory Service Area
-                  </label>
-                  <select
-                    name="serviceArea"
-                    value={formData.serviceArea}
-                    onChange={handleChange}
-                    className="w-full h-11 px-3 rounded-lg bg-[#050505] border border-white/15 text-white text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
-                  >
-                    {PRACTICES_DATA.map((p) => (
-                      <option key={p.slug} value={p.title} className="bg-[#0B1320] text-white">
-                        {p.title}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                    Industry Sector
-                  </label>
-                  <select
-                    name="industry"
-                    value={formData.industry}
-                    onChange={handleChange}
-                    className="w-full h-11 px-3 rounded-lg bg-[#050505] border border-white/15 text-white text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
-                  >
-                    {INDUSTRIES_DATA.map((ind) => (
-                      <option key={ind.slug} value={ind.name} className="bg-[#0B1320] text-white">
-                        {ind.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
+              <div>
+                <LuxurySelect
+                  label="Industry Sector"
+                  value={formData.industry}
+                  onChange={(val) => setFormData((p) => ({ ...p, industry: val }))}
+                  options={industryOptions}
+                  placeholder="Select Industry"
+                />
               </div>
 
               <div>
@@ -307,7 +314,7 @@ export default function ContactPage() {
                   value={formData.message}
                   onChange={handleChange}
                   placeholder="Outline the scope of your inquiry, capital requirement, or partnership objectives..."
-                  className="w-full p-4 rounded-lg bg-[#050505] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all resize-none"
+                  className="w-full p-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all resize-none"
                 />
               </div>
 

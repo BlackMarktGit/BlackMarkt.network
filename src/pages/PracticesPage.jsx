@@ -52,7 +52,7 @@ export default function PracticesPage() {
             className="p-8 rounded-[20px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] flex flex-col justify-between hover:border-[#C9A227]/40 hover:-translate-y-1 transition-all duration-300 group"
           >
             <div>
-              <div className="w-12 h-12 rounded-xl bg-[#050505] border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] group-hover:bg-[#C9A227]/10 transition-all">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_4px_20px_rgba(201,162,39,0.15)] flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] transition-all">
                 <Icon name={service.iconName} className="w-6 h-6 text-[#C9A227]" />
               </div>
 

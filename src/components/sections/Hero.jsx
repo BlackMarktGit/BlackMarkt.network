@@ -33,7 +33,7 @@ export default function Hero() {
         {/* Client's Official Headline */}
         <h1
           id="hero-title"
-          className="hero__title font-headings text-[clamp(26px,4.5vw,48px)] lg:text-[clamp(36px,2.4vw+2vh,58px)] font-medium leading-[1.08] tracking-[-0.02em] text-[#F8F9FA] m-0"
+          className="hero__title font-headings text-[clamp(24px,5.5vw,44px)] lg:text-[clamp(34px,2.4vw+2vh,58px)] font-medium leading-[1.08] tracking-[-0.02em] text-[#F8F9FA] m-0 break-words"
         >
           <span className="hero__title-line block">
             Connecting African <span className="text-[#C9A227]">Opportunity</span>
@@ -49,11 +49,11 @@ export default function Hero() {
         </p>
 
         {/* Action Button CTAs */}
-        <div className="hero__cta-wrap flex items-center gap-3 sm:gap-4 w-full sm:w-auto pt-2">
+        <div className="hero__cta-wrap flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto pt-2">
           {/* Primary CTA */}
           <Link
             to="/book-consultation"
-            className="action-button group/action flex-1 sm:flex-initial inline-flex items-center justify-between gap-3 border-0 select-none cursor-pointer no-underline rounded-[var(--normal-8)] font-body text-[13px] sm:text-[14px] font-semibold tracking-[-0.01em] leading-none whitespace-nowrap transition-all duration-200 focus-visible:outline-none h-[44px] sm:h-[48px] px-5 sm:px-6 bg-[#C9A227] text-[#050505] hover:bg-[#DFBA42] shadow-[0_4px_20px_rgba(201,162,39,0.35)]"
+            className="action-button group/action inline-flex items-center justify-between gap-3 border-0 select-none cursor-pointer no-underline rounded-xl font-body text-[13px] sm:text-[14px] font-semibold tracking-[-0.01em] leading-none whitespace-nowrap transition-all duration-200 focus-visible:outline-none h-[44px] sm:h-[48px] px-5 sm:px-6 bg-[#C9A227] text-[#050505] hover:bg-[#DFBA42] shadow-[0_4px_20px_rgba(201,162,39,0.35)] w-full sm:w-auto"
             aria-label="Request a Strategic Consultation"
           >
             <span className="action-button__label transition-transform duration-[450ms] group-hover/action:translate-x-1">
@@ -82,7 +82,7 @@ export default function Hero() {
           {/* Secondary CTA */}
           <a
             href="#services"
-            className="action-button group/action inline-flex items-center justify-center gap-1.5 select-none cursor-pointer no-underline rounded-[var(--normal-8)] font-body text-[13px] sm:text-[14px] font-medium tracking-[-0.01em] leading-none whitespace-nowrap transition-all duration-200 focus-visible:outline-none h-[44px] sm:h-[48px] px-4 sm:px-5 bg-white/5 text-[#F8F9FA] border border-white/15 hover:bg-white/10 hover:border-[#C9A227]/40 shrink-0"
+            className="action-button group/action inline-flex items-center justify-center gap-1.5 select-none cursor-pointer no-underline rounded-xl font-body text-[13px] sm:text-[14px] font-medium tracking-[-0.01em] leading-none whitespace-nowrap transition-all duration-200 focus-visible:outline-none h-[44px] sm:h-[48px] px-4 sm:px-5 bg-white/5 text-[#F8F9FA] border border-white/15 hover:bg-white/10 hover:border-[#C9A227]/40 w-full sm:w-auto"
             aria-label="Explore Advisory Services"
           >
             <span>Our Services</span>
