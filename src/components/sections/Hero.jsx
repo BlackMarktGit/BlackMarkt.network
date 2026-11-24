@@ -1,78 +1,102 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronDown } from 'lucide-react';
 import AnimatedCityBackground from '../hero/AnimatedCityBackground';
 
 export default function Hero() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setMounted(true), 100);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <section
       id="hero"
-      className="hero page-shell__card relative z-0 w-full max-w-full overflow-hidden rounded-[20px] sm:rounded-[24px] bg-[#050505] border border-[#C9A227]/20 shadow-[0_25px_60px_rgba(0,0,0,0.9)] min-h-[580px] sm:min-h-[640px] lg:min-h-[700px] flex items-center"
+      className="hero page-shell__card max-lg:relative lg:sticky top-[var(--section-gap,16px)] z-0 w-full max-w-full overflow-hidden rounded-[20px] sm:rounded-[24px] bg-[#050505] border border-[#C9A227]/20 shadow-[0_25px_60px_rgba(0,0,0,0.9)] min-h-[540px] sm:min-h-[600px] lg:min-h-[660px] flex items-center"
       aria-labelledby="hero-title"
+      data-mounted={mounted ? "true" : "false"}
     >
-      {/* Dynamic Cinematic Skyline Backdrop */}
+      {/* Dynamic Animated Background: Global Capitals Continuous Loop */}
       <AnimatedCityBackground />
 
-      {/* Hero Editorial Content */}
-      <div className="relative z-10 w-full max-w-[1408px] mx-auto px-6 sm:px-12 lg:px-16 py-16 sm:py-24">
-        <div className="max-w-[820px] flex flex-col items-start gap-5 sm:gap-6">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#0B1320]/80 border border-[#C9A227]/30 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-[#C9A227] animate-pulse" />
-            <span className="text-[#C9A227] text-[11px] sm:text-[12px] font-sans font-semibold tracking-[0.15em] uppercase">
-              Strategic Capital Advisory &bull; Africa Growth Markets
-            </span>
-          </div>
-
-          {/* Official Company Headline */}
-          <h1
-            id="hero-title"
-            className="font-headings text-[clamp(32px,5.2vw,64px)] font-medium leading-[1.06] tracking-[-0.02em] text-[#F8F9FA] m-0"
-          >
-            Connecting African Opportunity{' '}
-            <span className="text-[#C9A227]">With Global Capital</span>
-          </h1>
-
-          {/* Value Proposition Body */}
-          <p className="font-body text-[15px] sm:text-[17px] lg:text-[19px] leading-[1.6] text-[#CBD5E1] max-w-[720px] m-0">
-            Black Markt Network Consultancy is an independent strategic capital advisory firm specialising in connecting ambitious African businesses, project sponsors, governments and institutions with the capital, expertise and strategic partnerships required to accelerate sustainable growth.
+      {/* Editorial Content (Left side on desktop, full width flex container on mobile) */}
+      <div className="hero__content relative z-10 h-full w-full max-w-full lg:w-[65%] lg:max-w-[820px] 2xl:max-w-[900px] px-6 sm:px-10 md:px-16 flex flex-col justify-center items-start py-12 sm:py-16 lg:py-20 gap-3.5 sm:gap-4 lg:gap-5 overflow-hidden">
+        {/* Eyebrow */}
+        <div className="inline-flex items-center gap-2 max-w-full">
+          <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-[#C9A227] animate-pulse shrink-0" />
+          <p className="hero__eyebrow text-caption text-[#C9A227] text-[10px] sm:text-[11.5px] 2xl:text-[13px] font-sans font-semibold tracking-[0.14em] uppercase whitespace-nowrap m-0">
+            Strategic Capital Advisory &bull; Africa Growth Markets
           </p>
+        </div>
 
-          {/* Direct, Meaningful CTAs */}
-          <div className="flex flex-wrap items-center gap-4 pt-2 w-full sm:w-auto">
-            <Link
-              to="/book-consultation"
-              className="inline-flex items-center justify-center gap-2.5 px-6 py-3.5 sm:px-8 sm:py-4 rounded-xl bg-[#C9A227] hover:bg-[#DFBA42] text-[#050505] font-semibold text-[13.5px] sm:text-[14.5px] tracking-[-0.01em] transition-all shadow-[0_4px_20px_rgba(201,162,39,0.35)]"
-              aria-label="Request a Strategic Consultation"
+        {/* Client's Official Headline */}
+        <h1
+          id="hero-title"
+          className="hero__title font-headings text-[clamp(26px,4.5vw,48px)] lg:text-[clamp(36px,2.4vw+2vh,58px)] font-medium leading-[1.08] tracking-[-0.02em] text-[#F8F9FA] m-0"
+        >
+          <span className="hero__title-line block">
+            Connecting African <span className="text-[#C9A227]">Opportunity</span>
+          </span>
+          <span className="hero__title-line block">
+            With Global Capital
+          </span>
+        </h1>
+
+        {/* Client's Official Value Proposition Body */}
+        <p className="hero__subhead font-body text-[13.5px] sm:text-[15px] xl:text-[16.5px] 2xl:text-[18px] leading-[1.5] text-[#CBD5E1] max-w-[620px] xl:max-w-[720px] m-0">
+          Black Markt Network Consultancy is an independent strategic capital advisory firm connecting ambitious African businesses, project sponsors, governments and institutions with institutional capital, expertise and transformative partnerships.
+        </p>
+
+        {/* Action Button CTAs */}
+        <div className="hero__cta-wrap flex items-center gap-3 sm:gap-4 w-full sm:w-auto pt-2">
+          {/* Primary CTA */}
+          <Link
+            to="/book-consultation"
+            className="action-button group/action flex-1 sm:flex-initial inline-flex items-center justify-between gap-3 border-0 select-none cursor-pointer no-underline rounded-[var(--normal-8)] font-body text-[13px] sm:text-[14px] font-semibold tracking-[-0.01em] leading-none whitespace-nowrap transition-all duration-200 focus-visible:outline-none h-[44px] sm:h-[48px] px-5 sm:px-6 bg-[#C9A227] text-[#050505] hover:bg-[#DFBA42] shadow-[0_4px_20px_rgba(201,162,39,0.35)]"
+            aria-label="Request a Strategic Consultation"
+          >
+            <span className="action-button__label transition-transform duration-[450ms] group-hover/action:translate-x-1">
+              Request a Strategic Consultation
+            </span>
+            <svg
+              className="action-button__chevron shrink-0"
+              width="16"
+              height="16"
+              viewBox="0 0 18 18"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              aria-hidden="true"
+              focusable="false"
             >
-              <span>Request a Strategic Consultation</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+              <path
+                d="M7.5 13.5L12 9L7.5 4.5"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </Link>
 
-            <a
-              href="#services"
-              className="inline-flex items-center justify-center gap-2 px-5 py-3.5 sm:px-6 sm:py-4 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/15 hover:border-[#C9A227]/40 text-[13.5px] sm:text-[14.5px] font-medium transition-all"
-            >
-              <span>Our Services</span>
-              <ChevronDown className="w-4 h-4 text-[#C9A227]" />
-            </a>
-          </div>
+          {/* Secondary CTA */}
+          <a
+            href="#services"
+            className="action-button group/action inline-flex items-center justify-center gap-1.5 select-none cursor-pointer no-underline rounded-[var(--normal-8)] font-body text-[13px] sm:text-[14px] font-medium tracking-[-0.01em] leading-none whitespace-nowrap transition-all duration-200 focus-visible:outline-none h-[44px] sm:h-[48px] px-4 sm:px-5 bg-white/5 text-[#F8F9FA] border border-white/15 hover:bg-white/10 hover:border-[#C9A227]/40 shrink-0"
+            aria-label="Explore Advisory Services"
+          >
+            <span>Our Services</span>
+            <span className="text-[#C9A227] ml-0.5">&darr;</span>
+          </a>
+        </div>
 
-          {/* Clean Assurance Note */}
-          <div className="pt-4 border-t border-white/10 w-full max-w-[720px] text-[12px] sm:text-[13px] text-[#94A3B8] flex flex-wrap items-center gap-y-2 gap-x-6">
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227]" />
-              <span>Independent Strategic Advisory</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227]" />
-              <span>Extensive International Network</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227]" />
-              <span>Discretion &amp; Commercial Integrity</span>
-            </div>
-          </div>
+        {/* Fiduciary Discretion Assurance Badge */}
+        <div className="mt-2 text-[11px] sm:text-[12.5px] text-[#94A3B8] font-sans flex items-center gap-2">
+          <svg className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#C9A227] shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+            <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+          </svg>
+          <span>Strict Professional Discretion &bull; Fiduciary Independence</span>
         </div>
       </div>
     </section>
