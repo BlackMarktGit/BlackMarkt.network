@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../common/Icon';
+import { OPERATING_APPROACH } from '../../data/platformData';
 
 export default function AboutUsSection() {
   return (
@@ -41,16 +42,16 @@ export default function AboutUsSection() {
 
           <div className="lg:col-span-6 flex flex-col gap-5 text-[#CBD5E1] font-body text-[15px] sm:text-[16.5px] leading-[1.65]">
             <p>
-              Black Markt Network Consultancy exists to connect Africa’s emerging opportunities with global sources of capital and strategic expertise.
+              We operate at the intersection of African commercial opportunity and international institutional liquidity—bridging the gap between emerging market potential and global underwriting standards.
             </p>
             <p>
-              We work with ambitious African businesses, project sponsors, governments and institutions seeking growth capital, strategic partnerships and international expansion opportunities.
+              Through our established network spanning Development Finance Institutions (DFIs), sovereign wealth funds, private equity and private credit funds, single- and multi-family offices, commercial banks, and multinational corporates, we originate and execute transactions built for enduring commercial and economic impact.
             </p>
             <p>
-              By combining deep commercial understanding, regional market insight and a trusted international network, we provide clients with access to investors and partners capable of supporting complex transactions, expansion strategies and long-term value creation.
+              Our mandate extends well beyond traditional capital introduction. We architect bespoke funding strategies, structure bankable transactions, elevate corporate governance and investment readiness, and negotiate cross-border joint ventures that position clients for sustainable expansion.
             </p>
             <p className="text-white font-medium italic border-l-2 border-[#C9A227] pl-4 my-1">
-              &ldquo;We believe Africa’s growth potential requires more than capital alone. It requires strategic relationships, industry expertise and partnerships built for sustainable impact.&rdquo;
+              &ldquo;Every engagement is anchored in strict confidentiality, conflict-free independence, and disciplined execution.&rdquo;
             </p>
           </div>
         </div>
@@ -68,52 +69,26 @@ export default function AboutUsSection() {
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505]/80 via-transparent to-transparent pointer-events-none" />
           </div>
 
-          {/* 3 Strategic Pillars Cards */}
+          {/* 3 Strategic Operating Approach Cards */}
           <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {/* Pillar 1 */}
-            <div className="p-6 rounded-[18px] bg-[#050505]/70 border border-white/10 hover:border-[#C9A227]/40 transition-all flex flex-col justify-between group">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_4px_20px_rgba(201,162,39,0.15)] flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] transition-all">
-                  <Icon name="Compass" className="w-6 h-6 text-[#C9A227]" />
+            {OPERATING_APPROACH.map((pillar) => (
+              <div
+                key={pillar.title}
+                className="p-6 rounded-[18px] bg-[#050505]/70 border border-white/10 hover:border-[#C9A227]/40 transition-all flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_4px_20px_rgba(201,162,39,0.15)] flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] transition-all">
+                    <Icon name={pillar.iconName} className="w-6 h-6 text-[#C9A227]" />
+                  </div>
+                  <h3 className="text-white font-headings text-[18px] sm:text-[19px] font-medium mb-2.5 leading-snug">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-[#94A3B8] text-[13.5px] leading-relaxed">
+                    {pillar.desc}
+                  </p>
                 </div>
-                <h3 className="text-white font-headings text-[18px] sm:text-[19px] font-medium mb-2.5 leading-snug">
-                  Commercial &amp; Strategic Insight
-                </h3>
-                <p className="text-[#94A3B8] text-[13.5px] leading-relaxed">
-                  Combining commercial understanding and regional market insight to structure transactions aligned with long-term business objectives.
-                </p>
               </div>
-            </div>
-
-            {/* Pillar 2 */}
-            <div className="p-6 rounded-[18px] bg-[#050505]/70 border border-white/10 hover:border-[#C9A227]/40 transition-all flex flex-col justify-between group">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_4px_20px_rgba(201,162,39,0.15)] flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] transition-all">
-                  <Icon name="Globe2" className="w-6 h-6 text-[#C9A227]" />
-                </div>
-                <h3 className="text-white font-headings text-[18px] sm:text-[19px] font-medium mb-2.5 leading-snug">
-                  International Capital Network
-                </h3>
-                <p className="text-[#94A3B8] text-[13.5px] leading-relaxed">
-                  Direct access to institutional investors, sovereign wealth funds, family offices, commercial banks, and development finance institutions.
-                </p>
-              </div>
-            </div>
-
-            {/* Pillar 3 */}
-            <div className="p-6 rounded-[18px] bg-[#050505]/70 border border-white/10 hover:border-[#C9A227]/40 transition-all flex flex-col justify-between group">
-              <div>
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_4px_20px_rgba(201,162,39,0.15)] flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] transition-all">
-                  <Icon name="ShieldCheck" className="w-6 h-6 text-[#C9A227]" />
-                </div>
-                <h3 className="text-white font-headings text-[18px] sm:text-[19px] font-medium mb-2.5 leading-snug">
-                  Discretion &amp; Integrity
-                </h3>
-                <p className="text-[#94A3B8] text-[13.5px] leading-relaxed">
-                  Every client engagement is conducted with strict confidentiality, fiduciary discipline, and an uncompromising standard of professionalism.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 

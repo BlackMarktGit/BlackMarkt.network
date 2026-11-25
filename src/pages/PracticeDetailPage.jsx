@@ -73,7 +73,7 @@ export default function PracticeDetailPage() {
 
           <div className="pt-6 border-t border-white/10">
             <h3 className="text-white font-headings text-[20px] font-medium mb-4">
-              Core Capabilities &amp; Deliverables
+              {practice.deliverablesHeading || 'Core Capabilities & Deliverables'}
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {practice.deliverables.map((d, i) => (

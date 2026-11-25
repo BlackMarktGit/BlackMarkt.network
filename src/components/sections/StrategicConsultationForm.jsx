@@ -2,38 +2,21 @@ import React, { useState } from 'react';
 import api from '../../services/api';
 import Icon from '../common/Icon';
 import LuxurySelect from '../common/LuxurySelect';
-import { INDUSTRIES_DATA, COMPANY_INFO } from '../../data/platformData';
-
-const INVESTMENT_REQUIREMENTS = [
-  'Growth Capital & Private Equity',
-  'Project Finance & Infrastructure Debt',
-  'Commercial Debt & Structured Lending',
-  'Strategic Equity & Joint Venture Capital',
-  'Venture & Early Stage Growth Capital',
-  'Sovereign / Public-Private Partnership Financing',
-  'General Strategic Capital Advisory',
-];
-
-const PARTNERSHIP_OBJECTIVES = [
-  'Access International Institutional Investors',
-  'Cross-Border Market Entry & Expansion',
-  'Strategic Joint Venture Alignment',
-  'Investment Readiness & Due Diligence Preparation',
-  'Mergers, Acquisitions or Divestitures',
-  'Government & Concession Structuring',
-  'General Strategic Partnership Discussion',
-];
+import { COMPANY_INFO, FORM_OPTIONS, DIRECT_ENGAGEMENT_DESKS } from '../../data/platformData';
+import { ShieldCheck, ArrowRight, Check } from 'lucide-react';
 
 export default function StrategicConsultationForm() {
   const [formData, setFormData] = useState({
     name: '',
+    titleRole: '',
+    organisation: '',
     email: '',
     phone: '',
-    organisation: '',
     country: '',
-    industry: '',
-    investmentRequirement: '',
-    partnershipObjective: '',
+    natureOfEnquiry: FORM_OPTIONS.enquiryCategories[0],
+    industry: FORM_OPTIONS.industrySectors[0],
+    capitalRequirement: FORM_OPTIONS.capitalRequirements[0],
+    objective: '',
     message: '',
     confidentialityAgreed: true,
   });
@@ -59,12 +42,12 @@ export default function StrategicConsultationForm() {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        organization: formData.organisation,
+        organization: `${formData.organisation} (${formData.titleRole})`,
         country: formData.country,
         industry: formData.industry,
-        investment_requirement: formData.investmentRequirement,
-        partnership_objective: formData.partnershipObjective,
-        message: `Phone: ${formData.phone || 'N/A'}\nCountry: ${formData.country}\n\n${formData.message}`,
+        investment_requirement: formData.capitalRequirement,
+        partnership_objective: formData.objective || formData.natureOfEnquiry,
+        message: `Title/Role: ${formData.titleRole}\nCountry: ${formData.country}\nEnquiry Type: ${formData.natureOfEnquiry}\nObjective: ${formData.objective}\n\nSummary:\n${formData.message}`,
       };
 
       const res = await api.submitInquiry(payload);
@@ -87,22 +70,23 @@ export default function StrategicConsultationForm() {
     setSubmitted(false);
     setFormData({
       name: '',
+      titleRole: '',
+      organisation: '',
       email: '',
       phone: '',
-      organisation: '',
       country: '',
-      industry: '',
-      investmentRequirement: '',
-      partnershipObjective: '',
+      natureOfEnquiry: FORM_OPTIONS.enquiryCategories[0],
+      industry: FORM_OPTIONS.industrySectors[0],
+      capitalRequirement: FORM_OPTIONS.capitalRequirements[0],
+      objective: '',
       message: '',
       confidentialityAgreed: true,
     });
   };
 
-  const industryOptions = INDUSTRIES_DATA.map((ind) => ({
-    value: ind.name,
-    label: ind.name,
-  }));
+  const enquiryOptions = FORM_OPTIONS.enquiryCategories.map((c) => ({ value: c, label: c }));
+  const industryOptions = FORM_OPTIONS.industrySectors.map((i) => ({ value: i, label: i }));
+  const capitalOptions = FORM_OPTIONS.capitalRequirements.map((cr) => ({ value: cr, label: cr }));
 
   return (
     <section
@@ -157,49 +141,39 @@ export default function StrategicConsultationForm() {
                     <Icon name="Phone" className="w-4 h-4 text-[#C9A227]" />
                   </div>
                   <div>
-                    <span className="text-white block font-medium">Telephone Inquiries</span>
+                    <span className="text-white block font-medium">Telephone / WhatsApp Business</span>
                     <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-[#C9A227] hover:underline font-mono text-[13px] font-medium">
                       {COMPANY_INFO.phoneFormatted}
                     </a>
                   </div>
                 </div>
 
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-[#0B1320] border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227] shrink-0 mt-0.5">
-                    <Icon name="Mail" className="w-4 h-4 text-[#C9A227]" />
+                {DIRECT_ENGAGEMENT_DESKS.map((desk, idx) => (
+                  <div key={idx} className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-lg bg-[#0B1320] border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227] shrink-0 mt-0.5">
+                      <Icon name="Mail" className="w-4 h-4 text-[#C9A227]" />
+                    </div>
+                    <div>
+                      <span className="text-white block font-medium">{desk.desk}</span>
+                      <a href={`mailto:${desk.email}`} className="text-[#C9A227] hover:underline text-[13px]">
+                        {desk.email}
+                      </a>
+                    </div>
                   </div>
-                  <div>
-                    <span className="text-white block font-medium">Advisory Inquiries</span>
-                    <a href={`mailto:${COMPANY_INFO.emails.advisory}`} className="text-[#C9A227] hover:underline text-[13px]">
-                      {COMPANY_INFO.emails.advisory}
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-[#0B1320] border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227] shrink-0 mt-0.5">
-                    <Icon name="Mail" className="w-4 h-4 text-[#C9A227]" />
-                  </div>
-                  <div>
-                    <span className="text-white block font-medium">Client Services Desk</span>
-                    <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="text-[#C9A227] hover:underline text-[13px]">
-                      {COMPANY_INFO.emails.clientService}
-                    </a>
-                  </div>
-                </div>
+                ))}
               </div>
             </div>
 
             {/* Confidentiality Assurance Box */}
             <div className="p-6 rounded-[18px] bg-[#0B1320] border border-[#C9A227]/30 shadow-lg">
               <div className="flex items-center gap-2 mb-2">
-                <Icon name="ShieldCheck" className="w-4 h-4 text-[#C9A227]" />
+                <ShieldCheck className="w-4 h-4 text-[#C9A227]" />
                 <span className="text-[#C9A227] text-[11px] font-sans font-semibold tracking-wider uppercase">
-                  Confidentiality Commitment
+                  Institutional Professional Secrecy
                 </span>
               </div>
               <p className="text-[13px] text-[#94A3B8] leading-relaxed">
-                All inquiries and transaction details are handled under strict professional secrecy and bilateral non-disclosure agreements.
+                Black Markt Network Consultancy processes all enquiries under strict professional secrecy. Information provided is treated as confidential and will not be disclosed to third parties without prior written consent.
               </p>
             </div>
           </div>
@@ -210,17 +184,17 @@ export default function StrategicConsultationForm() {
               {submitted ? (
                 <div className="py-12 px-4 text-center space-y-6">
                   <div className="w-16 h-16 mx-auto rounded-full bg-[#C9A227]/10 border border-[#C9A227] flex items-center justify-center text-[#C9A227]">
-                    <Icon name="Check" className="w-8 h-8 text-[#C9A227]" />
+                    <Check className="w-8 h-8 text-[#C9A227]" />
                   </div>
                   <div className="space-y-2">
                     <span className="text-xs uppercase tracking-widest font-mono text-[#C9A227]">
-                      Inquiry Received
+                      Mandate Inquiry Received
                     </span>
                     <h3 className="text-2xl sm:text-3xl font-headings text-white font-medium">
                       Thank You, {formData.name}
                     </h3>
                     <p className="text-[#CBD5E1] text-sm max-w-md mx-auto leading-relaxed">
-                      Your inquiry has been received. Our advisory team will review your requirements and respond promptly with strict confidentiality.
+                      Your mandate enquiry has been received. Our senior advisory desk will review your submission and connect with you under strict bilateral confidentiality.
                     </p>
                   </div>
 
@@ -240,7 +214,7 @@ export default function StrategicConsultationForm() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  {/* Name & Organisation */}
+                  {/* Name & Title/Role */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
@@ -252,14 +226,32 @@ export default function StrategicConsultationForm() {
                         required
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="e.g. John Mensah"
+                        placeholder="e.g. David Mensah"
                         className="w-full px-4 py-3 rounded-xl bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-colors text-sm"
                       />
                     </div>
 
                     <div>
                       <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
-                        Organisation <span className="text-[#C9A227]">*</span>
+                        Title / Role <span className="text-[#C9A227]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="titleRole"
+                        required
+                        value={formData.titleRole}
+                        onChange={handleChange}
+                        placeholder="e.g. Managing Partner / CEO / CFO"
+                        className="w-full px-4 py-3 rounded-xl bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-colors text-sm"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Organisation & Country */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
+                        Organisation / Institution <span className="text-[#C9A227]">*</span>
                       </label>
                       <input
                         type="text"
@@ -267,13 +259,28 @@ export default function StrategicConsultationForm() {
                         required
                         value={formData.organisation}
                         onChange={handleChange}
-                        placeholder="Company or institution name"
+                        placeholder="Company or fund name"
+                        className="w-full px-4 py-3 rounded-xl bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-colors text-sm"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
+                        Country / Primary Market <span className="text-[#C9A227]">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="country"
+                        required
+                        value={formData.country}
+                        onChange={handleChange}
+                        placeholder="e.g. United Kingdom, Nigeria, Kenya"
                         className="w-full px-4 py-3 rounded-xl bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-colors text-sm"
                       />
                     </div>
                   </div>
 
-                  {/* Corporate Email & Phone Number (Added per User Request) */}
+                  {/* Email & Phone */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
@@ -285,14 +292,14 @@ export default function StrategicConsultationForm() {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="e.g. j.mensah@company.com"
+                        placeholder="e.g. d.mensah@company.com"
                         className="w-full px-4 py-3 rounded-xl bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-colors text-sm"
                       />
                     </div>
 
                     <div>
                       <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
-                        Phone Number <span className="text-[#C9A227]">*</span>
+                        Telephone / WhatsApp <span className="text-[#C9A227]">*</span>
                       </label>
                       <input
                         type="tel"
@@ -306,71 +313,70 @@ export default function StrategicConsultationForm() {
                     </div>
                   </div>
 
-                  {/* Country & Industry (Custom Elite Dropdown) */}
+                  {/* Nature of Enquiry & Relevant Industry */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
-                        Country / Market <span className="text-[#C9A227]">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="country"
+                      <LuxurySelect
+                        label="Nature of Enquiry"
                         required
-                        value={formData.country}
-                        onChange={handleChange}
-                        placeholder="e.g. United Kingdom, Nigeria, Kenya"
-                        className="w-full px-4 py-3 rounded-xl bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-colors text-sm"
+                        value={formData.natureOfEnquiry}
+                        onChange={(val) => setFormData((p) => ({ ...p, natureOfEnquiry: val }))}
+                        options={enquiryOptions}
+                        placeholder="Select Nature of Enquiry"
                       />
                     </div>
 
                     <div>
                       <LuxurySelect
-                        label="Industry Sector"
+                        label="Relevant Industry Sector"
                         required
                         value={formData.industry}
                         onChange={(val) => setFormData((p) => ({ ...p, industry: val }))}
                         options={industryOptions}
-                        placeholder="Select Industry"
+                        placeholder="Select Industry Sector"
                       />
                     </div>
                   </div>
 
-                  {/* Investment Requirement & Partnership Objective (Custom Elite Dropdowns) */}
+                  {/* Estimated Capital Requirement & Partnership Objective */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
                       <LuxurySelect
-                        label="Capital Requirement"
+                        label="Estimated Capital Requirement"
                         required
-                        value={formData.investmentRequirement}
-                        onChange={(val) => setFormData((p) => ({ ...p, investmentRequirement: val }))}
-                        options={INVESTMENT_REQUIREMENTS}
-                        placeholder="Select Capital Requirement"
+                        value={formData.capitalRequirement}
+                        onChange={(val) => setFormData((p) => ({ ...p, capitalRequirement: val }))}
+                        options={capitalOptions}
+                        placeholder="Select Capital Range"
                       />
                     </div>
 
                     <div>
-                      <LuxurySelect
-                        label="Partnership Objective"
-                        required
-                        value={formData.partnershipObjective}
-                        onChange={(val) => setFormData((p) => ({ ...p, partnershipObjective: val }))}
-                        options={PARTNERSHIP_OBJECTIVES}
-                        placeholder="Select Primary Objective"
+                      <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
+                        Partnership / Transaction Objective
+                      </label>
+                      <input
+                        type="text"
+                        name="objective"
+                        value={formData.objective}
+                        onChange={handleChange}
+                        placeholder="e.g. Project financing, co-investment..."
+                        className="w-full px-4 py-3 rounded-xl bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-colors text-sm"
                       />
                     </div>
                   </div>
 
-                  {/* Message */}
+                  {/* Overview / Summary of Mandate */}
                   <div>
                     <label className="block text-[12px] uppercase tracking-wider text-[#CBD5E1] font-mono mb-2">
-                      Project Overview &amp; Message
+                      Overview / Summary of Mandate
                     </label>
                     <textarea
                       name="message"
                       rows={3}
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="Outline transaction parameters, funding requirements, or timeline..."
+                      placeholder="Outline transaction parameters, funding structures, target timeline..."
                       className="w-full px-4 py-3 rounded-xl bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-colors text-sm resize-none"
                     />
                   </div>
@@ -399,14 +405,17 @@ export default function StrategicConsultationForm() {
                       className="w-full h-12 rounded-xl bg-[#C9A227] hover:bg-[#DFBA42] text-[#050505] font-semibold text-sm tracking-wide transition-all duration-200 shadow-[0_4px_20px_rgba(201,162,39,0.35)] flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50"
                     >
                       {loading ? (
-                        <span>Submitting Inquiry...</span>
+                        <span>Submitting Mandate Enquiry...</span>
                       ) : (
                         <>
-                          <span>Submit Inquiry</span>
-                          <Icon name="ArrowRight" className="w-4 h-4" />
+                          <span>Submit Mandate Enquiry</span>
+                          <ArrowRight className="w-4 h-4" />
                         </>
                       )}
                     </button>
+                    <p className="text-[11.5px] text-[#64748B] leading-relaxed text-center mt-3">
+                      Black Markt Network Consultancy processes all enquiries under strict professional secrecy. Information provided is treated as confidential and will not be disclosed to third parties without prior written consent.
+                    </p>
                   </div>
                 </form>
               )}

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import Icon from '../common/Icon';
-import { PRACTICES_DATA } from '../../data/platformData';
+import { PRACTICES_DATA, CORE_ADVISORY_PILLARS } from '../../data/platformData';
 
 export default function ServicesSection() {
   return (
@@ -14,7 +14,7 @@ export default function ServicesSection() {
       <div className="max-w-[1408px] mx-auto">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-12 border-b border-white/10">
-          <div className="max-w-[700px]">
+          <div className="max-w-[720px]">
             <div className="flex items-center gap-2 mb-3">
               <span className="w-2 h-2 rounded-full bg-[#C9A227]" />
               <span className="text-[#C9A227] text-[11px] sm:text-[12px] font-sans font-semibold tracking-[0.18em] uppercase">
@@ -25,50 +25,87 @@ export default function ServicesSection() {
               id="services-heading"
               className="font-headings text-[clamp(28px,3.8vw,52px)] font-medium leading-[1.12] text-white tracking-[-0.02em]"
             >
-              Strategic Capital &amp; Advisory Capabilities
+              End-to-End Capital &amp; Strategic Advisory
             </h2>
           </div>
-          <p className="text-[#94A3B8] max-w-[440px] text-[14.5px] leading-relaxed">
-            Our role extends beyond traditional fundraising. We develop tailored capital strategies, structure investment opportunities, enhance investment readiness and facilitate high-value partnerships.
+          <p className="text-[#94A3B8] max-w-[460px] text-[14.5px] leading-relaxed">
+            We deliver bespoke advisory mandates across the full capital and transaction lifecycle, working alongside founders, executive boards, project sponsors, and sovereign stakeholders.
           </p>
         </div>
 
+        {/* 4 Core Advisory Pillars Highlight */}
+        <div className="pt-10 pb-6">
+          <span className="text-[#C9A227] text-[11px] font-sans font-semibold tracking-widest uppercase block mb-4">
+            Core Advisory Pillars
+          </span>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {CORE_ADVISORY_PILLARS.map((pillar) => (
+              <Link
+                key={pillar.id}
+                to={pillar.link}
+                className="p-5 rounded-[16px] bg-[#0B1320] border border-white/10 hover:border-[#C9A227]/50 transition-all flex flex-col justify-between group"
+              >
+                <div>
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 flex items-center justify-center text-[#C9A227] mb-3 group-hover:border-[#C9A227] transition-all">
+                    <Icon name={pillar.iconName} className="w-5 h-5 text-[#C9A227]" />
+                  </div>
+                  <h3 className="font-headings text-[17px] text-white font-medium mb-1.5 group-hover:text-[#C9A227] transition-colors leading-snug">
+                    {pillar.title}
+                  </h3>
+                  <p className="text-[#94A3B8] text-[12.5px] leading-relaxed">
+                    {pillar.desc}
+                  </p>
+                </div>
+                <div className="pt-3 mt-3 border-t border-white/5 flex items-center gap-1 text-[12px] text-[#C9A227] font-semibold">
+                  <span>Explore Pillar</span>
+                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+
         {/* 9 Services Modern Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-12">
-          {PRACTICES_DATA.map((service) => (
-            <div
-              key={service.slug}
-              className="group bg-[#0B1320] border border-white/10 hover:border-[#C9A227]/40 p-7 sm:p-8 rounded-[18px] flex flex-col justify-between transition-all duration-300 hover:shadow-[0_16px_40px_rgba(0,0,0,0.7)] hover:-translate-y-1 relative overflow-hidden"
-            >
-              <div>
-                {/* Premium Icon Header */}
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_4px_20px_rgba(201,162,39,0.15)] flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] transition-all">
-                  <Icon name={service.iconName} className="w-6 h-6 text-[#C9A227]" />
+        <div className="pt-10">
+          <span className="text-[#94A3B8] text-[11px] font-sans font-semibold tracking-widest uppercase block mb-4">
+            Specialised Mandate Areas (4.1 &ndash; 4.9)
+          </span>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PRACTICES_DATA.map((service) => (
+              <div
+                key={service.slug}
+                className="group bg-[#0B1320] border border-white/10 hover:border-[#C9A227]/40 p-7 sm:p-8 rounded-[18px] flex flex-col justify-between transition-all duration-300 hover:shadow-[0_16px_40px_rgba(0,0,0,0.7)] hover:-translate-y-1 relative overflow-hidden"
+              >
+                <div>
+                  {/* Premium Icon Header */}
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#121E33] to-[#070D18] border border-[#C9A227]/40 shadow-[0_4px_20px_rgba(201,162,39,0.15)] flex items-center justify-center text-[#C9A227] mb-5 group-hover:border-[#C9A227] transition-all">
+                    <Icon name={service.iconName} className="w-6 h-6 text-[#C9A227]" />
+                  </div>
+
+                  {/* Service Title */}
+                  <h3 className="font-headings text-[21px] sm:text-[23px] text-white font-medium mb-3 group-hover:text-[#C9A227] transition-colors leading-[1.2]">
+                    {service.title}
+                  </h3>
+
+                  {/* Concise Factual Description */}
+                  <p className="text-[#94A3B8] text-[14px] leading-relaxed mb-6">
+                    {service.shortDesc}
+                  </p>
                 </div>
 
-                {/* Service Title */}
-                <h3 className="font-headings text-[21px] sm:text-[23px] text-white font-medium mb-3 group-hover:text-[#C9A227] transition-colors leading-[1.2]">
-                  {service.title}
-                </h3>
-
-                {/* Concise Factual Description */}
-                <p className="text-[#94A3B8] text-[14px] leading-relaxed mb-6">
-                  {service.shortDesc}
-                </p>
+                {/* Direct Learn More Action */}
+                <div className="pt-4 border-t border-white/5 flex items-center justify-between">
+                  <Link
+                    to={`/services/${service.slug}`}
+                    className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#CBD5E1] group-hover:text-[#C9A227] transition-colors"
+                  >
+                    <span>View Deliverables</span>
+                    <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                  </Link>
+                </div>
               </div>
-
-              {/* Direct Learn More Action */}
-              <div className="pt-4 border-t border-white/5 flex items-center justify-between">
-                <Link
-                  to={`/services/${service.slug}`}
-                  className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#CBD5E1] group-hover:text-[#C9A227] transition-colors"
-                >
-                  <span>View Details</span>
-                  <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
 
         {/* Bottom Consultation Banner */}

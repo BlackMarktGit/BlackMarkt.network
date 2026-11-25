@@ -1,6 +1,6 @@
 /**
  * Black Markt Network Consultancy - Platform Master Data
- * Source of truth: The company.docx & approved corporate documentation
+ * Source of truth: BlackMarkt website update.pdf (Approved Master Copy)
  */
 
 export const COMPANY_INFO = {
@@ -13,6 +13,10 @@ export const COMPANY_INFO = {
   vatNumber: '477993219',
   jurisdiction: 'England and Wales',
   scope: 'Strategic Capital Advisory | Africa Growth Markets | Global Investment & Partnership Solutions',
+  headline: 'Connecting African Opportunity With Global Capital',
+  valueProposition: 'Institutional Rigour. Dual-Corridor Reach.',
+  mission: 'To empower African businesses, project sponsors, and public institutions by connecting them with the institutional capital, strategic partnerships, and advisory expertise required to achieve sustainable scale, industrial competitiveness, and lasting economic development.',
+  vision: 'To be recognised among the world’s most trusted independent strategic capital advisory firms—serving as the premier institutional bridge between African growth markets and global investment capital.',
   phone: '+44 77 7419 0852',
   phoneFormatted: '+44 77 7419 0852',
   phoneRaw: '+447774190852',
@@ -34,543 +38,720 @@ export const COMPANY_INFO = {
   ],
 };
 
-// 1. SERVICES (9 Core Advisory Services from The company.docx)
-export const PRACTICES_DATA = [
+// 1. HOME: CORE ADVISORY PILLARS
+export const CORE_ADVISORY_PILLARS = [
   {
-    slug: 'strategic-capital-advisory',
-    title: 'Strategic Capital Advisory',
-    iconName: 'Landmark',
-    shortDesc: 'Developing customised funding strategies that align ambitious businesses and projects with the right capital partners and investment opportunities.',
-    fullDesc: 'We develop tailored capital architectures that reflect commercial realities and investor expectations. Our advisory encompasses capital structure optimization, funding pathway sequencing, and valuation positioning to ensure projects and businesses secure the right capital on sustainable commercial terms.',
-    deliverables: [
-      'Tailored Funding & Capital Structure Strategy',
-      'Capital Partner Alignment & Matching',
-      'Transaction Readiness & Commercial Positioning',
-      'Strategic Financial Roadmaps',
-    ],
-  },
-  {
-    slug: 'equity-debt-raising',
-    title: 'Equity & Debt Capital Raising',
+    id: '01',
+    title: 'Capital Raising & Structuring',
+    desc: 'End-to-end origination and placement of institutional growth equity, private credit, blended finance, and syndicated debt facilities.',
     iconName: 'TrendingUp',
-    shortDesc: 'Supporting companies and project sponsors in accessing institutional capital across growth equity, debt, and structured finance.',
-    fullDesc: 'We assist clients across Africa in accessing diverse pools of international capital, navigating the requirements of different funding providers to assemble viable, multi-tranche financing packages.',
-    deliverables: [
-      'Growth Equity, Private Equity & Venture Capital',
-      'Institutional Investment & Family Office Capital',
-      'Commercial Lending & Structured Debt',
-      'Development Finance Institutions (DFI) Funding',
-    ],
+    link: '/services/equity-debt-raising',
   },
   {
-    slug: 'project-finance',
-    title: 'Project Finance & Infrastructure Advisory',
+    id: '02',
+    title: 'Project Finance & Infrastructure',
+    desc: 'Bankability structuring and multi-tranche capital mobilisation for utility-scale energy, transport, logistics, and industrial assets.',
     iconName: 'HardHat',
-    shortDesc: 'Supporting large-scale, transformative development opportunities across energy, logistics, utilities, and public infrastructure.',
-    fullDesc: 'Large infrastructure assets require robust financial models, clear risk allocation, and multi-stakeholder coordination. We support project sponsors and governments in packaging bankable projects that attract long-term commercial and concessionary capital.',
-    deliverables: [
-      'Energy Projects & Renewable Infrastructure',
-      'Transport, Ports & Logistics Corridors',
-      'Real Estate Developments & Industrial Parks',
-      'Public & Utility Infrastructure Structuring',
-    ],
+    link: '/services/project-finance',
   },
   {
-    slug: 'strategic-partnerships',
-    title: 'Strategic Partnerships & Joint Ventures',
-    iconName: 'Handshake',
-    shortDesc: 'Connecting businesses with strategic partners that provide market access, technical expertise, and operational capability.',
-    fullDesc: 'Sustainable growth often requires strategic relationships beyond capital. We identify and structure commercial alliances, joint ventures, and technical co-operations that accelerate market expansion across African and global territories.',
-    deliverables: [
-      'Regional & International Market Access',
-      'Technical Expertise & Technology Transfer',
-      'Distribution Networks & Off-taker Agreements',
-      'Operational Capability & Scale Alignment',
-    ],
-  },
-  {
-    slug: 'investment-readiness',
-    title: 'Investment Readiness & Due Diligence',
-    iconName: 'FileSearch',
-    shortDesc: 'Preparing organisations to meet international investment standards through financial analysis, governance, and documentation.',
-    fullDesc: 'Global investors require clear governance, transparent financial records, and rigorous documentation. We prepare organisations to withstand international scrutiny, accelerating the transaction cycle and reducing deal attrition.',
-    deliverables: [
-      'Business Strategy Refinement & Financial Modelling',
-      'Institutional Investor Documentation & Information Memorandums',
-      'Comprehensive Due Diligence Preparation & Data Rooms',
-      'Corporate Governance & Reporting Enhancement',
-    ],
-  },
-  {
-    slug: 'ma-advisory',
-    title: 'Mergers & Acquisitions Advisory',
+    id: '03',
+    title: 'Cross-Border M&A & Joint Ventures',
+    desc: 'Buy-side and sell-side advisory, strategic alliances, and market-entry execution across African and international jurisdictions.',
     iconName: 'GitMerge',
-    shortDesc: 'Supporting strategic corporate combinations, acquisitions, divestitures, and cross-border transactions with discretion and discipline.',
-    fullDesc: 'We guide clients through the complete lifecycle of corporate transactions, from valuation and counterparty identification through negotiation, structuring, and execution.',
-    deliverables: [
-      'Buy-Side & Sell-Side Acquisitions',
-      'Corporate Partnerships & Business Combinations',
-      'Cross-Border Transactions & Asset Disposals',
-      'Strategic Equity Investments',
-    ],
+    link: '/services/ma-advisory',
   },
   {
-    slug: 'investor-relations',
-    title: 'Investor Relations & Capital Strategy',
-    iconName: 'Users',
-    shortDesc: 'Helping businesses develop enduring, transparent relationships with international investors through strategic communication.',
-    fullDesc: 'Maintaining long-term credibility requires consistent, professional investor communication. We assist companies in articulating their performance, strategic milestones, and capital requirements to international financial stakeholders.',
-    deliverables: [
-      'Investor Positioning & Messaging Architecture',
-      'Multi-Year Capital Planning & Allocation Strategy',
-      'Stakeholder Engagement & Fiduciary Reporting',
-      'Strategic Financial Communication Frameworks',
-    ],
-  },
-  {
-    slug: 'cross-border-entry',
-    title: 'Cross-Border Market Entry',
-    iconName: 'Globe',
-    shortDesc: 'Supporting international businesses seeking African opportunities and African enterprises expanding into global markets.',
-    fullDesc: 'Expanding across borders requires nuanced understanding of local regulatory frameworks, commercial customs, and stakeholder dynamics. We provide strategic counsel and trusted local connectivity to ensure smooth, compliant market entry.',
-    deliverables: [
-      'Inbound African Market Entry Strategy',
-      'Outbound African Enterprise International Expansion',
-      'Regulatory Environment & Stakeholder Mapping',
-      'Local Operational Partner Due Diligence',
-    ],
-  },
-  {
-    slug: 'government-ppp',
-    title: 'Government & Public-Private Partnership Advisory',
-    iconName: 'Building2',
-    shortDesc: 'Advising governments, institutions, and private sector partners on collaborative investment models that support economic development.',
-    fullDesc: 'We advise public entities and private concessionaires on structuring collaborative public-private partnerships (PPPs) that align public policy objectives with commercial return requirements.',
-    deliverables: [
-      'Public-Private Partnership (PPP) Transaction Structuring',
-      'Concession Agreement & Risk Allocation Frameworks',
-      'Sovereign Investment Alignment & Project Screening',
-      'Collaborative Economic Development Models',
-    ],
+    id: '04',
+    title: 'Investment Readiness & Governance',
+    desc: 'Institutional financial modelling, Information Memorandum preparation, due diligence management, and board governance alignment.',
+    iconName: 'FileSearch',
+    link: '/services/investment-readiness',
   },
 ];
 
-// 2. INDUSTRIES (9 Core Sectors from The company.docx)
-export const INDUSTRIES_DATA = [
+// 2. ABOUT US: WHO WE ADVISE & OPERATING APPROACH
+export const WHO_WE_ADVISE = [
   {
-    slug: 'infrastructure',
-    name: 'Infrastructure',
+    category: 'African Growth Enterprises & Family-Owned Businesses',
+    desc: 'Market leaders seeking institutional growth equity, structured debt, governance enhancement, or international expansion partners.',
     iconName: 'Building2',
-    desc: 'Supporting development opportunities across transportation, logistics, utilities and public infrastructure.',
-    overview: 'Infrastructure is the foundational driver of economic expansion in emerging African economies. We advise project sponsors, concessionaires, and public institutions on packaging bankable transportation, ports, logistics hubs, and utility networks that meet international underwriting standards.',
-    focusAreas: [
-      'Transportation & Highway Corridors',
-      'Maritime Ports & Inland Logistics Hubs',
-      'Water, Utilities & Urban Infrastructure',
-      'Public Utility Concessions & Refinancing',
-    ],
   },
   {
-    slug: 'energy-renewables',
-    name: 'Energy & Renewable Resources',
-    iconName: 'Zap',
-    desc: 'Supporting energy transition and investment opportunities across renewable and conventional energy projects.',
-    overview: 'Accelerating energy access and transitioning towards sustainable power generation are critical priorities across the continent. We advise on commercial and financial structuring for solar, wind, hydropower, natural gas, and off-grid distributed power assets.',
-    focusAreas: [
-      'Utility-Scale Solar & Wind Power Developments',
-      'Hydropower & Geothermal Energy Projects',
-      'Distributed Energy & Commercial Captive Power',
-      'Grid Modernization & Energy Storage Solutions',
-    ],
+    category: 'Project Sponsors & Infrastructure Developers',
+    desc: 'Consortia and developers structuring greenfield and brownfield energy, transport, real estate, and industrial projects to international bankability standards.',
+    iconName: 'HardHat',
   },
   {
-    slug: 'real-estate',
-    name: 'Real Estate',
-    iconName: 'Building',
-    desc: 'Supporting property development, commercial projects, residential developments and strategic real estate investments.',
-    overview: 'Urbanization and demographic growth across Africa drive sustained demand for high-quality commercial, industrial, and residential real estate. We advise developers and property funds on capital structure, joint ventures, and institutional equity packaging.',
-    focusAreas: [
-      'Grade-A Commercial Office & Mixed-Use Developments',
-      'Modern Industrial Warehousing & Cold-Chain Logistics Hubs',
-      'Affordable & Large-Scale Residential Masterplans',
-      'Hospitality Real Estate & Strategic Land Assets',
-    ],
-  },
-  {
-    slug: 'healthcare',
-    name: 'Healthcare',
-    iconName: 'HeartPulse',
-    desc: 'Supporting healthcare infrastructure, medical innovation and healthcare-related investment opportunities.',
-    overview: 'Strengthening healthcare delivery systems requires sustainable capital allocation across physical hospitals, diagnostic infrastructure, local pharmaceutical production, and health technology platforms.',
-    focusAreas: [
-      'Hospital & Specialized Diagnostic Infrastructure',
-      'Local Pharmaceutical Manufacturing & Formulation',
-      'Digital Health & Healthcare Supply Chain Networks',
-      'Medical Equipment Financing & Public Health Collaborations',
-    ],
-  },
-  {
-    slug: 'technology',
-    name: 'Technology',
-    iconName: 'Cpu',
-    desc: 'Supporting technology-driven businesses, digital transformation and emerging innovation sectors.',
-    overview: 'Technology is transforming financial inclusion, trade, and enterprise productivity across Africa. We support established technology leaders, high-growth digital businesses, and infrastructure operators in raising strategic growth capital and structuring international partnerships.',
-    focusAreas: [
-      'Fintech, Payments & Financial Inclusion Networks',
-      'Data Centers & Terrestrial Fiber Infrastructure',
-      'Enterprise Software & Digital Transformation Solutions',
-      'Cross-Border E-Commerce & Tech-Enabled Logistics',
-    ],
-  },
-  {
-    slug: 'manufacturing',
-    name: 'Manufacturing',
-    iconName: 'Factory',
-    desc: 'Supporting industrial development, production expansion and global competitiveness.',
-    overview: 'Industrialization and value-add domestic production are key to creating resilient African economies and capitalizing on the African Continental Free Trade Area (AfCFTA). We advise industrial sponsors on production scale-up, automation financing, and supply chain localization.',
-    focusAreas: [
-      'Industrial Manufacturing & Assembly Facilities',
-      'Import Substitution & Consumer Goods Production',
-      'Packaging, Construction Materials & Chemicals',
-      'Equipment Modernization & Export Scaling',
-    ],
-  },
-  {
-    slug: 'agriculture',
-    name: 'Agriculture',
-    iconName: 'Wheat',
-    desc: 'Supporting agricultural businesses, food security initiatives and value-chain development.',
-    overview: 'Agriculture represents one of Africa’s greatest commercial and developmental opportunities. We advise agri-enterprises, commercial farms, and processing facilities on accessing growth capital to expand production, enhance cold-chain logistics, and build sustainable food supply chains.',
-    focusAreas: [
-      'Commercial Farming & Mechanized Cultivation',
-      'Agro-Processing & Packaged Food Value Chains',
-      'Cold-Chain Storage, Warehousing & Distribution',
-      'Input Supply, Irrigation & Agri-Tech Solutions',
-    ],
-  },
-  {
-    slug: 'mining-natural-resources',
-    name: 'Mining & Natural Resources',
-    iconName: 'Gem',
-    desc: 'Supporting responsible investment in mineral resources and natural resource development.',
-    overview: 'Africa holds a substantial share of global critical minerals essential for industrialization and the global green transition. We assist resource companies and project sponsors in structuring responsible, compliant investment frameworks that emphasize local value addition.',
-    focusAreas: [
-      'Critical Mineral Exploration & Production Assets',
-      'In-Country Beneficiation & Processing Facilities',
-      'ESG Compliance & Environmental Remediation Structuring',
-      'Equipment & Infrastructure Development for Mining Operations',
-    ],
-  },
-  {
-    slug: 'hospitality',
-    name: 'Hospitality',
-    iconName: 'Hotel',
-    desc: 'Supporting tourism, hospitality developments and international investment opportunities.',
-    overview: 'Growing business travel and tourism create opportunities for international and regional hospitality brands across key African gateway cities and leisure destinations. We structure equity partnerships, hotel management contracts, and acquisition finance.',
-    focusAreas: [
-      'Business Hotels in Major African Gateway Capitals',
-      'Eco-Tourism Resorts & Destination Developments',
-      'Conference & International Exhibition Infrastructure',
-      'Hotel Management Contracts & Franchise Financing',
-    ],
-  },
-];
-
-// 3. INVESTOR NETWORK (From The company.docx)
-export const INVESTOR_NETWORK = [
-  {
-    type: 'Institutional Investors',
-    desc: 'Pension funds, insurance asset managers, and global capital allocators seeking long-term commercial returns in emerging markets.',
+    category: 'Governments, Ministries & Public Institutions',
+    desc: 'Sovereign and municipal stakeholders designing bankable Public-Private Partnerships (PPPs), concessions, and strategic investment frameworks.',
     iconName: 'Landmark',
   },
   {
-    type: 'Family Offices',
-    desc: 'Single and multi-family offices requiring tailored investment opportunities, capital preservation, and direct private transactions.',
+    category: 'Global Institutional Investors & Multinationals',
+    desc: 'Funds, family offices, DFIs, and strategic corporates seeking pre-vetted African deal flow, co-investment structures, or disciplined market-entry execution.',
+    iconName: 'Globe2',
+  },
+];
+
+export const OPERATING_APPROACH = [
+  {
+    title: 'Dual-Corridor Connectivity',
+    desc: 'Headquartered in London with active on-the-ground networks across West, East, Southern, and North Africa, we translate local commercial realities into institutional-grade investment propositions.',
+    iconName: 'Globe',
+  },
+  {
+    title: 'Independent, Conflict-Free Advice',
+    desc: 'As a privately held advisory firm, our counsel is unencumbered by proprietary balance-sheet conflicts—ensuring complete alignment with our clients’ strategic and financial objectives.',
     iconName: 'Shield',
   },
   {
-    type: 'Sovereign Wealth Funds',
-    desc: 'National and regional sovereign investment authorities focused on strategic infrastructure and transformative sector investments.',
-    iconName: 'Crown',
-  },
-  {
-    type: 'Private Equity Firms',
-    desc: 'Mid-market and large-cap private equity sponsors evaluating proprietary direct investments, growth equity, and buyout opportunities.',
-    iconName: 'Briefcase',
-  },
-  {
-    type: 'Commercial Banks',
-    desc: 'International and regional financial institutions providing syndicated facilities, senior debt, and trade finance lines.',
-    iconName: 'CreditCard',
-  },
-  {
-    type: 'Development Finance Institutions (DFIs)',
-    desc: 'Multilateral and bilateral finance institutions providing concessionary capital, blended finance, and catalytic risk mitigation.',
-    iconName: 'Globe2',
-  },
-  {
-    type: 'Multinational Corporations',
-    desc: 'Global enterprises seeking strategic market entry, joint venture partnerships, and distribution networks in Africa.',
-    iconName: 'Building',
+    title: 'End-to-End Execution Discipline',
+    desc: 'From initial feasibility and financial modelling through to investor bookbuilding, due diligence, and financial close, we remain actively engaged at every milestone.',
+    iconName: 'Award',
   },
 ];
 
-// 4. TRANSACTIONS & LIFECYCLE (From The company.docx)
-export const TRANSACTION_SCOPES = [
-  'Growth Capital',
-  'Project Finance',
-  'Strategic Investments',
-  'Joint Ventures',
-  'Mergers & Acquisitions',
-  'Public-Private Partnerships',
-  'Cross-Border Expansion',
+// 3. CORE VALUES (Verbatim from Section 3 of PDF)
+export const CORE_VALUES = [
+  {
+    title: 'Integrity',
+    desc: 'We uphold the highest standards of professional ethics, transparency, and fiduciary responsibility in every advisory mandate and counterparty interaction.',
+    iconName: 'Scale',
+  },
+  {
+    title: 'Confidentiality',
+    desc: 'Discretion is foundational to our practice. We safeguard sensitive commercial, financial, and strategic information under strict non-disclosure protocols throughout every engagement.',
+    iconName: 'Lock',
+  },
+  {
+    title: 'Excellence',
+    desc: 'We apply institutional discipline, analytical rigour, and meticulous attention to detail across our financial modelling, transaction documentation, and deal execution.',
+    iconName: 'Award',
+  },
+  {
+    title: 'Strategic Thinking',
+    desc: 'We look beyond short-term capital placement to architect resilient capital structures and commercial partnerships aligned with multi-year growth objectives.',
+    iconName: 'Compass',
+  },
+  {
+    title: 'Global Collaboration',
+    desc: 'We foster enduring cross-border relationships between African entrepreneurs, sovereign stakeholders, and international institutional investors across continents.',
+    iconName: 'Globe2',
+  },
+  {
+    title: 'Long-Term Value Creation',
+    desc: 'We prioritise sustainable commercial fundamentals, sound corporate governance, and partnerships that generate measurable economic impact alongside attractive risk-adjusted returns.',
+    iconName: 'TrendingUp',
+  },
+];
+
+// 4. SERVICES (The 9 Core Advisory Services from Section 4 of PDF)
+export const PRACTICES_DATA = [
+  {
+    number: '4.1',
+    slug: 'strategic-capital-advisory',
+    title: 'Strategic Capital Advisory',
+    iconName: 'Landmark',
+    shortDesc: 'Customised funding strategies aligning operational roadmaps with optimal capital mix, pricing, and governance.',
+    fullDesc: 'We architect customised funding strategies that align a client’s operational roadmap with the optimal mix of capital, pricing, and governance. Rather than taking an opportunistic approach to fundraising, we evaluate balance sheet capacity, cash-flow horizons, and dilution sensitivity to match each mandate with the right institutional capital pools.',
+    deliverablesHeading: 'Core Deliverables',
+    deliverables: [
+      'Capital structure optimisation',
+      'Valuation and dilution modelling',
+      'Funding roadmap design',
+      'Capital partner mapping & matching',
+      'Term-sheet advisory & structuring',
+    ],
+  },
+  {
+    number: '4.2',
+    slug: 'equity-debt-raising',
+    title: 'Equity & Debt Capital Raising',
+    iconName: 'TrendingUp',
+    shortDesc: 'End-to-end capital raising connecting high-potential businesses and projects with aligned global liquidity.',
+    fullDesc: 'We manage end-to-end capital raising processes from initial positioning through to commercial negotiation and financial close. Leveraging direct relationships across London, Europe, the Middle East, North America, and Africa, we connect high-potential businesses and assets with aligned global liquidity.',
+    deliverablesHeading: 'Capital Instruments & Sources',
+    deliverables: [
+      'Growth equity and buyout private equity',
+      'Institutional venture capital (Series A and growth stages)',
+      'Sovereign wealth funds and institutional asset managers',
+      'Single- and multi-family office direct & co-investment capital',
+      'Commercial, syndicated, and trade finance facilities',
+      'Structured credit, mezzanine, and hybrid instruments',
+      'Development Finance Institutions (DFIs) & blended impact capital',
+    ],
+  },
+  {
+    number: '4.3',
+    slug: 'project-finance',
+    title: 'Project Finance & Infrastructure Advisory',
+    iconName: 'HardHat',
+    shortDesc: 'Bankability structuring and multi-tranche financing for large-scale African infrastructure and industrial assets.',
+    fullDesc: 'Large-scale African infrastructure and industrial assets require rigorous risk allocation and multi-tranche financing. We advise project sponsors and consortia on structuring greenfield and brownfield developments to meet international project finance and bankability standards.',
+    deliverablesHeading: 'Transaction Scope',
+    deliverables: [
+      'Utility-scale energy and renewable power projects',
+      'Transport corridors, ports, aviation, and logistics hubs',
+      'Commercial, industrial, and mixed-use real estate developments',
+      'Special Economic Zones (SEZs) and industrial manufacturing parks',
+      'Water, telecommunications, and municipal utility infrastructure',
+      'Blended finance structuring, off-take alignment, and EPC/O&M partner selection',
+    ],
+  },
+  {
+    number: '4.4',
+    slug: 'strategic-partnerships',
+    title: 'Strategic Partnerships & Joint Ventures',
+    iconName: 'Handshake',
+    shortDesc: 'Structuring commercial and operational alliances between African enterprises and international industry leaders.',
+    fullDesc: 'Sustainable scale across African markets frequently requires more than financial capital alone. We identify, vet, and structure commercial and operational alliances between African enterprises and international industry leaders to unlock synergies and de-risk expansion.',
+    deliverablesHeading: 'Partnership Structures',
+    deliverables: [
+      'Equity joint ventures and co-development consortia',
+      'Regional distribution, off-take, and supply-chain alliances',
+      'Technology transfer, IP licensing, and technical service agreements',
+      'Local-content and regulatory compliance partnerships for multinational entrants',
+    ],
+  },
+  {
+    number: '4.5',
+    slug: 'investment-readiness',
+    title: 'Investment Readiness & Due Diligence',
+    iconName: 'FileSearch',
+    shortDesc: 'Preparing promising enterprises and project sponsors to withstand the scrutiny of global investment committees.',
+    fullDesc: 'Many promising African enterprises and projects face delays during institutional underwriting due to gaps in reporting, governance, or documentation. We prepare clients prior to market launch so they withstand the scrutiny of global investment committees.',
+    deliverablesHeading: 'Readiness & Execution Support',
+    deliverables: [
+      'Commercial strategy refinement and unit-economics validation',
+      'Institutional-grade financial modelling and sensitivity analysis',
+      'Drafting of Teasers, Pitch Decks, and comprehensive Information Memorandums (IMs)',
+      'Virtual Data Room (VDR) architecture and due diligence management',
+      'Corporate governance, board structuring, and ESG framework alignment',
+    ],
+  },
+  {
+    number: '4.6',
+    slug: 'ma-advisory',
+    title: 'Mergers & Acquisitions (M&A) Advisory',
+    iconName: 'GitMerge',
+    shortDesc: 'Discreet buy-side and sell-side advisory for corporates, private equity, and family-owned enterprises.',
+    fullDesc: 'We provide discreet buy-side and sell-side advisory for corporates, private equity funds, and family-owned enterprises pursuing inorganic growth, market consolidation, or strategic exits across African and international jurisdictions.',
+    deliverablesHeading: 'M&A Capabilities',
+    deliverables: [
+      'Buy-side target screening, origination, and commercial evaluation',
+      'Sell-side positioning, competitive auction management, and value maximisation',
+      'Cross-border acquisitions, divestitures, and corporate carve-outs',
+      'Strategic minority stake sales and succession liquidity solutions',
+      'Deal structuring, valuation negotiation, and closing execution',
+    ],
+  },
+  {
+    number: '4.7',
+    slug: 'investor-relations',
+    title: 'Investor Relations & Capital Strategy',
+    iconName: 'Users',
+    shortDesc: 'Building credible, transparent investor communication frameworks that position businesses for follow-on capital or exit.',
+    fullDesc: 'Securing capital is the beginning of a long-term institutional partnership. We advise management teams on building credible, transparent investor communication frameworks that strengthen stakeholder trust and position the business for follow-on capital or eventual exit.',
+    deliverablesHeading: 'Advisory Focus',
+    deliverables: [
+      'Institutional investor positioning and equity story articulation',
+      'Long-term capital allocation and multi-round funding planning',
+      'Board and shareholder reporting frameworks',
+      'Strategic communication and stakeholder engagement management',
+    ],
+  },
+  {
+    number: '4.8',
+    slug: 'cross-border-entry',
+    title: 'Cross-Border Market Entry',
+    iconName: 'Globe',
+    shortDesc: 'Guiding international entrants into African markets and supporting African champions expanding regionally and globally.',
+    fullDesc: 'We operate as a dual-corridor advisor—guiding international corporations and investors entering high-growth African jurisdictions, while supporting established African champions expanding regionally under the African Continental Free Trade Area (AfCFTA) or into the UK, Europe, and the Middle East.',
+    deliverablesHeading: 'Market Entry Execution',
+    deliverables: [
+      'Country risk, regulatory landscape, and sector feasibility assessments',
+      'Go-to-market structuring (subsidiary setup, acquisition, or local JV)',
+      'Counterparty due diligence and local partner origination',
+      'Cross-border regulatory, tax-structuring coordination, and commercial launch support',
+    ],
+  },
+  {
+    number: '4.9',
+    slug: 'government-ppp',
+    title: 'Government & Public-Private Partnership (PPP) Advisory',
+    iconName: 'Building2',
+    shortDesc: 'Designing and financing bankable Public-Private Partnerships that accelerate national infrastructure transformation.',
+    fullDesc: 'We advise sovereign ministries, state-owned enterprises, municipal authorities, and private-sector consortia on designing and financing bankable Public-Private Partnerships that accelerate national infrastructure and economic transformation.',
+    deliverablesHeading: 'Public-Sector Mandate Scope',
+    deliverables: [
+      'Project commercial feasibility and bankability structuring',
+      'Concession framework design and balanced risk-allocation modelling',
+      'Private-sector investor and technical operator mobilisation',
+      'Sovereign-DFI-private sector capital blending and transaction execution',
+    ],
+  },
+];
+
+// 5. INDUSTRIES (High-Conviction African Growth Sectors from Section 5 of PDF)
+export const INDUSTRIES_DATA = [
+  {
+    number: '5.1',
+    slug: 'infrastructure',
+    name: 'Infrastructure',
+    iconName: 'Building2',
+    desc: 'Essential physical and digital assets underpinning regional trade, industrial productivity, and urban logistics.',
+    overview: 'Addressing Africa’s multi-billion-dollar infrastructure deficit represents one of the most compelling long-term yield opportunities globally. We advise sponsors and institutional investors on essential physical and digital assets that underpin regional trade and urban productivity.',
+    focusAreas: [
+      'Transport and logistics corridors (ports, rail, toll roads, aviation)',
+      'Cold-chain and warehousing hubs',
+      'Telecommunications backbone (fibre networks, data centres, tower infrastructure)',
+      'Water and municipal utilities',
+    ],
+  },
+  {
+    number: '5.2',
+    slug: 'energy-renewables',
+    name: 'Energy & Renewable Resources',
+    iconName: 'Zap',
+    desc: 'Capital raising and project structuring across the full energy transition spectrum and utility-scale power.',
+    overview: 'Rapid demographic growth and industrialisation are driving urgent demand for reliable, affordable, and cleaner power across the continent. We support capital raising and project structuring across the full energy transition spectrum.',
+    focusAreas: [
+      'Utility-scale solar, wind, hydro, and geothermal generation',
+      'Commercial & Industrial (C&I) captive solar and battery energy storage systems (BESS)',
+      'Decentralised mini-grids',
+      'Transitional natural gas infrastructure',
+      'Grid transmission and distribution upgrades',
+    ],
+  },
+  {
+    number: '5.3',
+    slug: 'real-estate',
+    name: 'Real Estate',
+    iconName: 'Building',
+    desc: 'Institutional-grade industrial parks, modern logistics, commercial developments, and scalable residential platforms.',
+    overview: 'Accelerated urbanisation, a rising middle class, and expanding corporate activity continue to fuel demand for institutional-grade real estate assets across key African gateway cities.',
+    focusAreas: [
+      'Modern industrial parks and Grade-A logistics warehousing',
+      'Mixed-use commercial and office developments',
+      'Scalable residential and affordable housing platforms',
+      'Retail centres and specialised student accommodation',
+    ],
+  },
+  {
+    number: '5.4',
+    slug: 'healthcare',
+    name: 'Healthcare',
+    iconName: 'HeartPulse',
+    desc: 'Expanding private healthcare capacity, diagnostic networks, and local pharmaceutical manufacturing.',
+    overview: 'Expanding private healthcare capacity and localising medical supply chains are critical priorities across African markets. We connect healthcare operators and innovators with growth capital and international clinical partners.',
+    focusAreas: [
+      'Multi-specialty hospitals, outpatient clinics, and diagnostic centres',
+      'Local pharmaceutical manufacturing and distribution',
+      'Medical equipment supply and vendor lease structuring',
+      'Scalable health-tech and telemedicine platforms',
+    ],
+  },
+  {
+    number: '5.5',
+    slug: 'technology',
+    name: 'Technology',
+    iconName: 'Cpu',
+    desc: 'Scalable platforms solving core commercial and financial bottlenecks across Africa’s leapfrogging digital economy.',
+    overview: 'Africa’s digital economy is leapfrogging legacy infrastructure, creating scalable, high-margin platforms solving core commercial and financial bottlenecks. We advise growth-stage technology companies expanding across regional markets.',
+    focusAreas: [
+      'Fintech, digital payments, and cross-border settlement infrastructure',
+      'B2B e-commerce and supply-chain enablement',
+      'Enterprise SaaS and cloud solutions',
+      'Insurtech, edtech, and AI-driven data analytics',
+    ],
+  },
+  {
+    number: '5.6',
+    slug: 'manufacturing',
+    name: 'Manufacturing',
+    iconName: 'Factory',
+    desc: 'Industrial localization, import substitution, and regional value-addition under the AfCFTA trade framework.',
+    overview: 'Supported by regional trade integration under the AfCFTA and a strategic push for import substitution, African manufacturing is attracting renewed institutional and strategic capital.',
+    focusAreas: [
+      'Fast-Moving Consumer Goods (FMCG) production',
+      'Building and construction materials',
+      'Light industrial assembly and packaging solutions',
+      'Textiles and automotive components',
+    ],
+  },
+  {
+    number: '5.7',
+    slug: 'agriculture',
+    name: 'Agriculture',
+    iconName: 'Wheat',
+    desc: 'Commercial farming, midstream agro-processing, cold-chain storage, and export-oriented food supply chains.',
+    overview: 'With the majority of the world’s remaining uncultivated arable land, Africa holds immense potential to scale domestic food security and high-value agricultural exports through commercialisation and downstream processing.',
+    focusAreas: [
+      'Agro-processing and value-added food manufacturing',
+      'Commercial farming and modern irrigation infrastructure',
+      'Agricultural inputs and agritech distribution',
+      'Cold-chain storage and export-oriented cash crops',
+    ],
+  },
+  {
+    number: '5.8',
+    slug: 'mining-natural-resources',
+    name: 'Mining & Natural Resources',
+    iconName: 'Gem',
+    desc: 'Responsible, ESG-compliant capital and technical partnerships across critical energy-transition minerals.',
+    overview: 'Africa hosts vast reserves of the critical minerals essential to global decarbonisation, electrification, and industrial supply chains. We facilitate responsible, ESG-compliant capital and technical partnerships across the mineral value chain.',
+    focusAreas: [
+      'Critical and battery transition minerals (lithium, copper, cobalt, graphite, rare earths)',
+      'Precious and industrial metals',
+      'Midstream local beneficiation and processing facilities',
+      'Mine-site renewable energy infrastructure',
+    ],
+  },
+  {
+    number: '5.9',
+    slug: 'hospitality',
+    name: 'Hospitality',
+    iconName: 'Hotel',
+    desc: 'Cash-generative business and conference hotels, serviced executive residences, and luxury eco-tourism destinations.',
+    overview: 'Driven by growing intra-African business travel, diaspora connectivity, and rising international demand for experiential tourism, the continent’s hospitality sector offers strong cash-generative investment opportunities.',
+    focusAreas: [
+      'Branded business and conference hotels in commercial hubs',
+      'Luxury eco-tourism and safari resorts',
+      'Serviced executive apartments',
+      'Integrated leisure and mixed-use destinations',
+    ],
+  },
+];
+
+// 6. INVESTORS: CAPITAL POOLS, MANDATE MATRIX & ORIGINATION ADVANTAGES (Section 6)
+export const INVESTOR_POOLS = [
+  {
+    category: 'Development Finance Institutions (DFIs) & Multilateral Agencies',
+    desc: 'We structure bankable transactions that deliver measurable developmental impact alongside commercial sustainability, incorporating blended finance, technical assistance, and IFC Performance Standards.',
+    iconName: 'Globe2',
+  },
+  {
+    category: 'Sovereign Wealth Funds (SWFs) & Institutional Asset Managers',
+    desc: 'We originate large-scale, long-horizon opportunities across strategic national priorities—utility-scale renewable energy, transport corridors, critical minerals, and PPP concessions.',
+    iconName: 'Crown',
+  },
+  {
+    category: 'Single- & Multi-Family Offices',
+    desc: 'Discreet access to off-market direct investments, club deals, and structured co-investments with patient growth capital deployment and real-asset backing.',
+    iconName: 'Shield',
+  },
+  {
+    category: 'Private Equity & Private Credit Funds',
+    desc: 'Pan-African and global origination partner for proprietary growth equity, buyout, mezzanine, buy-side bolt-ons, and secondary liquidity transactions.',
+    iconName: 'Briefcase',
+  },
+  {
+    category: 'Commercial Banks, Export Credit Agencies (ECAs) & Strategic Corporates',
+    desc: 'Syndicated debt facilities, trade lines, ECA-backed equipment financings, and strategic joint ventures for corporations expanding their operational footprint across Africa.',
+    iconName: 'Landmark',
+  },
+];
+
+export const MANDATE_ALIGNMENT_MATRIX = [
+  {
+    category: 'DFIs & Impact Funds',
+    focus: 'Infrastructure, energy transition, healthcare, agriculture, financial inclusion',
+    instruments: 'Senior/subordinated debt, blended finance, political/credit risk guarantees, growth equity',
+  },
+  {
+    category: 'Sovereign Wealth Funds',
+    focus: 'National infrastructure, energy, mining, industrial parks, strategic real estate',
+    instruments: 'Large-ticket direct equity, sovereign-backed PPP concessions, platform co-investments',
+  },
+  {
+    category: 'Family Offices',
+    focus: 'Cash-generative operating businesses, real estate, hospitality, agri-processing',
+    instruments: 'Direct minority/majority equity, club deals, convertible instruments, structured notes',
+  },
+  {
+    category: 'Private Equity & Credit',
+    focus: 'Scalable market leaders, regional roll-ups, cash-flowing mid-market enterprises',
+    instruments: 'Growth equity, buyouts, mezzanine & private credit, buy-side M&A, recapitalisations',
+  },
+  {
+    category: 'Strategic Corporates',
+    focus: 'Market entry, supply-chain integration, technology & distribution expansion',
+    instruments: 'Equity joint ventures, strategic minority stakes, off-take & licensing partnerships',
+  },
+];
+
+export const ORIGINATION_ADVANTAGES = [
+  {
+    title: 'Pre-Vetted, Investment-Committee-Ready Pipeline',
+    desc: 'Every opportunity undergoes rigorous commercial, financial, and governance screening before introduction, reducing execution friction and underwriting timelines.',
+    iconName: 'FileCheck',
+  },
+  {
+    title: 'Structuring & Risk Mitigation',
+    desc: 'We work alongside legal, tax, and technical advisors to address currency exposure, regulatory approvals, off-take security, and capital repatriation mechanics upfront.',
+    iconName: 'ShieldCheck',
+  },
+  {
+    title: 'Aligned Co-Investment & Syndication',
+    desc: 'We assemble balanced capital stacks—pairing local operational sponsors with complementary international equity, private credit, and DFI tranches.',
+    iconName: 'Users',
+  },
+  {
+    title: 'Discreet, Mandate-Driven Coverage',
+    desc: 'We engage investors strictly on the basis of defined sector, geographic, ticket-size, and return criteria, maintaining complete confidentiality throughout origination and due diligence.',
+    iconName: 'Lock',
+  },
+];
+
+// 7. TRANSACTIONS: CAPABILITIES, 4-STAGE LIFECYCLE & MANDATE PROFILES (Section 7)
+export const TRANSACTION_MANDATES = [
+  'Growth Capital & Institutional Equity',
+  'Project Finance & Blended Capital',
+  'Strategic Investments & Co-Investments',
+  'Joint Ventures & Operational Alliances',
+  'Mergers, Acquisitions & Divestitures',
+  'Public-Private Partnerships (PPPs) & Concessions',
+  'Cross-Border Expansion & Market Entry',
 ];
 
 export const LIFECYCLE_STEPS = [
   {
     step: '01',
-    title: 'Opportunity Assessment',
-    desc: 'Rigorous assessment of commercial viability, financial readiness, and initial investment thesis formulation.',
+    title: 'Origination, Structuring & Bankability Assessment',
+    desc: 'We evaluate commercial fundamentals, capital structure efficiency, regulatory considerations, and risk allocation to establish an optimal transaction thesis prior to market approach.',
   },
   {
     step: '02',
-    title: 'Capital Strategy & Structuring',
-    desc: 'Developing tailored capital architectures, optimizing the capital stack, and preparing institutional investor documentation.',
+    title: 'Institutional Documentation & Pre-Marketing',
+    desc: 'We prepare institutional-grade financial models, teasers, Information Memorandums (IMs), and Virtual Data Rooms (VDRs) aligned with international underwriting and ESG standards.',
   },
   {
     step: '03',
-    title: 'Investor Engagement',
-    desc: 'Facilitating targeted, confidential discussions with aligned institutional investors, DFIs, and strategic partners.',
+    title: 'Targeted Investor Engagement & Bookbuilding',
+    desc: 'We execute discreet, curated outreach to matched capital providers—spanning DFIs, private equity funds, private credit providers, family offices, and strategic corporates—to generate competitive tension.',
   },
   {
     step: '04',
-    title: 'Negotiation & Due Diligence',
-    desc: 'Guiding transaction terms, managing data room processes, and coordinating due diligence across legal, financial, and technical streams.',
-  },
-  {
-    step: '05',
-    title: 'Execution & Closing',
-    desc: 'Finalizing definitive agreements, fulfilling regulatory requirements, and achieving successful financial close.',
+    title: 'Due Diligence Management, Negotiation & Financial Close',
+    desc: 'We coordinate commercial, legal, technical, and financial due diligence workstreams, advise on term-sheet and definitive agreement negotiations, and drive execution through to disbursement and close.',
   },
 ];
 
-// Representative transaction advisory portfolio (Factual & Professional)
 export const TRANSACTIONS_DATA = [
   {
-    slug: 'renewable-energy-consortium',
-    title: '50MW Solar Power Infrastructure Advisory',
-    sector: 'Energy & Renewable Resources',
+    slug: 'renewable-generation-bess-west-africa',
+    title: 'Utility-Scale Renewable Generation & Battery Energy Storage',
+    sector: 'Energy & Infrastructure',
     location: 'West Africa',
-    scope: 'Project Finance & DFI Syndication',
-    overview: 'Advised project sponsors on structuring a 50MW utility-scale solar photovoltaic facility, including power purchase agreement (PPA) financial modelling and coordinating blended debt facilities with regional development finance institutions.',
+    scope: 'Project Finance & Blended Debt/Equity Advisory',
+    overview: 'Structuring multi-tranche institutional capital for a utility-scale renewable generation and battery energy storage (BESS) platform.',
     servicesDelivered: [
-      'Bankability Financial Model Refinement',
-      'DFI & Commercial Debt Structuring',
-      'Concession & Off-Take Agreement Advisory',
+      'Bankability structuring & PPA financial modelling',
+      'DFI & blended finance tranche alignment',
+      'Off-take security & risk mitigation framework',
+      'EPC & O&M commercial partner advisory',
     ],
   },
   {
-    slug: 'commercial-logistics-corridor',
-    title: 'Inland Logistics Hub & Cold-Chain Expansion',
-    sector: 'Infrastructure',
+    slug: 'cold-chain-logistics-east-africa',
+    title: 'Regional Cold-Chain & Warehousing Expansion',
+    sector: 'Transport & Logistics',
     location: 'East Africa',
-    scope: 'Growth Capital & Structured Debt',
-    overview: 'Structured growth equity and commercial debt for an integrated logistics provider expanding cold-chain storage and intermodal transport connections along a major regional trade corridor.',
+    scope: 'Growth Equity & Strategic Joint Venture',
+    overview: 'Advising a regional cold-chain and warehousing operator on institutional growth capital and an international logistics partnership.',
     servicesDelivered: [
-      'Comprehensive Investment Memorandum',
-      'Family Office & Institutional Equity Syndication',
-      'Asset-Backed Debt Facility Structuring',
+      'Growth equity placement & investor due diligence',
+      'International strategic joint venture structuring',
+      'Asset-backed debt facility arrangement',
+      'Regional trade corridor expansion roadmap',
     ],
   },
   {
-    slug: 'commercial-agri-processing',
-    title: 'Integrated Grain Processing & Value Chain',
-    sector: 'Agriculture',
-    location: 'Sub-Saharan Africa',
-    scope: 'Strategic Joint Venture & Debt',
-    overview: 'Facilitated a cross-border joint venture between a leading domestic agro-enterprise and an international processing conglomerate, securing capital for facility modernization and expanding smallholder sourcing networks.',
+    slug: 'enterprise-payments-series-b',
+    title: 'Cross-Border Enterprise Payments Infrastructure',
+    sector: 'Technology & Financial Services',
+    location: 'Pan-African & London Desk',
+    scope: 'Cross-Border Expansion & Series B Capital Raise',
+    overview: 'Positioning an enterprise payments infrastructure provider for institutional venture and strategic corporate investment.',
     servicesDelivered: [
-      'Joint Venture Commercial Structuring',
-      'Technical Partner Due Diligence',
-      'Working Capital Facility Arrangement',
+      'Institutional investment readiness & IM drafting',
+      'Global tech VC & strategic investor roadshows',
+      'Valuation advisory & Series B term-sheet negotiation',
+      'UK/European holding corporate governance alignment',
     ],
   },
   {
-    slug: 'fintech-digital-payments',
-    title: 'Digital Payments & Cross-Border Clearing Expansion',
-    sector: 'Technology',
-    location: 'Pan-African & UK Desk',
-    scope: 'Growth Equity & Institutional Placement',
-    overview: 'Supported an institutional-grade payments infrastructure provider in preparing for international growth equity investment, refining corporate governance, and engaging global financial technology investors.',
+    slug: 'consumer-goods-bolt-on-ma',
+    title: 'Industrial Consumer Goods Consolidation',
+    sector: 'Manufacturing & Agro-Processing',
+    location: 'Southern Africa',
+    scope: 'Buy-Side M&A & Working Capital Facility',
+    overview: 'Advising an industrial consumer goods group on cross-border bolt-on acquisitions and structured trade finance.',
     servicesDelivered: [
-      'Investment Readiness & Governance Enhancement',
-      'Institutional Investor Bilateral Roadshows',
-      'Valuation Advisory & Term Sheet Negotiation',
-    ],
-  },
-  {
-    slug: 'specialized-healthcare-facility',
-    title: 'Multi-Specialty Medical Centre & Diagnostic Network',
-    sector: 'Healthcare',
-    location: 'North Africa',
-    scope: 'Equity Syndication & Equipment Finance',
-    overview: 'Advised healthcare sponsors on capital raising for a modern tertiary healthcare facility and regional diagnostic clinic network, combining equity capital with specialized medical equipment leasing facilities.',
-    servicesDelivered: [
-      'Healthcare Market Feasibility & Financial Architecture',
-      'Medical Equipment Vendor Lease Structuring',
-      'Private Equity Investor Placement',
-    ],
-  },
-  {
-    slug: 'industrial-manufacturing-expansion',
-    title: 'Light Industrial Manufacturing & Packaging Facility',
-    sector: 'Manufacturing',
-    location: 'West Africa',
-    scope: 'Cross-Border M&A & Expansion Capital',
-    overview: 'Advised an industrial packaging enterprise on a strategic cross-border acquisition, supporting due diligence, commercial valuation, and securing long-term expansion debt.',
-    servicesDelivered: [
-      'Buy-Side Due Diligence & Valuation',
-      'Syndicated Commercial Debt Package',
-      'Post-Transaction Integration Framework',
+      'Buy-side target screening & commercial valuation',
+      'Cross-border regulatory & AfCFTA compliance',
+      'Structured trade & working capital facility arrangement',
+      'Post-acquisition operational integration plan',
     ],
   },
 ];
 
-// 5. OUR CORE VALUES (Verbatim from The company.docx)
-export const CORE_VALUES = [
+// 8. INSIGHTS: RESEARCH PILLARS & EDITORIAL THEMES (Section 8)
+export const RESEARCH_PILLARS = [
   {
-    title: 'Integrity',
-    desc: 'We operate with honesty, transparency and professionalism in every engagement.',
-    iconName: 'Scale',
-  },
-  {
-    title: 'Confidentiality',
-    desc: 'We protect client information and maintain the highest standards of discretion throughout every mandate.',
-    iconName: 'Lock',
-  },
-  {
-    title: 'Excellence',
-    desc: 'We deliver exceptional advisory services through expertise, discipline and attention to detail.',
-    iconName: 'Award',
-  },
-  {
-    title: 'Strategic Thinking',
-    desc: 'We develop innovative solutions that align capital, partnerships and long-term business objectives.',
-    iconName: 'Compass',
-  },
-  {
-    title: 'Global Collaboration',
-    desc: 'We build bridges between businesses, investors and institutions across continents.',
-    iconName: 'Globe2',
-  },
-  {
-    title: 'Long-Term Value Creation',
-    desc: 'We focus on sustainable growth, meaningful partnerships and outcomes that create lasting economic impact.',
+    title: 'Capital Flows & Macroeconomic Briefings',
+    desc: 'Analysis of institutional capital allocation across Africa, tracking shifts in private equity, private credit, sovereign debt markets, and foreign exchange risk mitigation.',
     iconName: 'TrendingUp',
   },
+  {
+    title: 'Sector Deep-Dives & Bankability Reports',
+    desc: 'Ground-level evaluations of investment readiness, unit economics, and structuring requirements across energy transition, digital infrastructure, critical minerals, and agro-industry.',
+    iconName: 'FileSearch',
+  },
+  {
+    title: 'Cross-Border Policy, Regulatory & AfCFTA Analysis',
+    desc: 'Practical commentary on trade integration under the African Continental Free Trade Area, investment treaty frameworks, local-content rules, and capital repatriation mechanics.',
+    iconName: 'Globe',
+  },
+  {
+    title: 'Transaction Structuring & Governance Notes',
+    desc: 'Actionable guidance for founders, boards, and project sponsors on institutional governance, ESG integration, valuation discipline, and exit preparation.',
+    iconName: 'Scale',
+  },
 ];
 
-// 6. INSIGHTS & RESEARCH (Genuine, High-Value Industry Content)
 export const INSIGHTS_DATA = [
   {
-    slug: 'financing-african-energy-transition',
-    title: 'Financing Africa’s Energy Transition: Renewable Infrastructure & Distributed Power',
+    slug: 'private-credit-catalyst-african-infrastructure',
+    title: 'Private Credit as a Catalyst for African Infrastructure',
     category: 'Energy & Infrastructure',
     date: 'February 2026',
     readTime: '6 min read',
-    excerpt: 'An analysis of project finance structures, PPA bankability standards, and the role of blended finance in accelerating solar, wind, and captive power developments.',
+    excerpt: 'Examining how structured private debt and blended credit vehicles are increasingly bridging the continent’s infrastructure financing gap alongside traditional commercial bank lending.',
     content: `
-      Energy access remains the principal catalyst for industrial growth and economic resilience across the African continent. As national grids face generation constraints, commercial and industrial enterprises are increasingly deploying private, decentralized energy solutions to guarantee continuous power and lower operational overhead.
+      Addressing Africa’s multi-billion-dollar infrastructure deficit requires more than sovereign balance sheets and traditional commercial bank loans. Over the past twenty-four months, private credit has emerged as one of the fastest-growing asset classes across emerging and frontier markets.
 
-      ### The Evolution of Bankable Project Structures
-      Historically, utility-scale renewable projects relied heavily on sovereign guarantees to secure debt financing from international lenders. However, fiscal constraints in many emerging markets have accelerated the transition toward commercial off-taker models, distributed captive power facilities, and regional energy consortiums.
+      ### Why Private Debt is Gaining Ground
+      Commercial banks across key African markets often face regulatory capital constraints and single-obligor exposure limits, restricting their ability to underwrite long-tenor infrastructure loans. Meanwhile, institutional project developers require flexible, non-dilutive debt packages structured to match project cash flows.
 
-      Key parameters that institutional lenders evaluate include:
-      1. **Off-Taker Creditworthiness:** Verifiable historical cash flows, independent credit ratings, and credit enhancement mechanisms such as escrow reserves or partial risk guarantees (PRGs).
-      2. **Currency Alignment:** Structuring power purchase agreements (PPAs) with foreign-exchange indexed tariffs or local-currency debt facilities to mitigate currency mismatch risks.
-      3. **Grid Interconnection & Curtailment Risk:** Clear contractual allocation of grid availability risks between the project developer and national transmission operators.
+      Key structuring models include:
+      1. **Mezzanine & Subordinated Credit:** Providing subordinated tranches that enhance equity returns and make senior bank debt viable.
+      2. **Blended Infrastructure Vehicles:** Pairing commercial debt with first-loss guarantees from Development Finance Institutions (DFIs) to achieve acceptable risk-adjusted yields.
+      3. **Local Currency Denominated Private Credit:** Mitigating FX mismatch risk for infrastructure assets generating revenue in domestic currencies.
 
-      ### The Role of Blended Finance & DFIs
-      Development finance institutions (DFIs) continue to play a pivotal catalytic role. By providing subordinated debt, first-loss equity, and concessional financing tranches, DFIs de-risk early-stage projects and mobilize private institutional capital that would otherwise remain on the sidelines.
-
-      As renewable technologies mature and battery energy storage systems (BESS) become economically viable at scale, Africa's energy sector offers institutional investors long-term, inflation-protected cash flows coupled with profound developmental impact.
+      As macroeconomic volatility tests conventional banking channels, institutional private credit funds are positioning themselves as vital partners for large-scale energy, logistics, and telecom asset developers.
     `,
   },
   {
-    slug: 'infrastructure-corridors-afcfta',
-    title: 'Infrastructure & Trade Corridors: Unlocking Intra-African Commerce Under AfCFTA',
-    category: 'Infrastructure',
+    slug: 'domestic-strategic-exits-regional-ma',
+    title: 'The Rise of Domestic Strategic Exits & Regional M&A',
+    category: 'M&A & Corporate Strategy',
     date: 'January 2026',
     readTime: '5 min read',
-    excerpt: 'Examining commercial opportunities in transport, cold-chain logistics, and inland dry ports as regional economic integration gathers momentum.',
+    excerpt: 'Analysing how African corporates are driving trade-sale acquisitions and cross-border consolidation across key regional hubs under the AfCFTA framework.',
     content: `
-      The operationalization of the African Continental Free Trade Area (AfCFTA) creates the world's largest single free trade zone by number of participating countries. However, realising the agreement's transformative potential depends squarely on closing the continent's physical infrastructure deficit.
+      Historically, private equity sponsors in Africa focused their liquidity planning on public equity listings (IPOs) on international or domestic bourses. Today, commercial reality points toward a different, more resilient exit pathway: corporate strategic sales and regional consolidation.
 
-      ### Intermodal Logistics Corridors
-      Trade efficiency requires seamless connectivity between deep-water coastal ports and landlocked economic hinterlands. Major trade arteries—such as the Northern Corridor in East Africa and the Abidjan-Lagos Corridor in West Africa—are experiencing substantial public and private capital investment in highway expansion, rail modernization, and automated customs facilities.
+      ### Corporate Consolidators as Strategic Acquirers
+      Across West, East, and Southern Africa, well-capitalised regional market champions are actively seeking inorganic expansion. Rather than navigating lengthy greenfield setup cycles in new territories, corporate buyers acquire existing operators to secure immediate distribution networks, local licenses, and established management teams.
 
-      Critical investment opportunities include:
-      - **Inland Container Depots (ICDs) & Dry Ports:** Reducing port congestion by transferring customs clearance and storage inland.
-      - **Cold-Chain Logistics:** Preserving agricultural yields and pharmaceutical integrity through refrigerated transport fleets and temperature-controlled storage nodes.
-      - **Digital Cargo Tracking:** Cloud-based fleet management and electronic cargo tracking systems that reduce transit delays and cross-border dwell times.
+      Key drivers include:
+      - **AfCFTA Trade Integration:** Lowering tariff barriers and encouraging the creation of Pan-African operating groups capable of cross-border scale.
+      - **Supply-Chain Resilience:** Securing domestic processing assets, packaging facilities, and cold-chain hubs to protect against global supply shocks.
+      - **Currency Diversification:** Building multi-country revenue streams that balance single-currency exposure risks.
 
-      Institutional investors who position capital in core transport nodes and integrated logistics infrastructure stand to benefit directly from the sustained expansion of intra-continental commerce.
+      For founders and institutional investors, preparing a business for a strategic trade sale requires clear governance, auditable financial records, and institutional readiness from day one.
     `,
   },
   {
-    slug: 'commercial-agriculture-value-chain',
-    title: 'Scaling Commercial Agriculture: From Primary Production to Value-Added Processing',
-    category: 'Agriculture',
-    date: 'January 2026',
-    readTime: '5 min read',
-    excerpt: 'Why institutional capital is focusing on post-harvest infrastructure, processing facilities, and domestic import substitution across food supply chains.',
-    content: `
-      With over 60% of the world's uncultivated arable land, Africa possesses the potential to not only feed its rapidly expanding population but to become a net exporter of value-added agricultural commodities. 
-
-      ### Moving Beyond Primary Production
-      Historically, investment was disproportionately concentrated in upstream commodity cultivation, leaving economies vulnerable to international price volatility. The most compelling commercial returns and economic impact today lie in midstream agro-processing:
-
-      1. **Import Substitution:** Replacing expensive imports of basic staples (wheat flour, edible oils, starch, packaged dairy) with locally sourced, industrially processed alternatives.
-      2. **Post-Harvest Loss Mitigation:** Modern silo networks, drying facilities, and cold storage that preserve crop value and stabilize seasonal price fluctuations.
-      3. **Smallholder Outgrower Integration:** Commercial processors partnering with thousands of organized smallholder farmers, providing inputs, technical extension services, and guaranteed off-take contracts.
-
-      By packaging commercial debt and strategic equity into integrated agribusiness ventures, project sponsors can build resilient enterprises that address food security while delivering stable commercial yields.
-    `,
-  },
-  {
-    slug: 'digital-infrastructure-telecom-datacenters',
-    title: 'Digital Backbone: The Investment Case for African Data Centers & Fiber Networks',
-    category: 'Technology',
-    date: 'December 2025',
-    readTime: '5 min read',
-    excerpt: 'Analyzing the capital requirements and commercial drivers behind carrier-neutral data centers, subsea landings, and terrestrial fiber rollouts.',
-    content: `
-      The rapid adoption of mobile broadband, digital financial services, cloud applications, and e-government platforms across Africa has created an exponential demand for digital infrastructure. Data sovereignty regulations and latency requirements dictate that digital traffic must increasingly be processed and stored in-country.
-
-      ### Key Investment Pillars in Digital Infrastructure
-      - **Carrier-Neutral Data Centers:** Multi-tenant colocation facilities in major commercial hubs (Lagos, Nairobi, Johannesburg, Cairo, Accra) capable of hosting hyperscale cloud providers and local enterprise workloads.
-      - **Terrestrial Fiber Expansion:** Connecting coastal subsea cable landing stations to secondary metropolitan centers, industrial parks, and educational institutions.
-      - **Tower Infrastructure & Rural Connectivity:** Sharing telecommunication towers to optimize operational expenditure and expand 4G and 5G network reach.
-
-      Digital infrastructure assets offer predictable, annuity-style revenue profiles backed by hard-currency enterprise contracts, making them an attractive asset class for global private equity and infrastructure funds.
-    `,
-  },
-  {
-    slug: 'private-equity-direct-investment-africa',
-    title: 'Institutional Capital in Africa: Deal Structuring, Governance & Exit Strategies',
+    slug: 'mobilising-dfi-institutional-capital',
+    title: 'Mobilising Institutional & DFI Capital in a Fragmented Global Economy',
     category: 'Capital Markets',
-    date: 'November 2025',
-    readTime: '6 min read',
-    excerpt: 'Key strategies for institutional investors navigating valuation, corporate governance, minority protections, and liquidity pathways in private equity.',
+    date: 'January 2026',
+    readTime: '5 min read',
+    excerpt: 'Practical frameworks for using guarantees, blended finance, and risk-sharing instruments to unlock development finance and institutional capital at scale.',
     content: `
-      Direct private investment across African growth markets requires an active, hands-on approach to deal structuring and corporate governance. Successful fund managers and co-investors focus on fundamental commercial drivers rather than financial engineering alone.
+      In an era characterized by higher global interest rates and shifting geopolitical priorities, attracting foreign institutional capital into African growth markets demands sophisticated financial architecture. The most successful transactions employ catalytic capital to crowd in private institutional investment.
 
-      ### Essential Structuring Considerations
-      1. **Governance & Minority Protections:** Establishing robust board oversight, independent audit committees, and clear veto rights over major capital expenditures and related-party transactions.
-      2. **Currency Hedging & Operational Natural Hedges:** Prioritizing businesses that generate export revenues in foreign currency, or enterprises whose pricing models allow for inflation pass-through without demand destruction.
-      3. **Strategic Exit Pathways:** Structuring flexible exit mechanisms, including trade sales to multinational corporations, secondary buyouts by pan-African funds, and structured dividend self-liquidating instruments.
+      ### The Power of Risk-Sharing Structures
+      Development Finance Institutions (DFIs) hold substantial mandates to invest in emerging markets, yet their capital deployment is bound by strict underwriting criteria. By structuring transactions that explicitly address perceived political, regulatory, and currency risks, project sponsors can unlock multi-tranche funding.
 
-      Transparent reporting, alignment of interests between founders and investors, and rigorous pre-investment due diligence remain the bedrock of sustainable returns in private market transactions.
+      Essential instruments include:
+      1. **Political Risk Insurance (PRI) & Guarantees:** Utilizing instruments from agencies like MIGA, GuarantCo, and regional credit insurers to protect against expropriation, breach of contract, and currency inconvertibility.
+      2. **Subordinated Tranches:** Structuring concessional DFI capital to absorb initial operational or credit losses, shielding commercial co-investors.
+      3. **Technical Assistance Grants:** Funding bankability studies, environmental impact assessments (EIA), and ESG compliance frameworks prior to financial close.
+
+      Through disciplined structuring, African projects can access patient, long-term capital built for enduring commercial and developmental impact.
+    `,
+  },
+  {
+    slug: 'local-champion-to-institutional-asset',
+    title: 'From Local Champion to Institutional Asset: Governance Milestones for African Enterprises',
+    category: 'Governance & Investment Readiness',
+    date: 'December 2025',
+    readTime: '6 min read',
+    excerpt: 'Key governance, financial reporting, and structuring milestones required for family-owned African enterprises preparing for international private equity or strategic investment.',
+    content: `
+      Africa is home to thousands of dynamic, highly profitable family-owned enterprises and privately held businesses. However, when seeking to scale into regional markets or raise institutional capital, many encounter an "underwriting friction" caused by informal governance and opaque financial systems.
+
+      ### Transitioning from Founder-Led to Institution-Ready
+      Institutional investors—whether global private equity funds, sovereign wealth funds, or international joint venture partners—require certainty before committing capital. Transforming a successful private enterprise into an institutional-grade investment asset involves four essential milestones:
+
+      1. **Separation of Management & Ownership:** Establishing an independent board of directors with specialized committee oversight (audit, risk, compensation).
+      2. **IFRS Financial Audits:** Upgrading from statutory tax accounting to multi-year historical financial statements audited by internationally recognized accounting firms.
+      3. **Management Succession & Key-Person De-Risking:** Developing second-line leadership capacity so the enterprise’s commercial viability does not rest solely on the founding family.
+      4. **ESG & Compliance Systems:** Institutionalizing anti-bribery policies, supply-chain traceability, and environmental standards aligned with global LP requirements.
+
+      Enterprises that undertake this governance transformation command substantial valuation premiums and gain access to lower costs of international growth capital.
     `,
   },
 ];
+
+// 9. CONTACT & INTAKE DESKS (Section 9)
+export const DIRECT_ENGAGEMENT_DESKS = [
+  {
+    title: 'Corporate & Project Advisory Enquiries',
+    desc: 'For businesses and project sponsors seeking equity or debt capital raising, M&A advisory, investment readiness, or cross-border joint ventures.',
+    email: 'advisory@blackmarkt.network',
+  },
+  {
+    title: 'Institutional Investor & Co-Investment Desk',
+    desc: 'For DFIs, sovereign wealth funds, private equity funds, and family offices registering investment mandates or requesting deal-flow access.',
+    email: 'Clientservice@blackmarkt.network',
+  },
+  {
+    title: 'Sovereign, PPP & Institutional Relations',
+    desc: 'For government ministries, state-owned enterprises, and development agencies exploring public-private investment frameworks.',
+    email: 'Felix.beck@blackmarkt.network',
+  },
+];
+
+export const FORM_OPTIONS = {
+  enquiryCategories: [
+    'Capital Raising',
+    'Project Finance & Infrastructure',
+    'M&A / Strategic Partnership',
+    'Investor Mandate Registration',
+    'Government & PPP Advisory',
+  ],
+  industrySectors: [
+    'Infrastructure',
+    'Energy & Renewable Resources',
+    'Real Estate',
+    'Healthcare',
+    'Technology',
+    'Manufacturing',
+    'Agriculture',
+    'Mining & Natural Resources',
+    'Hospitality',
+    'Multi-Sector',
+  ],
+  capitalRequirements: [
+    'Under $5M',
+    '$5M – $25M',
+    '$25M – $100M',
+    '$100M+',
+    'Strategic Partnership / Non-Capital',
+  ],
+};

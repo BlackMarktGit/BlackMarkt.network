@@ -45,7 +45,7 @@ export default function Hero() {
 
         {/* Client's Official Value Proposition Body */}
         <p className="hero__subhead font-body text-[13.5px] sm:text-[15px] xl:text-[16.5px] 2xl:text-[18px] leading-[1.5] text-[#CBD5E1] max-w-[620px] xl:max-w-[720px] m-0">
-          Black Markt Network Consultancy is an independent strategic capital advisory firm connecting ambitious African businesses, project sponsors, governments and institutions with institutional capital, expertise and transformative partnerships.
+          Black Markt Network Consultancy is an independent, London-headquartered strategic capital advisory firm specialising in connecting high-growth African enterprises, infrastructure sponsors, sovereign institutions, and international investors with the capital, structuring expertise, and strategic partnerships required to scale across global markets.
         </p>
 
         {/* Action Button CTAs */}
@@ -79,15 +79,15 @@ export default function Hero() {
             </svg>
           </Link>
 
-          {/* Secondary CTA */}
-          <a
-            href="#services"
-            className="action-button group/action inline-flex items-center justify-center gap-1.5 select-none cursor-pointer no-underline rounded-xl font-body text-[13px] sm:text-[14px] font-medium tracking-[-0.01em] leading-none whitespace-nowrap transition-all duration-200 focus-visible:outline-none h-[44px] sm:h-[48px] px-4 sm:px-5 bg-white/5 text-[#F8F9FA] border border-white/15 hover:bg-white/10 hover:border-[#C9A227]/40 w-full sm:w-auto"
-            aria-label="Explore Advisory Services"
+          {/* Secondary CTA: Explore Investor Mandates */}
+          <Link
+            to="/investors"
+            className="action-button group/action inline-flex items-center justify-center gap-2 select-none cursor-pointer no-underline rounded-xl font-body text-[13px] sm:text-[14px] font-medium tracking-[-0.01em] leading-none whitespace-nowrap transition-all duration-200 focus-visible:outline-none h-[44px] sm:h-[48px] px-4 sm:px-5 bg-white/5 text-[#F8F9FA] border border-white/15 hover:bg-white/10 hover:border-[#C9A227]/40 w-full sm:w-auto"
+            aria-label="Explore Investor Mandates"
           >
-            <span>Our Services</span>
-            <span className="text-[#C9A227] ml-0.5">&darr;</span>
-          </a>
+            <span>Explore Investor Mandates</span>
+            <span className="text-[#C9A227] ml-0.5">&rarr;</span>
+          </Link>
         </div>
       </div>
     </section>

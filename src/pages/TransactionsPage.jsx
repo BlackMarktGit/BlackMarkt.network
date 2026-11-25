@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Layout from '../components/layout/Layout';
-import { TRANSACTIONS_DATA, TRANSACTION_SCOPES, LIFECYCLE_STEPS } from '../data/platformData';
-import { ArrowRight, MapPin } from 'lucide-react';
+import { TRANSACTIONS_DATA, TRANSACTION_MANDATES, LIFECYCLE_STEPS } from '../data/platformData';
+import { ArrowRight, MapPin, CheckCircle2 } from 'lucide-react';
 
 export default function TransactionsPage() {
   const [selectedSector, setSelectedSector] = useState('All');
@@ -21,7 +21,7 @@ export default function TransactionsPage() {
           <div className="flex items-center gap-2 text-[#C9A227]">
             <span className="w-2 h-2 rounded-full bg-[#C9A227]" />
             <span className="text-[11px] sm:text-[12px] font-sans font-semibold tracking-[0.18em] uppercase">
-              TRANSACTION ADVISORY
+              TRANSACTION ADVISORY & EXECUTION
             </span>
           </div>
 
@@ -29,8 +29,8 @@ export default function TransactionsPage() {
             Strategic Transactions. Sustainable Outcomes.
           </h1>
 
-          <p className="text-[18px] sm:text-[22px] text-[#CBD5E1] leading-relaxed max-w-[800px] font-body">
-            We support clients throughout the transaction lifecycle, from initial opportunity assessment and capital strategy through investor engagement, negotiation and execution.
+          <p className="text-[18px] sm:text-[22px] text-[#CBD5E1] leading-relaxed max-w-[820px] font-body">
+            Black Markt Network Consultancy advises clients across the full arc of complex transactions — from initial feasibility and financial structuring to capital syndication, negotiation, and closing. Our practice combines rigorous quantitative analysis with on-the-ground execution capabilities across London and key African markets.
           </p>
 
           <div className="flex flex-wrap gap-4 pt-3">
@@ -41,6 +41,12 @@ export default function TransactionsPage() {
               <span>Discuss a Mandate</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
+            <Link
+              to="/investors"
+              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-white/5 hover:bg-white/10 text-white border border-white/15 text-[13.5px] font-medium transition-all"
+            >
+              <span>Explore Investor Network</span>
+            </Link>
           </div>
         </div>
       </section>
@@ -48,15 +54,15 @@ export default function TransactionsPage() {
       {/* Advisory Capabilities Overview */}
       <section className="p-8 sm:p-10 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-4">
         <span className="text-[#C9A227] text-[11px] font-sans font-semibold uppercase tracking-wider block mb-3">
-          Core Transaction Scopes
+          Transaction Mandate Types
         </span>
         <div className="flex flex-wrap gap-2.5">
-          {TRANSACTION_SCOPES.map((scope, i) => (
+          {TRANSACTION_MANDATES.map((mandate, i) => (
             <span
               key={i}
               className="px-4 py-2 rounded-full bg-[#0B1320] border border-white/10 text-[13px] text-[#CBD5E1]"
             >
-              {scope}
+              {mandate}
             </span>
           ))}
         </div>
@@ -80,8 +86,8 @@ export default function TransactionsPage() {
         ))}
       </section>
 
-      {/* Transaction Cards Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 my-4">
+      {/* Selected Mandate Profiles Grid */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
         {filtered.map((tx) => (
           <div
             key={tx.slug}
@@ -98,17 +104,29 @@ export default function TransactionsPage() {
                 </span>
               </div>
 
-              <h2 className="text-[20px] sm:text-[22px] font-headings font-medium text-white mb-2.5 group-hover:text-[#C9A227] transition-colors leading-snug">
+              <h2 className="text-[20px] sm:text-[23px] font-headings font-medium text-white mb-2.5 group-hover:text-[#C9A227] transition-colors leading-snug">
                 <Link to={`/transactions/${tx.slug}`}>{tx.title}</Link>
               </h2>
 
-              <span className="inline-block text-[12px] font-sans font-semibold text-[#CBD5E1] bg-[#050505] border border-white/10 px-3 py-1 rounded-md mb-4">
+              <span className="inline-block text-[12px] font-sans font-semibold text-[#DFBA42] bg-[#050505] border border-[#C9A227]/20 px-3 py-1 rounded-md mb-4">
                 {tx.scope}
               </span>
 
               <p className="text-[14px] text-[#94A3B8] leading-relaxed mb-6">
                 {tx.overview}
               </p>
+
+              <div className="pt-4 border-t border-white/5 space-y-2 mb-6">
+                <span className="text-[11px] font-sans uppercase tracking-wider text-[#CBD5E1] block font-semibold">
+                  Key Deliverables:
+                </span>
+                {tx.servicesDelivered.slice(0, 3).map((s, idx) => (
+                  <div key={idx} className="flex items-start gap-2 text-[12.5px] text-[#94A3B8]">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-[#C9A227] shrink-0 mt-0.5" />
+                    <span>{s}</span>
+                  </div>
+                ))}
+              </div>
             </div>
 
             <div className="pt-4 border-t border-white/10 flex items-center justify-between">
@@ -116,7 +134,7 @@ export default function TransactionsPage() {
                 to={`/transactions/${tx.slug}`}
                 className="text-[13px] font-semibold text-[#CBD5E1] group-hover:text-[#C9A227] transition-colors flex items-center gap-1.5"
               >
-                <span>Transaction Details</span>
+                <span>Full Mandate Dossier</span>
                 <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
               </Link>
             </div>
@@ -124,7 +142,7 @@ export default function TransactionsPage() {
         ))}
       </section>
 
-      {/* 5-Stage Lifecycle Section */}
+      {/* 4-Stage Lifecycle Section */}
       <section className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.7)] my-4">
         <div className="max-w-[1408px] mx-auto">
           <div className="max-w-[700px] mb-10">
@@ -132,14 +150,14 @@ export default function TransactionsPage() {
               Execution Rigor
             </span>
             <h2 className="text-[28px] sm:text-[38px] font-headings font-medium text-white leading-tight">
-              Our 5-Stage Advisory Lifecycle
+              Our 4-Stage Advisory Lifecycle
             </h2>
             <p className="text-[#94A3B8] text-[15px] leading-relaxed mt-2">
               Structured methodology designed to ensure deal clarity, risk mitigation, and successful financial closing.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {LIFECYCLE_STEPS.map((step) => (
               <div
                 key={step.step}

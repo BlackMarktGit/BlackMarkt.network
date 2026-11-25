@@ -1,24 +1,28 @@
 import React, { useState } from 'react';
 import Layout from '../components/layout/Layout';
-import ActionButton from '../components/common/ActionButton';
 import Icon from '../components/common/Icon';
 import LuxurySelect from '../components/common/LuxurySelect';
-import { PRACTICES_DATA, INDUSTRIES_DATA, COMPANY_INFO } from '../data/platformData';
+import { COMPANY_INFO, FORM_OPTIONS, DIRECT_ENGAGEMENT_DESKS } from '../data/platformData';
 import api from '../services/api';
+import { ArrowRight, Check, ShieldCheck } from 'lucide-react';
 
 export default function ContactPage() {
   const [formSent, setFormSent] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [refId, setRefId] = useState('');
   const [formData, setFormData] = useState({
     name: '',
+    titleRole: '',
     organization: '',
     email: '',
     phone: '',
     country: '',
-    serviceArea: PRACTICES_DATA[0].title,
-    industry: INDUSTRIES_DATA[0].name,
+    natureOfEnquiry: FORM_OPTIONS.enquiryCategories[0],
+    industry: FORM_OPTIONS.industrySectors[0],
+    capitalRequirement: FORM_OPTIONS.capitalRequirements[0],
+    objective: '',
     message: '',
-    consent: false,
+    consent: true,
   });
 
   const handleChange = (e) => {
@@ -34,47 +38,59 @@ export default function ContactPage() {
     setSubmitting(true);
 
     try {
-      await api.submitInquiry({
+      const payload = {
         name: formData.name,
         email: formData.email,
         phone: formData.phone,
-        organization: formData.organization,
-        mandate_type: `${formData.serviceArea} (${formData.industry})`,
-        capital_range: formData.country,
-        message: `Phone: ${formData.phone || 'N/A'}\nCountry: ${formData.country}\n\n${formData.message}`,
-      });
+        organization: `${formData.organization} (${formData.titleRole})`,
+        mandate_type: `${formData.natureOfEnquiry} | ${formData.industry}`,
+        capital_range: formData.capitalRequirement,
+        message: `Role: ${formData.titleRole}\nCountry: ${formData.country}\nObjective: ${formData.objective}\n\nMessage:\n${formData.message}`,
+      };
+
+      const res = await api.submitInquiry(payload);
+      const generatedRef = res?.inquiry_id
+        ? `BMN-${String(res.inquiry_id).padStart(5, '0')}`
+        : `BMN-${Math.floor(10000 + Math.random() * 90000)}`;
+
+      setRefId(generatedRef);
       setFormSent(true);
       setFormData({
         name: '',
+        titleRole: '',
         organization: '',
         email: '',
         phone: '',
         country: '',
-        serviceArea: PRACTICES_DATA[0].title,
-        industry: INDUSTRIES_DATA[0].name,
+        natureOfEnquiry: FORM_OPTIONS.enquiryCategories[0],
+        industry: FORM_OPTIONS.industrySectors[0],
+        capitalRequirement: FORM_OPTIONS.capitalRequirements[0],
+        objective: '',
         message: '',
-        consent: false,
+        consent: true,
       });
     } catch (err) {
       console.error('Contact inquiry error:', err);
+      setRefId(`BMN-${Math.floor(10000 + Math.random() * 90000)}`);
       setFormSent(true);
     } finally {
       setSubmitting(false);
     }
   };
 
-  const serviceOptions = PRACTICES_DATA.map((p) => ({ value: p.title, label: p.title }));
-  const industryOptions = INDUSTRIES_DATA.map((ind) => ({ value: ind.name, label: ind.name }));
+  const enquiryOptions = FORM_OPTIONS.enquiryCategories.map((c) => ({ value: c, label: c }));
+  const industryOptions = FORM_OPTIONS.industrySectors.map((i) => ({ value: i, label: i }));
+  const capitalOptions = FORM_OPTIONS.capitalRequirements.map((cr) => ({ value: cr, label: cr }));
 
   return (
     <Layout>
       {/* Hero Header */}
-      <section className="relative w-full rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 p-6 sm:p-12 lg:p-16 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)]">
+      <section className="relative w-full rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 p-6 sm:p-12 lg:p-16 overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.8)] my-2">
         <div className="max-w-[960px] flex flex-col gap-4 sm:gap-6">
           <div className="flex items-center gap-3 text-caption text-[#C9A227]">
             <span className="w-2 h-2 rounded-full bg-[#C9A227]" />
             <span className="text-[11px] sm:text-[12px] font-sans font-semibold tracking-[0.18em] uppercase">
-              Get in Touch
+              CONTACT &amp; DIRECT ENGAGEMENT
             </span>
           </div>
 
@@ -117,7 +133,7 @@ export default function ContactPage() {
               <div className="flex items-start gap-3">
                 <Icon name="Phone" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
                 <div>
-                  <span className="text-white block font-medium">Direct Telephone Desk</span>
+                  <span className="text-white block font-medium">Telephone / WhatsApp Business</span>
                   <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-[#C9A227] hover:underline font-mono text-[15px] font-medium">
                     {COMPANY_INFO.phoneFormatted}
                   </a>
@@ -125,35 +141,17 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <Icon name="Mail" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-white block font-medium">Advisory Inquiries</span>
-                  <a href={`mailto:${COMPANY_INFO.emails.advisory}`} className="text-[#C9A227] hover:underline break-all">
-                    {COMPANY_INFO.emails.advisory}
-                  </a>
+              {DIRECT_ENGAGEMENT_DESKS.map((desk, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <Icon name="Mail" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-white block font-medium">{desk.desk}</span>
+                    <a href={`mailto:${desk.email}`} className="text-[#C9A227] hover:underline break-all">
+                      {desk.email}
+                    </a>
+                  </div>
                 </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icon name="Mail" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-white block font-medium">Client Services</span>
-                  <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="text-[#C9A227] hover:underline break-all">
-                    {COMPANY_INFO.emails.clientService}
-                  </a>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-3">
-                <Icon name="User" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
-                <div>
-                  <span className="text-white block font-medium">Managing Director Desk</span>
-                  <a href={`mailto:${COMPANY_INFO.emails.executive}`} className="text-[#C9A227] hover:underline break-all">
-                    {COMPANY_INFO.emails.executive}
-                  </a>
-                </div>
-              </div>
+              ))}
             </div>
 
             <div className="pt-4 border-t border-white/10">
@@ -174,48 +172,58 @@ export default function ContactPage() {
             <p className="text-[14px] text-[#94A3B8] leading-relaxed mb-4">
               Schedule a dedicated discussion with our strategic advisory team to review your transaction parameters.
             </p>
-            <ActionButton href="/book-consultation" variant="primary" className="w-full">
-              Book Consultation
-            </ActionButton>
+            <a
+              href="/book-consultation"
+              className="inline-flex items-center justify-center gap-2 w-full py-3 rounded-xl bg-[#C9A227] hover:bg-[#DFBA42] text-[#050505] font-semibold text-[13.5px] transition-all shadow-[0_4px_16px_rgba(201,162,39,0.25)]"
+            >
+              <span>Book Consultation</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
         </div>
 
-        {/* Right Column: Custom Modern Form with Zero Grey Dropdowns */}
+        {/* Right Column: Custom Modern Form */}
         <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)]">
           {formSent ? (
             <div className="text-center py-12 space-y-4">
               <div className="w-16 h-16 rounded-full bg-[#050505] border border-[#C9A227] text-[#C9A227] mx-auto flex items-center justify-center">
-                <Icon name="Check" className="w-8 h-8 text-[#C9A227]" />
+                <Check className="w-8 h-8 text-[#C9A227]" />
               </div>
               <h2 className="text-[26px] sm:text-[28px] font-headings font-medium text-white">
-                Inquiry Received
+                Mandate Enquiry Received
               </h2>
               <p className="text-[15px] text-[#CBD5E1] max-w-[480px] mx-auto leading-relaxed">
-                Thank you for contacting Black Markt Network Consultancy. Our team will review your inquiry and follow up promptly.
+                Thank you for contacting Black Markt Network Consultancy. Our senior desk will review your submission and connect promptly.
               </p>
-              <button
-                type="button"
-                onClick={() => setFormSent(false)}
-                className="mt-4 px-6 py-2.5 rounded-lg bg-[#C9A227] text-black font-semibold text-[13px] hover:bg-[#DFBA42] transition-colors cursor-pointer"
-              >
-                Submit Another Inquiry
-              </button>
+              <div className="inline-block py-2 px-5 rounded-lg bg-[#050505] border border-[#C9A227]/40 text-[#C9A227] font-mono text-sm">
+                Reference: {refId}
+              </div>
+              <div className="pt-2">
+                <button
+                  type="button"
+                  onClick={() => setFormSent(false)}
+                  className="px-6 py-2.5 rounded-lg bg-[#C9A227] text-black font-semibold text-[13px] hover:bg-[#DFBA42] transition-colors cursor-pointer"
+                >
+                  Submit Another Inquiry
+                </button>
+              </div>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="space-y-5">
               <div>
                 <h2 className="text-[22px] sm:text-[24px] font-headings font-medium text-white mb-1">
-                  Send an Inquiry
+                  Send a Mandate Enquiry
                 </h2>
                 <p className="text-[14px] text-[#94A3B8]">
-                  Please provide relevant details regarding your requirement.
+                  Please provide relevant parameters regarding your mandate or strategic inquiry.
                 </p>
               </div>
 
+              {/* Name & Title/Role */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                    Full Name *
+                    Full Name <span className="text-[#C9A227]">*</span>
                   </label>
                   <input
                     required
@@ -230,7 +238,25 @@ export default function ContactPage() {
 
                 <div>
                   <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                    Organisation / Entity *
+                    Title / Role <span className="text-[#C9A227]">*</span>
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="titleRole"
+                    value={formData.titleRole}
+                    onChange={handleChange}
+                    placeholder="e.g. Chief Financial Officer"
+                    className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Organisation & Country */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <div>
+                  <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
+                    Organisation / Institution <span className="text-[#C9A227]">*</span>
                   </label>
                   <input
                     required
@@ -242,13 +268,28 @@ export default function ContactPage() {
                     className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
                   />
                 </div>
+
+                <div>
+                  <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
+                    Country / Primary Market <span className="text-[#C9A227]">*</span>
+                  </label>
+                  <input
+                    required
+                    type="text"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleChange}
+                    placeholder="e.g. United Kingdom, Kenya, Nigeria"
+                    className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                  />
+                </div>
               </div>
 
               {/* Email & Phone */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                    Corporate Email *
+                    Corporate Email <span className="text-[#C9A227]">*</span>
                   </label>
                   <input
                     required
@@ -263,7 +304,7 @@ export default function ContactPage() {
 
                 <div>
                   <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                    Phone Number *
+                    Telephone / WhatsApp Number <span className="text-[#C9A227]">*</span>
                   </label>
                   <input
                     required
@@ -271,52 +312,63 @@ export default function ContactPage() {
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    placeholder="e.g. +44 20 7946 0000"
+                    placeholder="e.g. +44 77 7419 0852"
                     className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
                   />
                 </div>
               </div>
 
+              {/* Nature of Enquiry & Relevant Industry */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                    Country / Location *
-                  </label>
-                  <input
-                    required
-                    type="text"
-                    name="country"
-                    value={formData.country}
-                    onChange={handleChange}
-                    placeholder="e.g. United Kingdom, Kenya, Nigeria"
-                    className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
-                  />
-                </div>
-
-                <div>
-                  <LuxurySelect
-                    label="Advisory Service Area"
-                    value={formData.serviceArea}
-                    onChange={(val) => setFormData((p) => ({ ...p, serviceArea: val }))}
-                    options={serviceOptions}
-                    placeholder="Select Service"
-                  />
-                </div>
-              </div>
-
-              <div>
                 <LuxurySelect
-                  label="Industry Sector"
+                  label="Nature of Enquiry"
+                  required
+                  value={formData.natureOfEnquiry}
+                  onChange={(val) => setFormData((p) => ({ ...p, natureOfEnquiry: val }))}
+                  options={enquiryOptions}
+                  placeholder="Select Nature of Enquiry"
+                />
+
+                <LuxurySelect
+                  label="Relevant Industry Sector"
+                  required
                   value={formData.industry}
                   onChange={(val) => setFormData((p) => ({ ...p, industry: val }))}
                   options={industryOptions}
-                  placeholder="Select Industry"
+                  placeholder="Select Industry Sector"
                 />
               </div>
 
+              {/* Estimated Capital Requirement & Partnership Objective */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                <LuxurySelect
+                  label="Estimated Capital Requirement"
+                  required
+                  value={formData.capitalRequirement}
+                  onChange={(val) => setFormData((p) => ({ ...p, capitalRequirement: val }))}
+                  options={capitalOptions}
+                  placeholder="Select Capital Range"
+                />
+
+                <div>
+                  <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
+                    Partnership / Transaction Objective
+                  </label>
+                  <input
+                    type="text"
+                    name="objective"
+                    value={formData.objective}
+                    onChange={handleChange}
+                    placeholder="e.g. Debt syndication, cross-border M&A..."
+                    className="w-full h-11 px-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all"
+                  />
+                </div>
+              </div>
+
+              {/* Message */}
               <div>
                 <label className="block text-[12px] font-caption text-[#CBD5E1] font-semibold uppercase tracking-wider mb-2">
-                  Message / Inquiry Details *
+                  Overview / Summary of Mandate *
                 </label>
                 <textarea
                   required
@@ -324,7 +376,7 @@ export default function ContactPage() {
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
-                  placeholder="Outline the scope of your inquiry, capital requirement, or partnership objectives..."
+                  placeholder="Outline the scope of your mandate, capital requirement, or partnership objectives..."
                   className="w-full p-4 rounded-lg bg-[#070D18] border border-white/15 text-white placeholder-[#64748B] text-[14px] focus:outline-none focus:border-[#C9A227] focus:ring-1 focus:ring-[#C9A227] transition-all resize-none"
                 />
               </div>
@@ -341,7 +393,7 @@ export default function ContactPage() {
                   className="mt-1 w-4 h-4 rounded border-white/30 bg-[#050505] text-[#C9A227] focus:ring-[#C9A227] focus:ring-offset-0 accent-[#C9A227] cursor-pointer"
                 />
                 <label htmlFor="contact-consent" className="text-[13px] text-[#94A3B8] leading-snug cursor-pointer">
-                  I understand that communication through this inquiry form is treated with strict professional confidentiality by Black Markt Network Consultancy.
+                  I agree to the confidential processing of this mandate inquiry by Black Markt Network Consultancy under professional secrecy standards.
                 </label>
               </div>
 
@@ -349,10 +401,20 @@ export default function ContactPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full sm:w-auto h-12 px-8 rounded-lg bg-[#C9A227] text-black font-semibold text-[14px] hover:bg-[#DFBA42] shadow-[0_4px_20px_rgba(201,162,39,0.3)] transition-all cursor-pointer disabled:opacity-50"
+                  className="w-full sm:w-auto h-12 px-8 rounded-lg bg-[#C9A227] text-black font-semibold text-[14px] hover:bg-[#DFBA42] shadow-[0_4px_20px_rgba(201,162,39,0.3)] transition-all cursor-pointer disabled:opacity-50 flex items-center justify-center gap-2"
                 >
-                  {submitting ? 'Submitting...' : 'Submit Inquiry'}
+                  {submitting ? (
+                    <span>Submitting...</span>
+                  ) : (
+                    <>
+                      <span>Submit Mandate Enquiry</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </>
+                  )}
                 </button>
+                <p className="text-[12px] text-[#64748B] leading-relaxed mt-3">
+                  Black Markt Network Consultancy processes all enquiries under strict professional secrecy. Information provided is treated as confidential and will not be disclosed to third parties without prior written consent.
+                </p>
               </div>
             </form>
           )}
