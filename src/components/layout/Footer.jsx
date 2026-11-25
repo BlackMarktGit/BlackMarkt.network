@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../common/Icon';
-import { COMPANY_INFO, PRACTICES_DATA } from '../../data/platformData';
+import { COMPANY_INFO } from '../../data/platformData';
 
 export default function Footer() {
   const footerRef = useRef(null);
@@ -32,7 +32,7 @@ export default function Footer() {
 
       <div className="relative max-w-[1408px] mx-auto">
         {/* Top 4-Column Navigation Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-16 border-b border-white/10 text-[14px]">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-16 border-b border-white/10 text-[14px]">
           {/* Col 1: Brand & Identity (Bold, High-Visibility Prominent Logo) */}
           <div className="lg:col-span-4 flex flex-col gap-5">
             <Link to="/" className="group select-none inline-block py-1" aria-label="Black Markt Network Consultancy">
@@ -55,87 +55,77 @@ export default function Footer() {
 
           {/* Col 2: Advisory Services (Opens Specific Service Pages) */}
           <div className="lg:col-span-3 flex flex-col gap-3">
-            <div className="flex items-center justify-between">
-              <h4 className="font-headings text-[17px] text-white font-medium tracking-wide">
-                Advisory Services
-              </h4>
-              <Link to="/services" className="text-[11px] font-sans uppercase tracking-wider text-[#C9A227] hover:underline">
-                All Services
-              </Link>
-            </div>
-            <ul className="text-[#94A3B8] text-[13px] flex flex-col gap-2">
-              {PRACTICES_DATA.map((practice) => (
-                <li key={practice.slug}>
-                  <Link
-                    to={`/services/${practice.slug}`}
-                    className="hover:text-[#C9A227] transition-colors line-clamp-1 block"
-                  >
-                    {practice.title}
-                  </Link>
-                </li>
-              ))}
+            <h4 className="font-headings text-[17px] text-white font-medium tracking-wide mb-1">
+              Advisory Services
+            </h4>
+            <ul className="text-[#94A3B8] text-[13px] flex flex-col gap-2.5">
+              <li>
+                <Link to="/services/strategic-capital-advisory" className="hover:text-[#C9A227] transition-colors">
+                  Strategic Capital Advisory
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/equity-debt-capital-raising" className="hover:text-[#C9A227] transition-colors">
+                  Equity &amp; Debt Capital Raising
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/project-finance-infrastructure" className="hover:text-[#C9A227] transition-colors">
+                  Project Finance &amp; Infrastructure
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/strategic-partnerships-joint-ventures" className="hover:text-[#C9A227] transition-colors">
+                  Strategic Partnerships &amp; Joint Ventures
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/investment-readiness-due-diligence" className="hover:text-[#C9A227] transition-colors">
+                  Investment Readiness &amp; Due Diligence
+                </Link>
+              </li>
+              <li>
+                <Link to="/services/mergers-acquisitions-advisory" className="hover:text-[#C9A227] transition-colors">
+                  Mergers &amp; Acquisitions Advisory
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Col 3: Company & Governance (Opens Specific Page Sections) */}
+          {/* Col 3: Company (Opens Specific Pages) */}
           <div className="lg:col-span-2 flex flex-col gap-3">
             <h4 className="font-headings text-[17px] text-white font-medium tracking-wide mb-1">
               Company
             </h4>
-            <ul className="text-[#94A3B8] text-[13px] flex flex-col gap-2">
+            <ul className="text-[#94A3B8] text-[13px] flex flex-col gap-2.5">
               <li>
-                <Link to="/about#executive-overview" className="hover:text-[#C9A227] transition-colors">
-                  Executive Overview
+                <Link to="/about" className="hover:text-[#C9A227] transition-colors">
+                  About The Firm
                 </Link>
               </li>
               <li>
-                <Link to="/about#who-we-advise" className="hover:text-[#C9A227] transition-colors">
-                  Who We Advise
+                <Link to="/industries" className="hover:text-[#C9A227] transition-colors">
+                  Growth Industries
                 </Link>
               </li>
               <li>
-                <Link to="/about#operating-approach" className="hover:text-[#C9A227] transition-colors">
-                  Our Operating Approach
+                <Link to="/investors" className="hover:text-[#C9A227] transition-colors">
+                  Investor Network
                 </Link>
               </li>
               <li>
-                <Link to="/about#values" className="hover:text-[#C9A227] transition-colors">
-                  Core Fiduciary Values
-                </Link>
-              </li>
-              <li>
-                <Link to="/investors#capital-pools" className="hover:text-[#C9A227] transition-colors">
-                  Institutional Capital Pools
-                </Link>
-              </li>
-              <li>
-                <Link to="/investors#alignment-matrix" className="hover:text-[#C9A227] transition-colors">
-                  Mandate Alignment Matrix
-                </Link>
-              </li>
-              <li>
-                <Link to="/transactions#lifecycle" className="hover:text-[#C9A227] transition-colors">
-                  4-Stage Advisory Lifecycle
-                </Link>
-              </li>
-              <li>
-                <Link to="/transactions#mandate-profiles" className="hover:text-[#C9A227] transition-colors">
-                  Selected Mandate Profiles
+                <Link to="/transactions" className="hover:text-[#C9A227] transition-colors">
+                  Transactions
                 </Link>
               </li>
               <li>
                 <Link to="/insights" className="hover:text-[#C9A227] transition-colors">
-                  Market Intelligence
+                  Market Insights
                 </Link>
               </li>
               <li>
-                <Link to="/contact#engagement-desks" className="hover:text-[#C9A227] transition-colors">
-                  Direct Engagement Desks
-                </Link>
-              </li>
-              <li>
-                <Link to="/compliance" className="hover:text-[#C9A227] transition-colors">
-                  Compliance &amp; Legal
+                <Link to="/contact" className="hover:text-[#C9A227] transition-colors">
+                  Contact Us
                 </Link>
               </li>
             </ul>
@@ -202,26 +192,32 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Bottom Legal, IP & Policy Bar */}
-        <div className="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-[12px] text-[#64748B]">
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
-            <span>&copy; {new Date().getFullYear()} {COMPANY_INFO.legalName}. All rights reserved.</span>
-            <span className="hidden sm:inline text-white/20">&bull;</span>
-            <span>Reg: {COMPANY_INFO.registrationNumber} &bull; VAT: {COMPANY_INFO.vatNumber}</span>
-          </div>
+        {/* Corporate Entity & Registration Notice */}
+        <div className="pt-6 pb-6 border-b border-white/5 text-[12px] text-[#94A3B8] leading-relaxed">
+          <p>
+            <strong className="text-white font-medium">Corporate Registration &amp; Legal Notice:</strong>{' '}
+            Black Markt Network Consultancy is a subsidiary of {COMPANY_INFO.parentCompany}, registered in England and Wales under company registration number {COMPANY_INFO.registrationNumber}. Registered office address: {COMPANY_INFO.registeredAddress}. Registered VAT Number: {COMPANY_INFO.vatNumber}. All confidential engagements are governed under the laws of England and Wales.
+          </p>
+        </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6 text-[#94A3B8]">
-            <Link to="/privacy-policy" className="hover:text-[#C9A227] transition-colors">
+        {/* Bottom Legal & Copyright Bar */}
+        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-[12px] text-[#64748B]">
+          <p>
+            &copy; {new Date().getFullYear()} Black Markt Network Consultancy. All rights reserved.
+          </p>
+
+          <div className="flex flex-wrap items-center gap-6">
+            <Link to="/privacy" className="hover:text-[#C9A227] transition-colors">
               Privacy Policy
             </Link>
             <Link to="/terms" className="hover:text-[#C9A227] transition-colors">
-              Terms of Engagement
+              Terms &amp; Conditions
+            </Link>
+            <Link to="/cookies" className="hover:text-[#C9A227] transition-colors">
+              Cookie Policy
             </Link>
             <Link to="/compliance" className="hover:text-[#C9A227] transition-colors">
-              Fiduciary &amp; Regulatory Standards
-            </Link>
-            <Link to="/legal" className="hover:text-[#C9A227] transition-colors">
-              Legal Disclosures
+              Compliance &amp; Governance
             </Link>
           </div>
         </div>
