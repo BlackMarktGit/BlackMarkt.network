@@ -8,13 +8,7 @@ import { ArrowRight, BookOpen } from 'lucide-react';
 export default function InsightsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   
-  const categories = [
-    'All',
-    'Cross-Border Trade',
-    'Private Credit',
-    'Renewable Energy',
-    'Private Capital',
-  ];
+  const categories = ['All', ...new Set(INSIGHTS_DATA.map((item) => item.category))];
 
   const filteredInsights =
     selectedCategory === 'All'

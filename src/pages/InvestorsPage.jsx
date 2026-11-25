@@ -93,9 +93,19 @@ export default function InvestorsPage() {
                       {row.focus}
                     </td>
                     <td className="py-5 px-6 text-[#94A3B8] leading-relaxed align-top">
-                      <span className="inline-block px-3 py-1.5 rounded-lg bg-[#0B1320] border border-[#C9A227]/20 text-[#DFBA42] text-[12.5px] font-medium">
-                        {row.preferredInstruments || row.instruments}
-                      </span>
+                      <div className="flex flex-wrap gap-1.5">
+                        {(row.preferredInstruments || row.instruments || '')
+                          .split(',')
+                          .map((inst, i) => (
+                            <span
+                              key={i}
+                              className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#070D18] border border-[#C9A227]/30 text-[#DFBA42] text-[12px] font-medium tracking-wide shadow-sm"
+                            >
+                              <span className="w-1 h-1 rounded-full bg-[#C9A227]" />
+                              <span>{inst.trim()}</span>
+                            </span>
+                          ))}
+                      </div>
                     </td>
                   </tr>
                 ))}
