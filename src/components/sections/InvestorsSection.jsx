@@ -60,7 +60,7 @@ export default function InvestorsSection() {
           </div>
 
           {/* Right Column: Investor Network Categories */}
-          <div className="lg:col-span-7 flex flex-col gap-4">
+          <div id="capital-pools" className="lg:col-span-7 flex flex-col gap-4 scroll-mt-24">
             <span className="text-[#94A3B8] text-[11.5px] font-sans uppercase tracking-widest block mb-1 font-semibold">
               Tailored Engagement for Global Capital Pools:
             </span>
@@ -86,7 +86,7 @@ export default function InvestorsSection() {
         </div>
 
         {/* The Black Markt Origination & De-Risking Advantage */}
-        <div className="mt-16 sm:mt-24 pt-12 border-t border-white/10">
+        <div id="origination-advantage" className="mt-16 sm:mt-24 pt-12 border-t border-white/10 scroll-mt-24">
           <div className="max-w-[760px] mb-10">
             <span className="text-[#C9A227] text-[11px] font-sans font-semibold uppercase tracking-wider block mb-2">
               Value Proposition for Capital Providers

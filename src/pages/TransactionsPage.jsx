@@ -52,7 +52,7 @@ export default function TransactionsPage() {
       </section>
 
       {/* Advisory Capabilities Overview */}
-      <section className="p-8 sm:p-10 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-4">
+      <section id="mandate-types" className="p-8 sm:p-10 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-4 scroll-mt-24">
         <span className="text-[#C9A227] text-[11px] font-sans font-semibold uppercase tracking-wider block mb-3">
           Transaction Mandate Types
         </span>
@@ -87,7 +87,7 @@ export default function TransactionsPage() {
       </section>
 
       {/* Selected Mandate Profiles Grid */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4">
+      <section id="mandate-profiles" className="grid grid-cols-1 md:grid-cols-2 gap-6 my-4 scroll-mt-24">
         {filtered.map((tx) => (
           <div
             key={tx.slug}
@@ -143,7 +143,7 @@ export default function TransactionsPage() {
       </section>
 
       {/* 4-Stage Lifecycle Section */}
-      <section className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.7)] my-4">
+      <section id="lifecycle" className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.7)] my-4 scroll-mt-24">
         <div className="max-w-[1408px] mx-auto">
           <div className="max-w-[700px] mb-10">
             <span className="text-[#C9A227] text-[11px] font-sans font-semibold uppercase tracking-wider block mb-2">

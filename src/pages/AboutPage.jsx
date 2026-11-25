@@ -45,7 +45,7 @@ export default function AboutPage() {
       </section>
 
       {/* Narrative & Market Context */}
-      <section className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.7)] my-4">
+      <section id="executive-overview" className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.7)] my-4 scroll-mt-24">
         <div className="max-w-[1408px] mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start pb-12 border-b border-white/10">
             <div className="lg:col-span-5">
@@ -75,7 +75,7 @@ export default function AboutPage() {
           </div>
 
           {/* Section: Who We Advise */}
-          <div className="pt-12 pb-12 border-b border-white/10">
+          <div id="who-we-advise" className="pt-12 pb-12 border-b border-white/10 scroll-mt-24">
             <div className="max-w-[700px] mb-8">
               <span className="text-[#C9A227] text-[11px] font-sans font-semibold tracking-widest uppercase block mb-2">
                 CLIENT COVERAGE
@@ -107,7 +107,7 @@ export default function AboutPage() {
           </div>
 
           {/* Section: Our Operating Approach */}
-          <div className="pt-12 pb-6">
+          <div id="operating-approach" className="pt-12 pb-6 scroll-mt-24">
             <div className="max-w-[700px] mb-8">
               <span className="text-[#C9A227] text-[11px] font-sans font-semibold tracking-widest uppercase block mb-2">
                 EXECUTION PHILOSOPHY
@@ -141,7 +141,7 @@ export default function AboutPage() {
       </section>
 
       {/* Value Proposition, Mission & Vision */}
-      <section className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 shadow-[0_16px_40px_rgba(0,0,0,0.7)] my-4">
+      <section id="value-proposition" className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#0B1320] border border-[#C9A227]/20 shadow-[0_16px_40px_rgba(0,0,0,0.7)] my-4 scroll-mt-24">
         <div className="max-w-[1408px] mx-auto space-y-12">
           {/* Value Proposition Callout */}
           <div className="p-8 sm:p-10 rounded-[20px] bg-gradient-to-r from-[#070D18] via-[#0B1320] to-[#070D18] border border-[#C9A227]/40 text-center max-w-[1000px] mx-auto shadow-xl">
@@ -157,7 +157,7 @@ export default function AboutPage() {
           </div>
 
           {/* Mission & Vision Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div id="mission-vision" className="grid grid-cols-1 md:grid-cols-2 gap-8 scroll-mt-24">
             <div className="p-8 sm:p-10 rounded-[20px] bg-[#050505] border border-white/10 flex flex-col justify-between">
               <div>
                 <span className="text-[#C9A227] text-[11px] font-sans font-semibold tracking-widest uppercase block mb-3">
@@ -192,7 +192,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our 6 Core Values */}
-      <section className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.7)] my-4">
+      <section id="values" className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.7)] my-4 scroll-mt-24">
         <div className="max-w-[1408px] mx-auto">
           <div className="text-center max-w-[700px] mx-auto mb-12">
             <span className="text-[#C9A227] text-[11px] font-sans font-semibold tracking-widest uppercase block mb-2">
@@ -230,7 +230,7 @@ export default function AboutPage() {
       </section>
 
       {/* Corporate Registration & Factual Details */}
-      <section className="p-8 sm:p-12 rounded-[24px] bg-[#0B1320] border border-white/10 my-4 text-[#CBD5E1]">
+      <section id="corporate-status" className="p-8 sm:p-12 rounded-[24px] bg-[#0B1320] border border-white/10 my-4 text-[#CBD5E1] scroll-mt-24">
         <div className="max-w-[960px] mx-auto space-y-4">
           <h3 className="text-white font-headings text-[22px] font-medium">
             Corporate Status &amp; Legal Registration

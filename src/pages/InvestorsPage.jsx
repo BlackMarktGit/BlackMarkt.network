@@ -50,7 +50,7 @@ export default function InvestorsPage() {
       <InvestorsSection />
 
       {/* Mandate Alignment Matrix Section */}
-      <section className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-4">
+      <section id="alignment-matrix" className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-4 scroll-mt-24">
         <div className="max-w-[1408px] mx-auto">
           <div className="max-w-[760px] mb-10">
             <span className="text-[#C9A227] text-[11px] font-sans font-semibold uppercase tracking-wider block mb-2">
@@ -116,7 +116,7 @@ export default function InvestorsPage() {
       </section>
 
       {/* Supported Sectors for Investors */}
-      <section className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-4">
+      <section id="sectors-exposure" className="p-8 sm:p-12 lg:p-16 rounded-[24px] bg-[#050505] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] my-4 scroll-mt-24">
         <div className="max-w-[1408px] mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-10">
             <div className="max-w-[700px]">

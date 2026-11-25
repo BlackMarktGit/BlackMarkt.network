@@ -107,7 +107,7 @@ export default function ContactPage() {
       {/* Main Content Grid */}
       <section className="grid grid-cols-1 lg:grid-cols-12 gap-8 my-8">
         {/* Left Column: Corporate & Contact Details */}
-        <div className="lg:col-span-5 space-y-6">
+        <div id="engagement-desks" className="lg:col-span-5 space-y-6 scroll-mt-24">
           <div className="p-6 sm:p-8 rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.4)] space-y-6">
             <div>
               <span className="text-[11px] font-caption text-[#C9A227] uppercase tracking-wider block mb-2 font-semibold">
@@ -183,7 +183,7 @@ export default function ContactPage() {
         </div>
 
         {/* Right Column: Custom Modern Form */}
-        <div className="lg:col-span-7 p-6 sm:p-10 lg:p-12 rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)]">
+        <div id="mandate-enquiry" className="lg:col-span-7 p-6 sm:p-10 lg:p-12 rounded-[20px] sm:rounded-[24px] bg-[#0B1320] border border-white/10 shadow-[0_16px_40px_rgba(0,0,0,0.6)] scroll-mt-24">
           {formSent ? (
             <div className="text-center py-12 space-y-4">
               <div className="w-16 h-16 rounded-full bg-[#050505] border border-[#C9A227] text-[#C9A227] mx-auto flex items-center justify-center">
