@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../common/Icon';
 import { COMPANY_INFO } from '../../data/platformData';
+import { getAssetUrl } from '../../utils/assets';
 
 export default function Footer() {
   const footerRef = useRef(null);
@@ -37,7 +38,7 @@ export default function Footer() {
           <div className="lg:col-span-4 flex flex-col gap-5">
             <Link to="/" className="group select-none inline-block py-1" aria-label="Black Markt Network Consultancy">
               <img
-                src="/images/logos/bmn-logo.png"
+                src={getAssetUrl('images/logos/bmn-logo.png')}
                 alt="Black Markt Network Consultancy"
                 className="h-20 sm:h-24 md:h-28 w-auto object-contain filter drop-shadow-[0_4px_24px_rgba(201,162,39,0.45)] transition-transform duration-300 group-hover:scale-105"
               />
@@ -212,7 +213,7 @@ export default function Footer() {
           />
           <div className="relative z-10 flex flex-col items-center gap-4 py-4 w-full">
             <img
-              src="/images/logos/bmn-logo.png"
+              src={getAssetUrl('images/logos/bmn-logo.png')}
               alt="Black Markt Network Consultancy Official Logo"
               className="h-32 sm:h-48 md:h-64 lg:h-80 max-w-[92vw] w-auto object-contain filter drop-shadow-[0_0_50px_rgba(201,162,39,0.4)] transition-transform duration-500 hover:scale-105 select-none"
             />

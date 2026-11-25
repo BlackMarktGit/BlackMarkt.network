@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../common/Icon';
 import { INDUSTRIES_DATA } from '../../data/platformData';
+import { getAssetUrl } from '../../utils/assets';
 
 export default function IndustriesSection() {
   return (
@@ -35,7 +36,7 @@ export default function IndustriesSection() {
         {/* Visual Anchor Image: Infrastructure & Clean Energy Developments (Clean, No Cluttered Labels) */}
         <div className="relative mt-12 rounded-[18px] overflow-hidden border border-[#C9A227]/30 shadow-[0_20px_45px_rgba(0,0,0,0.8)] group">
           <img
-            src="/images/sections/infrastructure-energy.jpg"
+            src={getAssetUrl('images/sections/infrastructure-energy.jpg')}
             alt="Infrastructure and renewable energy development in Africa"
             className="w-full aspect-[21/9] sm:aspect-[24/9] object-cover object-center filter brightness-[0.85] contrast-[1.05] transition-transform duration-700 group-hover:scale-102"
             loading="lazy"

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Icon from '../common/Icon';
 import { COMPANY_INFO } from '../../data/platformData';
+import { getAssetUrl } from '../../utils/assets';
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -62,7 +63,7 @@ export default function NavBar() {
             aria-label="Black Markt Network Consultancy Home"
           >
             <img
-              src="/images/logos/bmn-logo.png"
+              src={getAssetUrl('images/logos/bmn-logo.png')}
               alt="Black Markt Network Logo"
               className="h-14 sm:h-16 md:h-18 lg:h-20 w-auto object-contain filter drop-shadow-[0_2px_18px_rgba(201,162,39,0.45)] transition-all"
             />
@@ -160,7 +161,7 @@ export default function NavBar() {
               <div className="flex items-center justify-between pb-5 border-b border-white/10">
                 <Link to="/" onClick={() => setMenuOpen(false)}>
                   <img
-                    src="/images/logos/bmn-logo.png"
+                    src={getAssetUrl('images/logos/bmn-logo.png')}
                     alt="Black Markt Logo"
                     className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(201,162,39,0.4)]"
                   />

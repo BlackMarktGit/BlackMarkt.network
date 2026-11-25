@@ -1,53 +1,54 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { getAssetUrl } from '../../utils/assets';
 
 export const CITIES = [
   {
     id: 'london',
     name: 'London',
     hub: 'Bank and city financial district',
-    image: '/images/cities/london.jpg',
+    image: getAssetUrl('images/cities/london.jpg'),
   },
   {
     id: 'newyork',
     name: 'New York',
     hub: 'Wall Street and lower Manhattan',
-    image: '/images/cities/newyork.jpg',
+    image: getAssetUrl('images/cities/newyork.jpg'),
   },
   {
     id: 'lagos',
     name: 'Lagos',
     hub: 'Lekki and Victoria Island corridor',
-    image: '/images/cities/lagos.jpg',
+    image: getAssetUrl('images/cities/lagos.jpg'),
   },
   {
     id: 'nairobi',
     name: 'Nairobi',
     hub: 'Upper Hill and Silicon Savannah',
-    image: '/images/cities/nairobi.jpg',
+    image: getAssetUrl('images/cities/nairobi.jpg'),
   },
   {
     id: 'johannesburg',
     name: 'Johannesburg',
     hub: 'Sandton financial district',
-    image: '/images/cities/johannesburg.jpg',
+    image: getAssetUrl('images/cities/johannesburg.jpg'),
   },
   {
     id: 'cairo',
     name: 'Cairo',
     hub: 'Nile Corniche and financial district',
-    image: '/images/cities/cairo.jpg',
+    image: getAssetUrl('images/cities/cairo.jpg'),
   },
   {
     id: 'accra',
     name: 'Accra',
     hub: 'Airport City and Ridge financial district',
-    image: '/images/cities/accra.jpg',
+    image: getAssetUrl('images/cities/accra.jpg'),
   },
   {
     id: 'kigali',
     name: 'Kigali',
     hub: 'Kigali International Financial Centre',
-    image: '/images/cities/kigali.jpg',
+    image: getAssetUrl('images/cities/kigali.jpg'),
   },
 ];
 

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Icon from '../common/Icon';
 import { OPERATING_APPROACH } from '../../data/platformData';
+import { getAssetUrl } from '../../utils/assets';
 
 export default function AboutUsSection() {
   return (
@@ -61,7 +62,7 @@ export default function AboutUsSection() {
           {/* Executive Boardroom Visual (Clean, High-End Presentation Without Cluttered Labels) */}
           <div className="lg:col-span-5 relative rounded-[18px] overflow-hidden border border-[#C9A227]/30 shadow-[0_16px_40px_rgba(0,0,0,0.7)] group">
             <img
-              src="/images/sections/executive-boardroom.jpg"
+              src={getAssetUrl('images/sections/executive-boardroom.jpg')}
               alt="Black Markt Strategic Advisory Boardroom"
               className="w-full aspect-[4/3] object-cover object-center filter brightness-[0.88] contrast-[1.05] transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
