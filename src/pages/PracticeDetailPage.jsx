@@ -5,9 +5,21 @@ import Icon from '../components/common/Icon';
 import { PRACTICES_DATA } from '../data/platformData';
 import { ArrowRight, CheckCircle2, ChevronRight } from 'lucide-react';
 
+const SLUG_ALIASES = {
+  'equity-debt-capital-raising': 'equity-debt-raising',
+  'project-finance-infrastructure': 'project-finance',
+  'strategic-partnerships-joint-ventures': 'strategic-partnerships',
+  'investment-readiness-due-diligence': 'investment-readiness',
+  'mergers-acquisitions-advisory': 'ma-advisory',
+  'mergers-and-acquisitions': 'ma-advisory',
+  'sovereign-ppp-advisory': 'sovereign-ppp',
+  'market-entry-expansion': 'market-entry',
+};
+
 export default function PracticeDetailPage() {
   const { slug } = useParams();
-  const practice = PRACTICES_DATA.find((p) => p.slug === slug) || PRACTICES_DATA[0];
+  const normalizedSlug = SLUG_ALIASES[slug] || slug;
+  const practice = PRACTICES_DATA.find((p) => p.slug === normalizedSlug) || PRACTICES_DATA[0];
 
   return (
     <Layout>

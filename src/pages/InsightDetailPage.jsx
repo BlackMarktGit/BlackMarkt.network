@@ -20,11 +20,17 @@ export default function InsightDetailPage() {
     }
   };
 
-  // Helper to format inline bold, italics and code
+  // Helper to format inline bold, italics, dashes and strip stray markdown characters
   const formatInline = (text) => {
     if (!text) return '';
+    // Clean any unspaced em-dashes and double-hyphens
+    let clean = text
+      .replace(/(\w)—(\w)/g, '$1 — $2')
+      .replace(/—/g, ' — ')
+      .replace(/--/g, ' — ');
+
     // Split by bold (**text**)
-    const parts = text.split(/\*\*(.*?)\*\*/g);
+    const parts = clean.split(/\*\*(.*?)\*\*/g);
     return parts.map((part, index) => {
       if (index % 2 === 1) {
         return (
@@ -33,81 +39,198 @@ export default function InsightDetailPage() {
           </strong>
         );
       }
-      return part;
+      // Remove any stray asterisks from non-bold text so no raw * or ** ever shows
+      const sanitized = part.replace(/\*/g, '');
+      return sanitized;
     });
   };
 
-  // Comprehensive Rich Content Parser
+  // Robust Stateful Line-by-Line Content Parser
   const renderContent = (content) => {
     if (!content) return null;
-    const paragraphs = content.trim().split(/\n\s*\n/);
 
-    return paragraphs.map((block, idx) => {
-      const trimmed = block.trim();
+    // Normalise newlines and em-dashes
+    const normalized = content
+      .replace(/\r\n/g, '\n')
+      .replace(/(\w)—(\w)/g, '$1 — $2')
+      .replace(/—/g, ' — ')
+      .replace(/--/g, ' — ');
+
+    const rawLines = normalized.split('\n');
+    const elements = [];
+    let currentList = [];
+    let currentParagraph = [];
+
+    const flushList = () => {
+      if (currentList.length > 0) {
+        const listItems = [...currentList];
+        currentList = [];
+        elements.push({
+          type: 'list',
+          items: listItems,
+        });
+      }
+    };
+
+    const flushParagraph = () => {
+      if (currentParagraph.length > 0) {
+        const text = currentParagraph.join(' ').trim();
+        currentParagraph = [];
+        if (text) {
+          elements.push({
+            type: 'paragraph',
+            text,
+          });
+        }
+      }
+    };
+
+    for (let i = 0; i < rawLines.length; i++) {
+      const line = rawLines[i].trim();
+
+      if (!line) {
+        flushParagraph();
+        flushList();
+        continue;
+      }
 
       // Heading 2 (## Heading)
-      if (trimmed.startsWith('## ')) {
-        const text = trimmed.replace('## ', '');
+      if (line.startsWith('## ')) {
+        flushParagraph();
+        flushList();
+        elements.push({
+          type: 'h2',
+          text: line.replace('## ', '').trim(),
+        });
+        continue;
+      }
+
+      // Heading 3 (### Heading)
+      if (line.startsWith('### ')) {
+        flushParagraph();
+        flushList();
+        elements.push({
+          type: 'h3',
+          text: line.replace('### ', '').trim(),
+        });
+        continue;
+      }
+
+      // Heading 4 (#### Heading)
+      if (line.startsWith('#### ')) {
+        flushParagraph();
+        flushList();
+        elements.push({
+          type: 'h4',
+          text: line.replace('#### ', '').trim(),
+        });
+        continue;
+      }
+
+      // Blockquote (> Quote)
+      if (line.startsWith('>')) {
+        flushParagraph();
+        flushList();
+        elements.push({
+          type: 'quote',
+          text: line.replace(/^>\s*"?|"$/g, '').trim(),
+        });
+        continue;
+      }
+
+      // Unordered or Ordered List (- Item or 1. Item)
+      if (line.startsWith('- ') || line.startsWith('* ') || /^\d+\.\s/.test(line)) {
+        flushParagraph();
+        const cleanItem = line.replace(/^[-*]\s*|^\d+\.\s*/, '').trim();
+        currentList.push(cleanItem);
+        continue;
+      }
+
+      // Regular paragraph line
+      flushList();
+      currentParagraph.push(line);
+    }
+
+    flushParagraph();
+    flushList();
+
+    // Render structured elements
+    return elements.map((elem, idx) => {
+      if (elem.type === 'h2') {
         return (
-          <div key={idx} className="mt-12 mb-5 pt-4 border-t border-white/10 first:mt-0 first:pt-0 first:border-t-0">
-            <h2 className="text-[22px] sm:text-[26px] font-headings font-medium text-white flex items-center gap-2.5 leading-snug">
-              <span className="w-2 h-2 rounded-full bg-[#C9A227] shrink-0" />
-              <span>{text}</span>
+          <div key={idx} className="mt-12 mb-5 pt-6 border-t border-white/10 first:mt-0 first:pt-0 first:border-t-0">
+            <h2 className="text-[22px] sm:text-[26px] font-headings font-medium text-white flex items-center gap-3 leading-snug">
+              <span className="w-2.5 h-2.5 rounded-sm bg-[#C9A227] shadow-[0_0_10px_rgba(201,162,39,0.5)] rotate-45 shrink-0" />
+              <span>{elem.text}</span>
             </h2>
           </div>
         );
       }
 
-      // Heading 3 (### Heading)
-      if (trimmed.startsWith('### ')) {
-        const text = trimmed.replace('### ', '');
+      if (elem.type === 'h3') {
         return (
-          <h3 key={idx} className="text-[19px] sm:text-[21px] font-headings font-medium text-[#DFBA42] mt-8 mb-3 leading-snug">
-            {text}
-          </h3>
+          <div key={idx} className="mt-8 mb-3">
+            <h3 className="text-[18px] sm:text-[20px] font-headings font-medium text-[#DFBA42] tracking-wide leading-snug">
+              {elem.text}
+            </h3>
+          </div>
         );
       }
 
-      // Heading 4 (#### Heading)
-      if (trimmed.startsWith('#### ')) {
-        const text = trimmed.replace('#### ', '');
+      if (elem.type === 'h4') {
         return (
-          <h4 key={idx} className="text-[17px] font-headings font-medium text-white mt-6 mb-2 leading-snug">
-            {text}
+          <h4 key={idx} className="text-[16px] sm:text-[17px] font-headings font-medium text-white mt-6 mb-2 leading-snug">
+            {elem.text}
           </h4>
         );
       }
 
-      // Blockquote (> Quote)
-      if (trimmed.startsWith('>')) {
-        const quoteText = trimmed.replace(/^>\s*"?|"$/g, '').trim();
+      if (elem.type === 'quote') {
         return (
           <blockquote
             key={idx}
-            className="my-8 p-6 sm:p-7 rounded-[18px] bg-[#050505] border-l-4 border-[#C9A227] shadow-[0_10px_30px_rgba(0,0,0,0.6)]"
+            className="my-8 p-6 sm:p-7 rounded-[18px] bg-gradient-to-r from-[#070D18] to-[#050505] border-l-4 border-[#C9A227] shadow-[0_12px_36px_rgba(0,0,0,0.6)]"
           >
-            <p className="text-[16px] sm:text-[18px] italic text-[#E2E8F0] leading-relaxed font-serif">
-              "{quoteText}"
+            <p className="text-[16px] sm:text-[18px] italic text-[#F1F5F9] leading-relaxed font-serif">
+              "{elem.text}"
             </p>
-            <span className="block mt-3 text-[11.5px] font-sans uppercase tracking-wider text-[#C9A227] font-semibold">
-              Black Markt Network &bull; Strategic Research Advisory
-            </span>
+            <div className="mt-3 flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C9A227]" />
+              <span className="text-[11.5px] font-sans uppercase tracking-[0.14em] text-[#C9A227] font-semibold">
+                Black Markt Network Strategic Intelligence
+              </span>
+            </div>
           </blockquote>
         );
       }
 
-      // Unordered or Ordered List (- Item or 1. Item)
-      if (trimmed.startsWith('- ') || trimmed.startsWith('* ') || /^\d+\.\s/.test(trimmed)) {
-        const lines = trimmed.split('\n').filter(Boolean);
+      if (elem.type === 'list') {
         return (
-          <ul key={idx} className="space-y-3.5 my-6 pl-2 sm:pl-4">
-            {lines.map((line, lIdx) => {
-              const cleanLine = line.replace(/^[-*]\s*|^\d+\.\s*/, '').trim();
+          <ul key={idx} className="space-y-3.5 my-6 pl-1 sm:pl-3">
+            {elem.items.map((item, lIdx) => {
+              // Parse item with bold label: **Label:** description
+              const boldMatch = item.match(/^\*\*(.*?)\*\*:?\s*(.*)$/);
+              if (boldMatch) {
+                const label = boldMatch[1].replace(/:$/, '').trim();
+                const desc = boldMatch[2].trim();
+                return (
+                  <li key={lIdx} className="flex items-start gap-3.5 text-[15px] sm:text-[16px] text-[#CBD5E1] leading-[1.75]">
+                    <span className="w-2 h-2 rounded-full bg-[#C9A227] mt-2.5 shrink-0 shadow-[0_0_8px_rgba(201,162,39,0.5)]" />
+                    <div className="flex-1">
+                      <strong className="text-white font-semibold font-headings mr-1.5">
+                        {label}:
+                      </strong>
+                      <span>{formatInline(desc)}</span>
+                    </div>
+                  </li>
+                );
+              }
+
               return (
-                <li key={lIdx} className="flex items-start gap-3.5 text-[15px] sm:text-[16px] text-[#CBD5E1] leading-[1.7]">
+                <li key={lIdx} className="flex items-start gap-3.5 text-[15px] sm:text-[16px] text-[#CBD5E1] leading-[1.75]">
                   <span className="w-2 h-2 rounded-full bg-[#C9A227] mt-2.5 shrink-0 shadow-[0_0_8px_rgba(201,162,39,0.5)]" />
                   <div className="flex-1">
-                    {formatInline(cleanLine)}
+                    {formatInline(item)}
                   </div>
                 </li>
               );
@@ -116,10 +239,10 @@ export default function InsightDetailPage() {
         );
       }
 
-      // Standard Paragraph
+      // Regular Paragraph
       return (
-        <p key={idx} className="text-[16px] sm:text-[17px] text-[#CBD5E1] leading-[1.8] mb-5 font-body">
-          {formatInline(trimmed)}
+        <p key={idx} className="text-[15.5px] sm:text-[16.5px] text-[#CBD5E1] leading-[1.8] mb-5 font-body">
+          {formatInline(elem.text)}
         </p>
       );
     });

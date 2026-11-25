@@ -53,10 +53,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Col 2: Advisory Services (Opens Specific Service Pages) */}
+          {/* Col 2: Our Services (Opens Specific Service Pages) */}
           <div className="lg:col-span-3 flex flex-col gap-3">
             <h4 className="font-headings text-[17px] text-white font-medium tracking-wide mb-1">
-              Advisory Services
+              Our Services
             </h4>
             <ul className="text-[#94A3B8] text-[13px] flex flex-col gap-2.5">
               <li>
@@ -65,27 +65,27 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/services/equity-debt-capital-raising" className="hover:text-[#C9A227] transition-colors">
+                <Link to="/services/equity-debt-raising" className="hover:text-[#C9A227] transition-colors">
                   Equity &amp; Debt Capital Raising
                 </Link>
               </li>
               <li>
-                <Link to="/services/project-finance-infrastructure" className="hover:text-[#C9A227] transition-colors">
+                <Link to="/services/project-finance" className="hover:text-[#C9A227] transition-colors">
                   Project Finance &amp; Infrastructure
                 </Link>
               </li>
               <li>
-                <Link to="/services/strategic-partnerships-joint-ventures" className="hover:text-[#C9A227] transition-colors">
+                <Link to="/services/strategic-partnerships" className="hover:text-[#C9A227] transition-colors">
                   Strategic Partnerships &amp; Joint Ventures
                 </Link>
               </li>
               <li>
-                <Link to="/services/investment-readiness-due-diligence" className="hover:text-[#C9A227] transition-colors">
+                <Link to="/services/investment-readiness" className="hover:text-[#C9A227] transition-colors">
                   Investment Readiness &amp; Due Diligence
                 </Link>
               </li>
               <li>
-                <Link to="/services/mergers-acquisitions-advisory" className="hover:text-[#C9A227] transition-colors">
+                <Link to="/services/ma-advisory" className="hover:text-[#C9A227] transition-colors">
                   Mergers &amp; Acquisitions Advisory
                 </Link>
               </li>
@@ -137,7 +137,7 @@ export default function Footer() {
               Confidential Communications
             </h4>
 
-            <div className="flex flex-col gap-2.5 text-[13px] text-[#94A3B8]">
+            <div className="flex flex-col gap-3 text-[13px] text-[#94A3B8]">
               <div className="flex items-start gap-2.5">
                 <Icon name="MapPin" className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
                 <span>
@@ -150,17 +150,43 @@ export default function Footer() {
                   {COMPANY_INFO.phoneFormatted}
                 </a>
               </div>
-              <div className="flex items-center gap-2.5">
-                <Icon name="Mail" className="w-4 h-4 text-[#C9A227] shrink-0" />
-                <a href={`mailto:${COMPANY_INFO.emails.advisory}`} className="hover:text-[#C9A227] transition-colors">
-                  {COMPANY_INFO.emails.advisory}
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Icon name="Mail" className="w-4 h-4 text-[#C9A227] shrink-0" />
-                <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="hover:text-[#C9A227] transition-colors">
-                  {COMPANY_INFO.emails.clientService}
-                </a>
+
+              <div className="pt-2 flex flex-col gap-3 border-t border-white/10">
+                <div className="flex items-start gap-2.5">
+                  <Icon name="Mail" className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-[11px] uppercase tracking-wider text-[#CBD5E1] block font-semibold">
+                      Corporate &amp; Project Advisory:
+                    </span>
+                    <a href={`mailto:${COMPANY_INFO.emails.advisory}`} className="hover:text-[#C9A227] transition-colors text-white font-medium">
+                      {COMPANY_INFO.emails.advisory}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <Icon name="Mail" className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-[11px] uppercase tracking-wider text-[#CBD5E1] block font-semibold">
+                      Institutional Investors &amp; Mandates:
+                    </span>
+                    <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="hover:text-[#C9A227] transition-colors text-white font-medium">
+                      {COMPANY_INFO.emails.clientService}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-2.5">
+                  <Icon name="Mail" className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
+                  <div>
+                    <span className="text-[11px] uppercase tracking-wider text-[#CBD5E1] block font-semibold">
+                      Sovereign &amp; Institutional Relations:
+                    </span>
+                    <a href={`mailto:${COMPANY_INFO.emails.executive}`} className="hover:text-[#C9A227] transition-colors text-white font-medium">
+                      {COMPANY_INFO.emails.executive}
+                    </a>
+                  </div>
+                </div>
               </div>
             </div>
 
@@ -176,18 +202,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Grand Mouse-Following Brand Logo Watermark Display (Displayed Beneath the Footer) */}
+        {/* Grand Brand Logo Watermark Display (Displayed Beneath the Footer) */}
         <div className="relative max-w-[1408px] mx-auto py-16 sm:py-24 flex justify-center items-center overflow-hidden border-b border-white/10">
           <div
-            className="w-full max-w-[900px] flex justify-center items-center select-none pointer-events-none transition-transform duration-700 ease-out"
+            className="absolute inset-0 pointer-events-none transition-opacity duration-300"
             style={{
-              transform: `perspective(1000px) rotateX(${(mousePos.y - 50) * -0.06}deg) rotateY(${(mousePos.x - 50) * 0.06}deg)`,
+              background: `radial-gradient(circle 520px at ${mousePos.x}% ${mousePos.y}%, rgba(201, 162, 39, 0.28), transparent 70%)`,
             }}
-          >
+          />
+          <div className="relative z-10 flex flex-col items-center gap-4 py-4 w-full">
             <img
               src="/images/logos/bmn-logo.png"
-              alt="Black Markt Network"
-              className="w-full max-w-[650px] sm:max-w-[780px] md:max-w-[880px] h-auto object-contain opacity-75 filter drop-shadow-[0_12px_45px_rgba(201,162,39,0.35)]"
+              alt="Black Markt Network Consultancy Official Logo"
+              className="h-32 sm:h-48 md:h-64 lg:h-80 max-w-[92vw] w-auto object-contain filter drop-shadow-[0_0_50px_rgba(201,162,39,0.4)] transition-transform duration-500 hover:scale-105 select-none"
             />
           </div>
         </div>

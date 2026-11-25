@@ -142,11 +142,16 @@ export default function ContactPage() {
               </div>
 
               {DIRECT_ENGAGEMENT_DESKS.map((desk, idx) => (
-                <div key={idx} className="flex items-start gap-3">
+                <div key={idx} className="flex items-start gap-3 pt-2 first:pt-0 border-t border-white/5 first:border-t-0">
                   <Icon name="Mail" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="text-white block font-medium">{desk.desk}</span>
-                    <a href={`mailto:${desk.email}`} className="text-[#C9A227] hover:underline break-all">
+                  <div className="space-y-1">
+                    <span className="text-white block font-medium text-[14px] leading-snug">
+                      {desk.title || desk.desk}
+                    </span>
+                    <p className="text-[12px] text-[#94A3B8] leading-relaxed">
+                      {desk.desc}
+                    </p>
+                    <a href={`mailto:${desk.email}`} className="inline-block text-[#C9A227] hover:underline font-mono text-[13px] font-medium break-all pt-0.5">
                       {desk.email}
                     </a>
                   </div>
