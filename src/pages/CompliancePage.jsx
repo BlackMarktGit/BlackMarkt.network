@@ -109,7 +109,10 @@ export default function CompliancePage() {
               Our registered office is situated at <strong className="text-white">{COMPANY_INFO.registeredAddress}</strong>. Our registered VAT number is <strong className="text-[#C9A227]">{COMPANY_INFO.vatNumber}</strong>.
             </p>
             <p>
-              For formal compliance inquiries, institutional due diligence packages, or statutory filings, please contact our administrative desk at{' '}
+              For formal compliance inquiries, institutional due diligence packages, or statutory filings, please contact our administrative desk via telephone at{' '}
+              <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-[#C9A227] hover:underline font-mono">
+                {COMPANY_INFO.phoneFormatted}
+              </a>, or by email at{' '}
               <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="text-[#C9A227] hover:underline">
                 {COMPANY_INFO.emails.clientService}
               </a>{' '}

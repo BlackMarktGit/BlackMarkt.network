@@ -429,6 +429,9 @@ export default function TermsPage() {
                 </div>
                 <div className="pt-2 border-t border-white/5 flex flex-col gap-1 text-[13px]">
                   <span className="text-[#94A3B8]">Company No: {COMPANY_INFO.registrationNumber} &bull; VAT: {COMPANY_INFO.vatNumber}</span>
+                  <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-[#C9A227] hover:underline font-mono">
+                    {COMPANY_INFO.phoneFormatted}
+                  </a>
                   <a href={`mailto:${COMPANY_INFO.emails.clientService}`} className="text-[#C9A227] hover:underline font-mono">
                     {COMPANY_INFO.emails.clientService}
                   </a>

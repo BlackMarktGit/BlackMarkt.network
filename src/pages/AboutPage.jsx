@@ -156,7 +156,12 @@ export default function AboutPage() {
           <p className="text-[14.5px] leading-relaxed text-[#94A3B8]">
             {COMPANY_INFO.legalName} is registered in England and Wales under Company Registration Number {COMPANY_INFO.registrationNumber}. The firm's registered office is situated at {COMPANY_INFO.registeredAddress}. Registered VAT Number: {COMPANY_INFO.vatNumber}.
           </p>
-          <div className="pt-2 flex flex-wrap gap-4 text-[13px] text-[#C9A227]">
+          <div className="pt-2 flex flex-wrap items-center gap-4 text-[13px] text-[#C9A227]">
+            <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="hover:underline flex items-center gap-1.5 font-mono font-medium">
+              <Icon name="Phone" className="w-3.5 h-3.5" />
+              <span>{COMPANY_INFO.phoneFormatted}</span>
+            </a>
+            <span className="text-white/20">&bull;</span>
             <Link to="/contact" className="hover:underline flex items-center gap-1.5">
               <span>Contact London Advisory Desk</span>
               <ArrowRight className="w-3.5 h-3.5" />

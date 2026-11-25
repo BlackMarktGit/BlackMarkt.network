@@ -127,6 +127,14 @@ export default function BookConsultationPage() {
               <p className="text-[14px] text-[#94A3B8]">
                 Please complete the form below. All discussions are conducted under strict professional confidentiality.
               </p>
+              <div className="mt-3 flex items-center gap-2 text-[13px] text-[#CBD5E1]">
+                <Icon name="Phone" className="w-4 h-4 text-[#C9A227] shrink-0" />
+                <span>Direct advisory telephone desk:</span>
+                <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-[#C9A227] hover:underline font-mono font-medium">
+                  {COMPANY_INFO.phoneFormatted}
+                </a>
+                <span className="text-[12px] text-[#64748B] hidden sm:inline">&bull; London HQ</span>
+              </div>
             </div>
 
             {/* Entity & Contact Info */}

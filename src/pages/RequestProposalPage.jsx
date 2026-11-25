@@ -107,6 +107,13 @@ export default function RequestProposalPage() {
               <p className="text-[14px] text-[#94A3B8]">
                 Please outline the key parameters of the advisory mandate.
               </p>
+              <div className="mt-3 flex items-center gap-2 text-[13px] text-[#CBD5E1]">
+                <Icon name="Phone" className="w-4 h-4 text-[#C9A227] shrink-0" />
+                <span>Telephone inquiry:</span>
+                <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-[#C9A227] hover:underline font-mono font-medium">
+                  {COMPANY_INFO.phoneFormatted}
+                </a>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">

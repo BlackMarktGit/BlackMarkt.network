@@ -115,6 +115,17 @@ export default function ContactPage() {
               </div>
 
               <div className="flex items-start gap-3">
+                <Icon name="Phone" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
+                <div>
+                  <span className="text-white block font-medium">Direct Telephone Desk</span>
+                  <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-[#C9A227] hover:underline font-mono text-[15px] font-medium">
+                    {COMPANY_INFO.phoneFormatted}
+                  </a>
+                  <span className="text-[12px] text-[#64748B] block mt-0.5">London Desk &bull; Mon&ndash;Fri 08:30&ndash;18:00 GMT</span>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-3">
                 <Icon name="Mail" className="w-5 h-5 text-[#C9A227] shrink-0 mt-0.5" />
                 <div>
                   <span className="text-white block font-medium">Advisory Inquiries</span>

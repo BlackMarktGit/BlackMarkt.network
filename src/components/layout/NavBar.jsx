@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Icon from '../common/Icon';
+import { COMPANY_INFO } from '../../data/platformData';
 
 export default function NavBar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -221,8 +222,13 @@ export default function NavBar() {
                 <Icon name="ArrowRight" className="w-4 h-4" />
               </Link>
 
-              <div className="text-center text-[12px] text-[#94A3B8]">
-                <span>London Headquarters &bull; 124 City Road, EC1V 2NX</span>
+              <div className="text-center text-[12px] text-[#94A3B8] space-y-1">
+                <div>London Headquarters &bull; 124 City Road, EC1V 2NX</div>
+                <div>
+                  <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-[#C9A227] hover:underline font-mono font-medium">
+                    {COMPANY_INFO.phoneFormatted}
+                  </a>
+                </div>
               </div>
             </div>
           </div>

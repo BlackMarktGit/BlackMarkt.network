@@ -145,6 +145,12 @@ export default function Footer() {
                 </span>
               </div>
               <div className="flex items-center gap-2.5">
+                <Icon name="Phone" className="w-4 h-4 text-[#C9A227] shrink-0" />
+                <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="hover:text-[#C9A227] transition-colors font-mono font-medium">
+                  {COMPANY_INFO.phoneFormatted}
+                </a>
+              </div>
+              <div className="flex items-center gap-2.5">
                 <Icon name="Mail" className="w-4 h-4 text-[#C9A227] shrink-0" />
                 <a href={`mailto:${COMPANY_INFO.emails.advisory}`} className="hover:text-[#C9A227] transition-colors">
                   {COMPANY_INFO.emails.advisory}

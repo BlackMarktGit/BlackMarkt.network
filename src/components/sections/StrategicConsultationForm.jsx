@@ -154,6 +154,18 @@ export default function StrategicConsultationForm() {
 
                 <div className="flex items-start gap-3">
                   <div className="w-9 h-9 rounded-lg bg-[#0B1320] border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227] shrink-0 mt-0.5">
+                    <Icon name="Phone" className="w-4 h-4 text-[#C9A227]" />
+                  </div>
+                  <div>
+                    <span className="text-white block font-medium">Telephone Inquiries</span>
+                    <a href={`tel:${COMPANY_INFO.phoneRaw}`} className="text-[#C9A227] hover:underline font-mono text-[13px] font-medium">
+                      {COMPANY_INFO.phoneFormatted}
+                    </a>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-9 h-9 rounded-lg bg-[#0B1320] border border-[#C9A227]/30 flex items-center justify-center text-[#C9A227] shrink-0 mt-0.5">
                     <Icon name="Mail" className="w-4 h-4 text-[#C9A227]" />
                   </div>
                   <div>
