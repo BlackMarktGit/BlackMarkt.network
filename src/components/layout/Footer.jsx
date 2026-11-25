@@ -33,13 +33,13 @@ export default function Footer() {
       <div className="relative max-w-[1408px] mx-auto">
         {/* Top 4-Column Navigation Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-12 pb-16 border-b border-white/10 text-[14px]">
-          {/* Col 1: Brand & Identity (Prominent, High-Visibility Logo) */}
-          <div className="lg:col-span-4 flex flex-col gap-4">
+          {/* Col 1: Brand & Identity (Bold, High-Visibility Prominent Logo) */}
+          <div className="lg:col-span-4 flex flex-col gap-5">
             <Link to="/" className="group select-none inline-block py-1" aria-label="Black Markt Network Consultancy">
               <img
                 src="/images/logos/bmn-logo.png"
                 alt="Black Markt Network Consultancy"
-                className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_12px_rgba(201,162,39,0.35)] transition-transform duration-300 group-hover:scale-105"
+                className="h-20 sm:h-24 md:h-28 w-auto object-contain filter drop-shadow-[0_4px_24px_rgba(201,162,39,0.45)] transition-transform duration-300 group-hover:scale-105"
               />
             </Link>
 
@@ -171,18 +171,18 @@ export default function Footer() {
         </div>
 
         {/* Grand Mouse-Following Brand Logo Watermark Display (Displayed Beneath the Footer) */}
-        <div className="relative max-w-[1408px] mx-auto py-12 flex justify-center items-center overflow-hidden border-b border-white/10">
+        <div className="relative max-w-[1408px] mx-auto py-16 sm:py-24 flex justify-center items-center overflow-hidden border-b border-white/10">
           <div
             className="absolute inset-0 pointer-events-none transition-opacity duration-300"
             style={{
-              background: `radial-gradient(circle 380px at ${mousePos.x}% ${mousePos.y}%, rgba(201, 162, 39, 0.22), transparent 70%)`,
+              background: `radial-gradient(circle 520px at ${mousePos.x}% ${mousePos.y}%, rgba(201, 162, 39, 0.28), transparent 70%)`,
             }}
           />
-          <div className="relative z-10 flex flex-col items-center gap-3 py-2">
+          <div className="relative z-10 flex flex-col items-center gap-4 py-4 w-full">
             <img
               src="/images/logos/bmn-logo.png"
               alt="Black Markt Network Consultancy Official Logo"
-              className="h-20 sm:h-28 md:h-36 w-auto object-contain filter drop-shadow-[0_0_35px_rgba(201,162,39,0.28)] transition-transform duration-300 hover:scale-105 select-none"
+              className="h-32 sm:h-48 md:h-64 lg:h-80 max-w-[92vw] w-auto object-contain filter drop-shadow-[0_0_50px_rgba(201,162,39,0.4)] transition-transform duration-500 hover:scale-105 select-none"
             />
           </div>
         </div>

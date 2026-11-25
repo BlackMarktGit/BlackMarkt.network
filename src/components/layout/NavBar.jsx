@@ -48,22 +48,22 @@ export default function NavBar() {
       <header
         className={`sticky top-0 z-50 w-full transition-all duration-300 ${
           scrolled
-            ? 'bg-[#050505]/95 backdrop-blur-xl border-b border-[#C9A227]/25 shadow-[0_12px_32px_rgba(0,0,0,0.7)] py-2 sm:py-3'
-            : 'bg-[#050505]/90 backdrop-blur-md border-b border-white/10 py-3 sm:py-4'
+            ? 'bg-[#050505]/95 backdrop-blur-xl border-b border-[#C9A227]/25 shadow-[0_12px_32px_rgba(0,0,0,0.7)] py-2 sm:py-2.5'
+            : 'bg-[#050505]/90 backdrop-blur-md border-b border-white/10 py-2.5 sm:py-3.5'
         }`}
         role="banner"
       >
         <div className="max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-12 flex items-center justify-between gap-4">
-          {/* Brand Logo ONLY: Bold, Prominent, Matching Previous Visual Weight */}
+          {/* Brand Logo ONLY: Bold, Prominent, Highly Visible */}
           <Link
             to="/"
-            className="group select-none inline-flex items-center shrink-0 py-1 transition-transform duration-200 hover:scale-105"
+            className="group select-none inline-flex items-center shrink-0 py-0.5 transition-transform duration-200 hover:scale-105"
             aria-label="Black Markt Network Consultancy Home"
           >
             <img
               src="/images/logos/bmn-logo.png"
               alt="Black Markt Network Logo"
-              className="h-11 sm:h-13 md:h-14 lg:h-15 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(201,162,39,0.4)]"
+              className="h-14 sm:h-16 md:h-18 lg:h-20 w-auto object-contain filter drop-shadow-[0_2px_18px_rgba(201,162,39,0.45)] transition-all"
             />
           </Link>
 
@@ -161,7 +161,7 @@ export default function NavBar() {
                   <img
                     src="/images/logos/bmn-logo.png"
                     alt="Black Markt Logo"
-                    className="h-10 sm:h-12 w-auto object-contain filter drop-shadow-[0_2px_10px_rgba(201,162,39,0.3)]"
+                    className="h-14 sm:h-16 w-auto object-contain filter drop-shadow-[0_2px_14px_rgba(201,162,39,0.4)]"
                   />
                 </Link>
 
