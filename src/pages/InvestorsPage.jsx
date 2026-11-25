@@ -94,7 +94,7 @@ export default function InvestorsPage() {
                     </td>
                     <td className="py-5 px-6 text-[#94A3B8] leading-relaxed align-top">
                       <span className="inline-block px-3 py-1.5 rounded-lg bg-[#0B1320] border border-[#C9A227]/20 text-[#DFBA42] text-[12.5px] font-medium">
-                        {row.preferredInstruments}
+                        {row.preferredInstruments || row.instruments}
                       </span>
                     </td>
                   </tr>

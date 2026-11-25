@@ -427,29 +427,39 @@ export const INDUSTRIES_DATA = [
 // 6. INVESTORS: CAPITAL POOLS, MANDATE MATRIX & ORIGINATION ADVANTAGES (Section 6)
 export const INVESTOR_POOLS = [
   {
-    category: 'Development Finance Institutions (DFIs) & Multilateral Agencies',
-    desc: 'We structure bankable transactions that deliver measurable developmental impact alongside commercial sustainability, incorporating blended finance, technical assistance, and IFC Performance Standards.',
-    iconName: 'Globe2',
-  },
-  {
-    category: 'Sovereign Wealth Funds (SWFs) & Institutional Asset Managers',
-    desc: 'We originate large-scale, long-horizon opportunities across strategic national priorities—utility-scale renewable energy, transport corridors, critical minerals, and PPP concessions.',
-    iconName: 'Crown',
-  },
-  {
-    category: 'Single- & Multi-Family Offices',
-    desc: 'Discreet access to off-market direct investments, club deals, and structured co-investments with patient growth capital deployment and real-asset backing.',
-    iconName: 'Shield',
-  },
-  {
-    category: 'Private Equity & Private Credit Funds',
+    title: 'Private Equity & Growth Funds',
+    category: 'Private Equity & Growth Funds',
+    description: 'Pan-African and global origination partner for proprietary growth equity, buyout, mezzanine, buy-side bolt-ons, and secondary liquidity transactions.',
     desc: 'Pan-African and global origination partner for proprietary growth equity, buyout, mezzanine, buy-side bolt-ons, and secondary liquidity transactions.',
     iconName: 'Briefcase',
   },
   {
-    category: 'Commercial Banks, Export Credit Agencies (ECAs) & Strategic Corporates',
-    desc: 'Syndicated debt facilities, trade lines, ECA-backed equipment financings, and strategic joint ventures for corporations expanding their operational footprint across Africa.',
+    title: 'Private Credit & Direct Lending Funds',
+    category: 'Private Credit & Direct Lending Funds',
+    description: 'Structuring senior secured, mezzanine, trade finance, and asset-backed debt facilities for high-performing mid-market and infrastructure borrowers.',
+    desc: 'Structuring senior secured, mezzanine, trade finance, and asset-backed debt facilities for high-performing mid-market and infrastructure borrowers.',
     iconName: 'Landmark',
+  },
+  {
+    title: 'Family Offices & Ultra-High-Net-Worth Vehicles',
+    category: 'Family Offices & Ultra-High-Net-Worth Vehicles',
+    description: 'Discreet access to off-market direct investments, club deals, and structured co-investments with patient growth capital deployment and real-asset backing.',
+    desc: 'Discreet access to off-market direct investments, club deals, and structured co-investments with patient growth capital deployment and real-asset backing.',
+    iconName: 'Shield',
+  },
+  {
+    title: 'Sovereign Wealth Funds & National Development Entities',
+    category: 'Sovereign Wealth Funds & National Development Entities',
+    description: 'We originate large-scale, long-horizon opportunities across strategic national priorities—utility-scale renewable energy, transport corridors, critical minerals, and PPP concessions.',
+    desc: 'We originate large-scale, long-horizon opportunities across strategic national priorities—utility-scale renewable energy, transport corridors, critical minerals, and PPP concessions.',
+    iconName: 'Crown',
+  },
+  {
+    title: 'Development Finance Institutions (DFIs) & Multilateral Agencies',
+    category: 'Development Finance Institutions (DFIs) & Multilateral Agencies',
+    description: 'We structure bankable transactions that deliver measurable developmental impact alongside commercial sustainability, incorporating blended finance, technical assistance, and IFC Performance Standards.',
+    desc: 'We structure bankable transactions that deliver measurable developmental impact alongside commercial sustainability, incorporating blended finance, technical assistance, and IFC Performance Standards.',
+    iconName: 'Globe2',
   },
 ];
 
@@ -458,26 +468,31 @@ export const MANDATE_ALIGNMENT_MATRIX = [
     category: 'DFIs & Impact Funds',
     focus: 'Infrastructure, energy transition, healthcare, agriculture, financial inclusion',
     instruments: 'Senior/subordinated debt, blended finance, political/credit risk guarantees, growth equity',
+    preferredInstruments: 'Senior/subordinated debt, blended finance, political/credit risk guarantees, growth equity',
   },
   {
     category: 'Sovereign Wealth Funds',
     focus: 'National infrastructure, energy, mining, industrial parks, strategic real estate',
     instruments: 'Large-ticket direct equity, sovereign-backed PPP concessions, platform co-investments',
+    preferredInstruments: 'Large-ticket direct equity, sovereign-backed PPP concessions, platform co-investments',
   },
   {
     category: 'Family Offices',
     focus: 'Cash-generative operating businesses, real estate, hospitality, agri-processing',
     instruments: 'Direct minority/majority equity, club deals, convertible instruments, structured notes',
+    preferredInstruments: 'Direct minority/majority equity, club deals, convertible instruments, structured notes',
   },
   {
     category: 'Private Equity & Credit',
     focus: 'Scalable market leaders, regional roll-ups, cash-flowing mid-market enterprises',
     instruments: 'Growth equity, buyouts, mezzanine & private credit, buy-side M&A, recapitalisations',
+    preferredInstruments: 'Growth equity, buyouts, mezzanine & private credit, buy-side M&A, recapitalisations',
   },
   {
     category: 'Strategic Corporates',
     focus: 'Market entry, supply-chain integration, technology & distribution expansion',
     instruments: 'Equity joint ventures, strategic minority stakes, off-take & licensing partnerships',
+    preferredInstruments: 'Equity joint ventures, strategic minority stakes, off-take & licensing partnerships',
   },
 ];
 

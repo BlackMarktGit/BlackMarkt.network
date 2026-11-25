@@ -74,10 +74,10 @@ export default function InvestorsSection() {
                 </div>
                 <div className="flex-1">
                   <h3 className="text-white font-headings text-[18px] sm:text-[19px] font-medium group-hover:text-[#C9A227] transition-colors leading-snug">
-                    {pool.title}
+                    {pool.title || pool.category}
                   </h3>
                   <p className="text-[#94A3B8] text-[13.5px] leading-relaxed mt-1">
-                    {pool.description}
+                    {pool.description || pool.desc}
                   </p>
                 </div>
               </div>
